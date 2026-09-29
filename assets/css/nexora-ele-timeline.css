@@ -1,0 +1,349 @@
+/**
+ * Nexora ELE Timeline — scoped production CSS
+ * Adapted from timeline.css + dark reference defaults.
+ * lg breakpoint: 1025px (Elementor tablet-safe).
+ */
+
+.nexora-ele-timeline {
+	box-sizing: border-box;
+	width: 100%;
+	background-color: var(--nexora-tl-bg, #0a0a0a);
+	color: var(--nexora-tl-text, #f8fafc);
+	font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+	-webkit-font-smoothing: antialiased;
+}
+
+.nexora-ele-timeline *,
+.nexora-ele-timeline *::before,
+.nexora-ele-timeline *::after {
+	box-sizing: border-box;
+}
+
+.nexora-ele-timeline__inner {
+	width: 100%;
+	max-width: var(--nexora-tl-max-width, 80rem);
+	margin-left: auto;
+	margin-right: auto;
+	padding: var(--nexora-tl-padding-block, 3rem) var(--nexora-tl-padding-inline, 1rem);
+}
+
+@media (min-width: 640px) {
+	.nexora-ele-timeline__inner {
+		padding-left: var(--nexora-tl-padding-inline-sm, 2rem);
+		padding-right: var(--nexora-tl-padding-inline-sm, 2rem);
+	}
+}
+
+@media (min-width: 1025px) {
+	.nexora-ele-timeline__inner {
+		padding-top: var(--nexora-tl-padding-block-lg, 6rem);
+		padding-bottom: var(--nexora-tl-padding-block-lg, 6rem);
+		padding-left: var(--nexora-tl-padding-inline-lg, 3rem);
+		padding-right: var(--nexora-tl-padding-inline-lg, 3rem);
+	}
+}
+
+.nexora-ele-timeline__grid {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	gap: var(--nexora-tl-gap, 2.5rem);
+	align-items: start;
+}
+
+@media (min-width: 1025px) {
+	.nexora-ele-timeline__grid {
+		grid-template-columns: repeat(12, minmax(0, 1fr));
+		gap: var(--nexora-tl-gap-lg, var(--nexora-tl-gap, 4rem));
+		align-items: stretch;
+	}
+}
+
+.nexora-ele-timeline__col {
+	min-width: 0;
+}
+
+@media (min-width: 1025px) {
+	.nexora-ele-timeline__col--4 {
+		grid-column: span 4 / span 4;
+	}
+	.nexora-ele-timeline__col--5 {
+		grid-column: span 5 / span 5;
+	}
+	.nexora-ele-timeline__col--6 {
+		grid-column: span 6 / span 6;
+	}
+	.nexora-ele-timeline__col--7 {
+		grid-column: span 7 / span 7;
+	}
+	.nexora-ele-timeline__col--8 {
+		grid-column: span 8 / span 8;
+	}
+}
+
+.nexora-ele-timeline__left {
+	display: none;
+}
+
+@media (min-width: 1025px) {
+	.nexora-ele-timeline__left {
+		display: block;
+		position: relative;
+		z-index: 10;
+		min-height: 100%;
+	}
+}
+
+/* Tracks the active step vertically (not viewport-sticky). */
+.nexora-ele-timeline__visual {
+	position: relative;
+	width: 100%;
+}
+
+@media (min-width: 1025px) {
+	.nexora-ele-timeline__visual {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		width: 100%;
+		transition: transform var(--nexora-tl-progress-duration, 0.35s) var(--nexora-tl-ease, cubic-bezier(0.22, 1, 0.36, 1));
+		will-change: transform;
+	}
+}
+
+.nexora-ele-timeline__image-frame {
+	position: relative;
+	width: 100%;
+	max-width: var(--nexora-tl-image-max, 540px);
+	margin-left: auto;
+	margin-right: auto;
+	aspect-ratio: 1 / 1;
+	border-radius: var(--nexora-tl-image-radius, 36px);
+	overflow: hidden;
+	background-color: var(--nexora-tl-image-bg, #000000);
+}
+
+.nexora-ele-timeline__desktop-image {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: var(--nexora-tl-image-fit, cover);
+	object-position: center;
+	opacity: var(--nexora-tl-image-opacity, 1);
+	user-select: none;
+	-webkit-user-select: none;
+}
+
+.nexora-ele-timeline__image-overlay {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	background-color: var(--nexora-tl-overlay-color, #000000);
+	opacity: var(--nexora-tl-overlay-opacity, 0);
+}
+
+.nexora-ele-timeline__active-num {
+	margin-top: 1.25rem;
+	font-size: clamp(4.5rem, 8vw, 7.5rem);
+	font-weight: 200;
+	line-height: 0.9;
+	letter-spacing: -0.04em;
+	color: var(--nexora-tl-large-fill, transparent);
+	opacity: var(--nexora-tl-large-opacity, 1);
+	-webkit-text-stroke: var(--nexora-tl-large-stroke-width, 1.5px) var(--nexora-tl-large-stroke, rgba(255, 255, 255, 0.35));
+	paint-order: stroke fill;
+	transition: opacity var(--nexora-tl-fade-duration, 0.4s) var(--nexora-tl-ease, cubic-bezier(0.22, 1, 0.36, 1)),
+		transform var(--nexora-tl-fade-duration, 0.4s) var(--nexora-tl-ease, cubic-bezier(0.22, 1, 0.36, 1));
+}
+
+.nexora-ele-timeline__steps {
+	position: relative;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	padding-left: 2.5rem;
+	display: flex;
+	flex-direction: column;
+	gap: var(--nexora-tl-step-gap, 4rem);
+}
+
+@media (min-width: 640px) {
+	.nexora-ele-timeline__steps {
+		padding-left: 3rem;
+		gap: var(--nexora-tl-step-gap-sm, var(--nexora-tl-step-gap, 6rem));
+	}
+}
+
+/* Original timeline.css rules — scoped + CSS vars */
+
+.nexora-ele-timeline .timeline-track-line {
+	position: absolute;
+	left: var(--nexora-tl-line-left, 14px);
+	top: 24px;
+	bottom: 32px;
+	width: var(--nexora-tl-line-width, 1.5px);
+	background-color: var(--nexora-tl-track, #fed7aa);
+}
+
+.nexora-ele-timeline .timeline-progress-line {
+	position: absolute;
+	left: var(--nexora-tl-line-left, 14px);
+	top: 24px;
+	width: var(--nexora-tl-line-width, 1.5px);
+	background-color: var(--nexora-tl-progress, #f97316);
+	transition: height var(--nexora-tl-progress-duration, 0.35s) var(--nexora-tl-ease, cubic-bezier(0.22, 1, 0.36, 1));
+}
+
+.nexora-ele-timeline .timeline-step {
+	position: relative;
+	cursor: pointer;
+	outline: none;
+}
+
+.nexora-ele-timeline .timeline-step:focus-visible {
+	outline: 2px solid var(--nexora-tl-progress, #f97316);
+	outline-offset: 4px;
+	border-radius: 4px;
+}
+
+.nexora-ele-timeline .timeline-node {
+	position: absolute;
+	left: -28px;
+	top: 18px;
+	transform: translateY(-50%);
+	width: var(--nexora-tl-marker-size, 14px);
+	height: var(--nexora-tl-marker-size, 14px);
+	border-radius: 9999px;
+	border: var(--nexora-tl-marker-border-width, 2px) solid var(--nexora-tl-marker-border, #ffffff);
+	background-color: var(--nexora-tl-marker-bg, #fdba74);
+	transition: all 0.3s ease;
+	z-index: 10;
+}
+
+.nexora-ele-timeline .timeline-step.active .timeline-node {
+	background-color: var(--nexora-tl-marker-bg-active, #f97316);
+	box-shadow: 0 0 0 2px var(--nexora-tl-marker-glow, rgba(249, 115, 22, 0.3));
+	transform: translateY(-50%) scale(1.1);
+}
+
+.nexora-ele-timeline .timeline-step.passed .timeline-node {
+	background-color: var(--nexora-tl-marker-bg-active, #f97316);
+}
+
+.nexora-ele-timeline__step-body {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+}
+
+.nexora-ele-timeline .step-num {
+	font-size: 2rem;
+	font-weight: 800;
+	letter-spacing: -0.025em;
+	color: var(--nexora-tl-item-num, var(--nexora-tl-num-color, #64748b));
+	transition: color 0.3s ease;
+	line-height: 1;
+}
+
+@media (min-width: 640px) {
+	.nexora-ele-timeline .step-num {
+		font-size: 2.25rem;
+	}
+}
+
+.nexora-ele-timeline .timeline-step.active .step-num {
+	color: var(--nexora-tl-item-num-active, var(--nexora-tl-num-color-active, #f97316));
+}
+
+.nexora-ele-timeline .step-title-link {
+	text-decoration: none;
+	color: inherit;
+}
+
+.nexora-ele-timeline .step-title {
+	margin: 0;
+	font-size: 1.25rem;
+	font-weight: 700;
+	letter-spacing: -0.02em;
+	color: var(--nexora-tl-item-title, var(--nexora-tl-title-color, #94a3b8));
+	transition: color 0.3s ease;
+	line-height: 1.3;
+}
+
+@media (min-width: 640px) {
+	.nexora-ele-timeline .step-title {
+		font-size: 1.5rem;
+	}
+}
+
+.nexora-ele-timeline .timeline-step.active .step-title {
+	color: var(--nexora-tl-item-title-active, var(--nexora-tl-title-color-active, #f8fafc));
+}
+
+.nexora-ele-timeline .step-desc {
+	margin: 0;
+	font-size: 1rem;
+	line-height: 1.625;
+	color: var(--nexora-tl-item-desc, var(--nexora-tl-desc-color, #94a3b8));
+	font-weight: 400;
+	max-width: var(--nexora-tl-desc-max, 36rem);
+	transition: color 0.3s ease;
+}
+
+@media (min-width: 640px) {
+	.nexora-ele-timeline .step-desc {
+		font-size: 1.125rem;
+	}
+}
+
+.nexora-ele-timeline .timeline-step.active .step-desc {
+	color: var(--nexora-tl-desc-color-active, #cbd5e1);
+}
+
+.nexora-ele-timeline .fade-image {
+	transition: opacity var(--nexora-tl-fade-duration, 0.4s) var(--nexora-tl-ease, cubic-bezier(0.22, 1, 0.36, 1)),
+		transform var(--nexora-tl-fade-duration, 0.4s) var(--nexora-tl-ease, cubic-bezier(0.22, 1, 0.36, 1));
+}
+
+.nexora-ele-timeline__mobile-image {
+	display: block;
+	padding-top: 1rem;
+}
+
+.nexora-ele-timeline__mobile-image.is-hidden {
+	display: none;
+}
+
+@media (min-width: 1025px) {
+	.nexora-ele-timeline__mobile-image {
+		display: none !important;
+	}
+}
+
+.nexora-ele-timeline__mobile-frame {
+	position: relative;
+	aspect-ratio: 1 / 1;
+	width: 100%;
+	border-radius: 1rem;
+	overflow: hidden;
+	background-color: var(--nexora-tl-image-bg, #000000);
+}
+
+.nexora-ele-timeline__mobile-frame img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: var(--nexora-tl-image-fit, cover);
+	object-position: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.nexora-ele-timeline .timeline-progress-line,
+	.nexora-ele-timeline .fade-image,
+	.nexora-ele-timeline .timeline-node,
+	.nexora-ele-timeline .step-num,
+	.nexora-ele-timeline .step-title,
+	.nexora-ele-timeline .step-desc,
+	.nexora-ele-timeline__active-num {
+		transition: none !important;
+	}
+}
