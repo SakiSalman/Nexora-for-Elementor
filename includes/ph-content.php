@@ -11,6 +11,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+if ( ! function_exists( 'nexora_ele_heading_tag' ) ) {
+	/**
+	 * Allow only heading tags the editor can choose.
+	 *
+	 * @param mixed  $tag      Saved tag.
+	 * @param string $fallback Original tag.
+	 */
+	function nexora_ele_heading_tag( $tag, $fallback = 'h2' ) {
+		$tag      = strtolower( trim( (string) $tag ) );
+		$fallback = strtolower( trim( (string) $fallback ) );
+		$allowed  = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div', 'span', 'p' );
+		if ( ! in_array( $fallback, $allowed, true ) ) {
+			$fallback = 'h2';
+		}
+		return in_array( $tag, $allowed, true ) ? $tag : $fallback;
+	}
+}
+
 if ( ! function_exists( 'nexora_ph_content_map' ) ) {
 	/**
 	 * Load one widget content map.
@@ -50,17 +68,43 @@ if ( ! function_exists( 'nexora_ph_register_mapped_controls' ) ) {
 		$singles = isset( $map['singletons'] ) && is_array( $map['singletons'] ) ? $map['singletons'] : [];
 
 		if ( $singles ) {
-			$widget->start_controls_section(
-				'section_ph_content',
-				[
-					'label' => esc_html__( 'Content', 'nexora-elementor' ),
-					'tab'   => $manager::TAB_CONTENT,
-				]
-			);
+			$groups = [];
 			foreach ( $singles as $field ) {
-				nexora_ph_add_mapped_control( $widget, $field );
+				if ( ! is_array( $field ) ) {
+					continue;
+				}
+				$section = isset( $field['section'] ) && '' !== (string) $field['section'] ? (string) $field['section'] : __( 'Content', 'nexora-elementor' );
+				if ( ! isset( $groups[ $section ] ) ) {
+					$groups[ $section ] = [];
+				}
+				$groups[ $section ][] = $field;
 			}
-			$widget->end_controls_section();
+			$group_index = 0;
+			foreach ( $groups as $section_label => $fields ) {
+				$group_index++;
+				$widget->start_controls_section(
+					'section_ph_' . $slug . '_' . $group_index,
+					[
+						'label' => $section_label,
+						'tab'   => $manager::TAB_CONTENT,
+					]
+				);
+				foreach ( $fields as $field ) {
+					if ( isset( $field['control'] ) && 'divider' === $field['control'] ) {
+						$widget->add_control(
+							(string) $field['id'],
+							[
+								'label'     => isset( $field['label'] ) ? (string) $field['label'] : '',
+								'type'      => $manager::HEADING,
+								'separator' => 'before',
+							]
+						);
+						continue;
+					}
+					nexora_ph_add_mapped_control( $widget, $field );
+				}
+				$widget->end_controls_section();
+			}
 		}
 
 		$repeaters = isset( $map['repeaters'] ) && is_array( $map['repeaters'] ) ? $map['repeaters'] : [];
@@ -68,10 +112,13 @@ if ( ! function_exists( 'nexora_ph_register_mapped_controls' ) ) {
 			if ( empty( $repeater_map['id'] ) || empty( $repeater_map['fields'] ) || ! is_array( $repeater_map['fields'] ) ) {
 				continue;
 			}
+			$section_label = isset( $repeater_map['section'] ) && '' !== (string) $repeater_map['section']
+				? (string) $repeater_map['section']
+				: ( isset( $repeater_map['label'] ) ? (string) $repeater_map['label'] : __( 'Items', 'nexora-elementor' ) );
 			$widget->start_controls_section(
 				'section_' . $repeater_map['id'],
 				[
-					'label' => isset( $repeater_map['label'] ) ? (string) $repeater_map['label'] : esc_html__( 'Items', 'nexora-elementor' ),
+					'label' => $section_label,
 					'tab'   => $manager::TAB_CONTENT,
 				]
 			);
@@ -97,7 +144,7 @@ if ( ! function_exists( 'nexora_ph_register_mapped_controls' ) ) {
 			$widget->add_control(
 				(string) $repeater_map['id'],
 				[
-					'label'       => isset( $repeater_map['label'] ) ? (string) $repeater_map['label'] : esc_html__( 'Items', 'nexora-elementor' ),
+					'label'         => isset( $repeater_map['label'] ) ? (string) $repeater_map['label'] : esc_html__( 'Items', 'nexora-elementor' ),
 					'type'          => $manager::REPEATER,
 					'fields'        => $repeater->get_controls(),
 					'default'       => $defaults,
@@ -130,7 +177,21 @@ if ( ! function_exists( 'nexora_ph_add_mapped_control' ) ) {
 			'label' => $label,
 		];
 
-		if ( 'textarea' === $control ) {
+		if ( 'tag' === $control ) {
+			$args['type']    = $manager::SELECT;
+			$args['default'] = nexora_ele_heading_tag( isset( $field['default'] ) ? $field['default'] : 'h2', 'h2' );
+			$args['options'] = [
+				'h1'   => 'H1',
+				'h2'   => 'H2',
+				'h3'   => 'H3',
+				'h4'   => 'H4',
+				'h5'   => 'H5',
+				'h6'   => 'H6',
+				'div'  => 'div',
+				'span' => 'span',
+				'p'    => 'p',
+			];
+		} elseif ( 'textarea' === $control ) {
 			$args['type']        = $manager::TEXTAREA;
 			$args['default']     = isset( $field['default'] ) ? (string) $field['default'] : '';
 			$args['label_block'] = true;
@@ -178,8 +239,10 @@ if ( ! function_exists( 'nexora_ph_apply_content' ) ) {
 		$ranges = [];
 		$singles = isset( $map['singletons'] ) && is_array( $map['singletons'] ) ? $map['singletons'] : [];
 		foreach ( $singles as $field ) {
-			$range = nexora_ph_field_range( $html, $field, $settings, false );
-			if ( null !== $range ) {
+			if ( ! is_array( $field ) ) {
+				continue;
+			}
+			foreach ( nexora_ph_control_ranges( $field, $settings ) as $range ) {
 				$ranges[] = $range;
 			}
 		}
@@ -217,6 +280,58 @@ if ( ! function_exists( 'nexora_ph_apply_content' ) ) {
 		}
 
 		return $html;
+	}
+}
+
+if ( ! function_exists( 'nexora_ph_control_ranges' ) ) {
+	/**
+	 * Replacement ranges for one control. Empty keeps the original bytes.
+	 *
+	 * @param array<string, mixed> $field    Field map.
+	 * @param array<string, mixed> $settings Settings bag.
+	 * @return array<int, array<string, mixed>>
+	 */
+	function nexora_ph_control_ranges( array $field, array $settings ) {
+		$control = isset( $field['control'] ) ? (string) $field['control'] : 'text';
+		if ( 'divider' === $control || 'tag' === $control ) {
+			return 'tag' === $control ? nexora_ph_tag_ranges( $field, $settings ) : [];
+		}
+		if ( ! isset( $field['start'] ) ) {
+			return [];
+		}
+		$range = nexora_ph_field_range( '', $field, $settings, false );
+		return null === $range ? [] : [ $range ];
+	}
+}
+
+if ( ! function_exists( 'nexora_ph_tag_ranges' ) ) {
+	/**
+	 * Replace an opening and closing tag name when the editor picks a different tag.
+	 *
+	 * @param array<string, mixed> $field    Tag field.
+	 * @param array<string, mixed> $settings Settings bag.
+	 * @return array<int, array<string, mixed>>
+	 */
+	function nexora_ph_tag_ranges( array $field, array $settings ) {
+		$default = nexora_ele_heading_tag( isset( $field['default'] ) ? $field['default'] : 'h2', 'h2' );
+		$id      = isset( $field['id'] ) ? (string) $field['id'] : '';
+		$has     = '' !== $id && array_key_exists( $id, $settings );
+		$value   = nexora_ele_heading_tag( $has ? $settings[ $id ] : $default, $default );
+		if ( $value === $default ) {
+			return [];
+		}
+		return [
+			[
+				'start' => isset( $field['openStart'] ) ? (int) $field['openStart'] : 0,
+				'end'   => isset( $field['openEnd'] ) ? (int) $field['openEnd'] : 0,
+				'value' => $value,
+			],
+			[
+				'start' => isset( $field['closeStart'] ) ? (int) $field['closeStart'] : 0,
+				'end'   => isset( $field['closeEnd'] ) ? (int) $field['closeEnd'] : 0,
+				'value' => $value,
+			],
+		];
 	}
 }
 
@@ -340,10 +455,12 @@ if ( ! function_exists( 'nexora_ph_render_repeater' ) ) {
 				if ( '' !== $key && ! array_key_exists( $key, $bag ) && isset( $defaults[ $shell_index ][ $key ] ) ) {
 					$bag[ $key ] = $defaults[ $shell_index ][ $key ];
 				}
-				$range = nexora_ph_field_range( $shell, $field, $bag, true );
-				if ( null !== $range ) {
-					$ranges[] = $range;
-					$changed  = true;
+				$found = nexora_ph_control_ranges( $field, $bag );
+				if ( $found ) {
+					foreach ( $found as $range ) {
+						$ranges[] = $range;
+					}
+					$changed = true;
 				}
 			}
 			usort(

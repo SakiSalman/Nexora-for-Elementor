@@ -58,6 +58,7 @@ foreach ( $raw_items as $index => $item ) {
 		'id'          => $index + 1,
 		'number'      => isset( $item['item_number'] ) ? (string) $item['item_number'] : sprintf( '%02d', $index + 1 ),
 		'title'       => isset( $item['item_title'] ) ? (string) $item['item_title'] : '',
+		'title_tag'   => nexora_ele_heading_tag( $item['item_title_tag'] ?? 'h3', 'h3' ),
 		'description' => isset( $item['item_description'] ) ? (string) $item['item_description'] : '',
 		'image'       => $url,
 		'link'        => isset( $item['item_link'] ) && is_array( $item['item_link'] ) ? $item['item_link'] : [],
@@ -234,10 +235,12 @@ if ( ! $is_elementor_edit_or_preview && function_exists( 'nexora_timeline_build_
 										}
 										?>
 									>
-										<h3 class="step-title"><?php echo esc_html( $item['title'] ); ?></h3>
+										<?php $title_tag = nexora_ele_heading_tag( $item['title_tag'] ?? 'h3', 'h3' ); ?>
+										<<?php echo $title_tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- whitelisted heading tag. ?> class="step-title"><?php echo esc_html( $item['title'] ); ?></<?php echo $title_tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- whitelisted heading tag. ?>>
 									</a>
 								<?php else : ?>
-									<h3 class="step-title"><?php echo esc_html( $item['title'] ); ?></h3>
+									<?php $title_tag = nexora_ele_heading_tag( $item['title_tag'] ?? 'h3', 'h3' ); ?>
+									<<?php echo $title_tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- whitelisted heading tag. ?> class="step-title"><?php echo esc_html( $item['title'] ); ?></<?php echo $title_tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- whitelisted heading tag. ?>>
 								<?php endif; ?>
 
 								<?php if ( '' !== $item['description'] ) : ?>

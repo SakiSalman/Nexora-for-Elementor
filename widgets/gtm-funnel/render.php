@@ -230,8 +230,9 @@ foreach ( $steps as $index => $step ) {
 			$groups[] = $current;
 		}
 		$current = [
-			'heading' => $heading,
-			'items'   => [],
+			'heading'     => $heading,
+			'heading_tag' => nexora_ele_heading_tag( $step['group_heading_tag'] ?? 'h2', 'h2' ),
+			'items'       => [],
 		];
 	}
 
@@ -271,7 +272,8 @@ $resolve_tier_key = static function ( array $step, int $index, array $tiers ): s
 					<div class="nexora-gtm__section-eyebrow"><?php echo esc_html( (string) $settings['section_eyebrow'] ); ?></div>
 				<?php endif; ?>
 				<?php if ( ! empty( $settings['section_title'] ) ) : ?>
-					<h2 class="nexora-gtm__section-title"><?php echo esc_html( (string) $settings['section_title'] ); ?></h2>
+					<?php $section_tag = nexora_ele_heading_tag( $settings['section_title_tag'] ?? 'h2', 'h2' ); ?>
+					<<?php echo $section_tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- whitelisted heading tag. ?> class="nexora-gtm__section-title"><?php echo esc_html( (string) $settings['section_title'] ); ?></<?php echo $section_tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- whitelisted heading tag. ?>>
 				<?php endif; ?>
 				<?php if ( ! empty( $settings['section_subtitle'] ) ) : ?>
 					<p class="nexora-gtm__section-subtitle"><?php echo esc_html( (string) $settings['section_subtitle'] ); ?></p>
@@ -286,7 +288,8 @@ $resolve_tier_key = static function ( array $step, int $index, array $tiers ): s
 				<?php foreach ( $groups as $group ) : ?>
 					<div class="nexora-gtm__group">
 						<?php if ( ! empty( $group['heading'] ) ) : ?>
-							<h2 class="nexora-gtm__group-heading"><?php echo esc_html( (string) $group['heading'] ); ?></h2>
+							<?php $group_tag = nexora_ele_heading_tag( $group['heading_tag'] ?? 'h2', 'h2' ); ?>
+							<<?php echo $group_tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- whitelisted heading tag. ?> class="nexora-gtm__group-heading"><?php echo esc_html( (string) $group['heading'] ); ?></<?php echo $group_tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- whitelisted heading tag. ?>>
 						<?php endif; ?>
 
 						<div class="nexora-gtm__group-steps">
@@ -340,9 +343,10 @@ $resolve_tier_key = static function ( array $step, int $index, array $tiers ): s
 													</span>
 												<?php endif; ?>
 											<?php endif; ?>
-											<h3 class="nexora-gtm__card-title">
+											<?php $card_tag = nexora_ele_heading_tag( $step['step_title_tag'] ?? 'h3', 'h3' ); ?>
+											<<?php echo $card_tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- whitelisted heading tag. ?> class="nexora-gtm__card-title">
 												<?php echo esc_html( (string) ( $step['step_title'] ?? '' ) ); ?>
-											</h3>
+											</<?php echo $card_tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- whitelisted heading tag. ?>>
 										</div>
 										<?php if ( ! empty( $step['step_description'] ) ) : ?>
 											<p class="nexora-gtm__card-desc">

@@ -160,12 +160,33 @@ function nexora_gtm_funnel_register_content_controls( $widget ): void {
 	$widget->add_control(
 		'section_title',
 		[
-			'label'       => esc_html__( 'Title', 'nexora-elementor' ),
+			'label'       => esc_html__( 'Heading', 'nexora-elementor' ),
 			'type'        => Controls_Manager::TEXT,
 			'default'     => '',
 			'label_block' => true,
 			'dynamic'     => [ 'active' => true ],
 			'condition'   => [ 'show_section_heading' => 'yes' ],
+		]
+	);
+
+	$widget->add_control(
+		'section_title_tag',
+		[
+			'label'     => esc_html__( 'HTML Tag', 'nexora-elementor' ),
+			'type'      => Controls_Manager::SELECT,
+			'default'   => 'h2',
+			'options'   => [
+				'h1'   => 'H1',
+				'h2'   => 'H2',
+				'h3'   => 'H3',
+				'h4'   => 'H4',
+				'h5'   => 'H5',
+				'h6'   => 'H6',
+				'div'  => 'div',
+				'span' => 'span',
+				'p'    => 'p',
+			],
+			'condition' => [ 'show_section_heading' => 'yes' ],
 		]
 	);
 
@@ -204,6 +225,26 @@ function nexora_gtm_funnel_register_content_controls( $widget ): void {
 			'label_block' => true,
 			'description' => esc_html__( 'Leave empty to continue the previous group. Non-empty starts a new group.', 'nexora-elementor' ),
 			'dynamic'     => [ 'active' => true ],
+		]
+	);
+
+	$steps_repeater->add_control(
+		'group_heading_tag',
+		[
+			'label'   => esc_html__( 'Group Heading HTML Tag', 'nexora-elementor' ),
+			'type'    => Controls_Manager::SELECT,
+			'default' => 'h2',
+			'options' => [
+				'h1'   => 'H1',
+				'h2'   => 'H2',
+				'h3'   => 'H3',
+				'h4'   => 'H4',
+				'h5'   => 'H5',
+				'h6'   => 'H6',
+				'div'  => 'div',
+				'span' => 'span',
+				'p'    => 'p',
+			],
 		]
 	);
 
@@ -271,11 +312,31 @@ function nexora_gtm_funnel_register_content_controls( $widget ): void {
 	$steps_repeater->add_control(
 		'step_title',
 		[
-			'label'       => esc_html__( 'Title', 'nexora-elementor' ),
+			'label'       => esc_html__( 'Heading', 'nexora-elementor' ),
 			'type'        => Controls_Manager::TEXT,
 			'default'     => '',
 			'label_block' => true,
 			'dynamic'     => [ 'active' => true ],
+		]
+	);
+
+	$steps_repeater->add_control(
+		'step_title_tag',
+		[
+			'label'   => esc_html__( 'HTML Tag', 'nexora-elementor' ),
+			'type'    => Controls_Manager::SELECT,
+			'default' => 'h3',
+			'options' => [
+				'h1'   => 'H1',
+				'h2'   => 'H2',
+				'h3'   => 'H3',
+				'h4'   => 'H4',
+				'h5'   => 'H5',
+				'h6'   => 'H6',
+				'div'  => 'div',
+				'span' => 'span',
+				'p'    => 'p',
+			],
 		]
 	);
 

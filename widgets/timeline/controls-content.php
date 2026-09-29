@@ -66,11 +66,31 @@ function nexora_timeline_register_content_controls( $widget ): void {
 	$repeater->add_control(
 		'item_title',
 		[
-			'label'       => esc_html__( 'Title', 'nexora-elementor' ),
+			'label'       => esc_html__( 'Heading', 'nexora-elementor' ),
 			'type'        => Controls_Manager::TEXT,
 			'default'     => esc_html__( 'Timeline Step', 'nexora-elementor' ),
 			'label_block' => true,
 			'dynamic'     => [ 'active' => true ],
+		]
+	);
+
+	$repeater->add_control(
+		'item_title_tag',
+		[
+			'label'   => esc_html__( 'HTML Tag', 'nexora-elementor' ),
+			'type'    => Controls_Manager::SELECT,
+			'default' => 'h3',
+			'options' => [
+				'h1'   => 'H1',
+				'h2'   => 'H2',
+				'h3'   => 'H3',
+				'h4'   => 'H4',
+				'h5'   => 'H5',
+				'h6'   => 'H6',
+				'div'  => 'div',
+				'span' => 'span',
+				'p'    => 'p',
+			],
 		]
 	);
 

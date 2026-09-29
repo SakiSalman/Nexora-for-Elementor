@@ -74,3 +74,21 @@ if ( ! class_exists( 'Nexora_Ele_Widget_Base', false ) ) {
 		}
 	}
 }
+
+if ( ! function_exists( 'nexora_ele_heading_tag' ) ) {
+	/**
+	 * Allow only heading tags the editor can choose. Anything else stays on the original tag.
+	 *
+	 * @param mixed  $tag      Saved tag.
+	 * @param string $fallback Original tag.
+	 */
+	function nexora_ele_heading_tag( $tag, $fallback = 'h2' ) {
+		$tag      = strtolower( trim( (string) $tag ) );
+		$fallback = strtolower( trim( (string) $fallback ) );
+		$allowed  = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div', 'span', 'p' );
+		if ( ! in_array( $fallback, $allowed, true ) ) {
+			$fallback = 'h2';
+		}
+		return in_array( $tag, $allowed, true ) ? $tag : $fallback;
+	}
+}

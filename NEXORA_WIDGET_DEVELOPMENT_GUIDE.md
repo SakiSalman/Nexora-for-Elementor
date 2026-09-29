@@ -2175,7 +2175,7 @@ The visual design stays where it is. Content controls only change the strings, U
 
 - Singleton: `{slug}_{fN}`, with hyphens in the slug turned into underscores. Example: `hero_f3`.
 - Repeater: `{slug}_r{N}`.
-- Repeater fields: `text`, `text_2`, `url`, `image`, `alt`, `placeholder`, `aria`, `tooltip`.
+- Repeater fields: `text`, `text_2`, `url`, `image`, `alt`, `placeholder`, `aria`, `tooltip`. A heading tag is `{slug}_tagN` on a singleton, or `html_tag` inside a repeater. Process step fields use `number`, `label`, `title`, `html_tag`, `description`, `image`, and `alt`.
 - Text domain: `nexora-elementor`.
 
 The hidden Schema section stays. Content sections are added after it.
@@ -2184,7 +2184,7 @@ The hidden Schema section stays. Content sections are added after it.
 
 Repeated siblings that share a tag, class list, and field order become one Elementor repeater. Each default item keeps its own HTML shell, so inline SVG and inline styles stay with that item. Extra items clone the last shell. Removing every item is allowed (`prevent_empty` is false). An empty saved repeater prints nothing. A missing repeater key prints the original items.
 
-Elementor has no nested repeaters. The deepest repeated group is the repeater. Text on a parent that contains that group stays as its own control. Process rows alternate image-left and image-right, so those steps are individual controls rather than one repeater.
+Elementor has no nested repeaters. The deepest repeated group is the repeater. Text on a parent that contains that group stays as its own control. Process rows that alternate image-left and image-right share one repeater. Each default item keeps the HTML shell of its position, so the layout stays with the slot and the copy moves with the item.
 
 A later item may omit a trailing field. The logo marquee does this: the first chips have alt text and the aria-hidden copies do not. Those copies stay in the repeater so the marquee count does not change.
 
@@ -2224,10 +2224,56 @@ Put content controls on that widget’s `controls-content.php`. Use the original
 
 ---
 
+## 38. Elementor control organization
+
+This is the sidebar standard for every Nexora widget. It covers how controls are grouped, when a repeater is required, and how a heading’s HTML tag is chosen. It does not change the frontend. CSS, JavaScript, classes, animations, and the default markup stay as they are.
+
+### Control organization
+
+- Group controls in the order a reader meets the content. A typical widget is Header, then the repeated items, then the call to action.
+- Give a group its own Elementor section when it has a heading of its own or it is a repeater. Do not open a section for a single stray label.
+- Labels are the words an editor uses: Heading, Description, Button text, Button link, Image, Image alt, HTML Tag. The control id can stay technical. The sidebar label cannot.
+- One control per content property. If a repeater already edits an item’s title, do not add another control outside the repeater for that same title.
+- Changing a label does not change the control id. Saved pages keep matching.
+- Do not fold an eyebrow, a heading, and a description into one control just to shorten the sidebar. They are three properties.
+- Do not add color, typography, spacing, border, shadow, animation, or responsive controls as part of this organization. Controls that already exist for layout, such as the GTM Funnel layout section, stay where they are.
+
+### Repeaters
+
+Use a repeater when the design repeats one content shape: cards, list rows, steps, logos, navigation links, questions, statistics, form fields.
+
+- The default items are the design items. Same count, same order, same text, images, and URLs. Do not invent a row and do not drop one.
+- Fields that belong to one item (title, description, image, link, HTML tag) live inside the repeater.
+- Fields that belong to the whole collection (section eyebrow, section heading, one shared button) stay outside it.
+- Set the repeater `title_field` to the item’s main text, so the row reads “Fast Performance” instead of “Item #1”.
+- Items that do not share the same fields stay as separate controls. A featured card with a checklist is not the same shape as a plain card. Elementor cannot put a repeater inside a repeater, so the deepest repeated group wins.
+- On Prospects Hive process steps, each default item keeps the HTML shell from that position. An image-left step and an image-right step stay visually distinct. Reordering moves the copy into the shell of the new position.
+
+### Headings
+
+Every heading an editor can change has two controls: the heading text, and HTML Tag.
+
+- The select offers H1, H2, H3, H4, H5, H6, div, span, and p.
+- The default is the tag already in the HTML. An `h1` defaults to H1. An `h3` defaults to H3. Do not default every heading to H2.
+- The renderer replaces the tag name only. The existing class stays on the element. Do not write CSS for each tag, and do not change type size because the tag changed.
+- A heading that repeats inside items has its HTML Tag field on the repeater item, not as one tag for the whole collection.
+- `nexora_ele_heading_tag()` in `includes/class-widget-base.php` (and again in `includes/ph-content.php` when Elementor is not loaded) allows only those nine tags. An empty or unknown value falls back to the original tag, so a heading is never printed without a tag.
+- GTM Funnel: the section heading defaults to H2, the group heading defaults to H2, and the card title defaults to H3. The classes `nexora-gtm__section-title`, `nexora-gtm__group-heading`, and `nexora-gtm__card-title` stay.
+- Timeline: the step title defaults to H3. The class stays `step-title`. The timeline script selects that class, not the tag name.
+
+### Content architecture
+
+- Every visible content property that the widget script does not own has exactly one control.
+- A repeated structure uses a repeater. Do not number controls as Item 1 Title, Item 2 Title, Item 3 Title.
+- Prospects Hive stores the map in `widgets/ph-{slug}/content-map.json`. `includes/ph-content.php` turns each `section` into an Elementor section and each repeater into its own section. A heading tag control replaces only the bytes of the tag name, so the attributes and the class are untouched. When the saved value still equals the default, those bytes are left alone.
+- The audit of every control is `PROSPECTS_HIVE_CONTENT_INVENTORY.md`.
+
+---
+
 ## Document history
 
 | Item | Value |
 | --- | --- |
 | Derived from | Plugin source at version 1.1.1 |
 | Primary files read | `nexora-for-elementor.php`, `includes/*`, `widgets/class-ele-*.php`, `widgets/gtm-funnel/*`, `widgets/timeline/*`, `widgets/lib/class-funnel-geometry.php`, `assets/js/*`, `assets/css/*` (timeline and admin in full, GTM CSS by structure) |
-| Not modified | Plugin behavior at the time section 36 was written. Section 37 documents the later Prospects Hive content controls. |
+| Not modified | Plugin behavior at the time section 36 was written. Section 37 documents Prospects Hive content controls. Section 38 documents sidebar organization, repeaters, and heading tags. |
