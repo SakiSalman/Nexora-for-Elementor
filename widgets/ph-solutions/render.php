@@ -17,4 +17,11 @@ if ( ! function_exists( 'nexora_ph_render_section' ) ) {
 	require_once NEXORA_ELE_PATH . 'includes/ph-markup.php';
 }
 
-nexora_ph_render_section( 'solutions', $uid, false );
+if ( ! isset( $this ) || ! is_object( $this ) || ! method_exists( $this, 'get_settings_for_display' ) ) {
+	return;
+}
+$settings = $this->get_settings_for_display();
+if ( ! is_array( $settings ) ) {
+	$settings = [];
+}
+nexora_ph_render_section( 'solutions', $uid, false, $settings );

@@ -17,11 +17,12 @@ if ( ! function_exists( 'nexora_ph_render_section' ) ) {
 	/**
 	 * Print one Prospects Hive section.
 	 *
-	 * @param string $slug    Widget slug.
-	 * @param string $uid     Element id suffix.
-	 * @param bool   $dynamic Whether the section uses the template runtime.
+	 * @param string               $slug     Widget slug.
+	 * @param string               $uid      Element id suffix.
+	 * @param bool                 $dynamic  Whether the section uses the template runtime.
+	 * @param array<string, mixed> $settings Elementor settings. Empty keeps the original copy.
 	 */
-	function nexora_ph_render_section( $slug, $uid, $dynamic ): void {
+	function nexora_ph_render_section( $slug, $uid, $dynamic, $settings = [] ): void {
 		$slug = preg_replace( '/[^a-z0-9_-]/', '', (string) $slug );
 		$uid  = sanitize_html_class( (string) $uid );
 
@@ -38,6 +39,14 @@ if ( ! function_exists( 'nexora_ph_render_section' ) ) {
 		if ( ! is_string( $html ) || '' === $html ) {
 			return;
 		}
+
+		if ( ! function_exists( 'nexora_ph_apply_content' ) ) {
+			require_once NEXORA_ELE_PATH . 'includes/ph-content.php';
+		}
+		if ( ! is_array( $settings ) ) {
+			$settings = [];
+		}
+		$html = nexora_ph_apply_content( $html, $slug, $settings );
 
 		$base = NEXORA_ELE_URL . 'assets/images/prospects/';
 		$html = str_replace( 'assets/', $base, $html );

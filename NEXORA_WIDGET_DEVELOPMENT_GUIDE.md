@@ -2139,10 +2139,95 @@ These are **RECOMMENDED**. They are not part of the widget contract until someon
 
 ---
 
+## 37. Prospects Hive content controls
+
+This is the content-customization standard for the 24 Prospects Hive widgets (`ele-ph-*`). GTM Funnel and Timeline already have their own content controls. Do not rebuild them to match this section.
+
+The visual design stays where it is. Content controls only change the strings, URLs, and image URLs that the widget prints. They do not change HTML structure, CSS, JavaScript, classes, or asset loading.
+
+### Rules
+
+- Every user-visible text node, link `href`, image `src` (including an SVG `<image href>` that points at a design file), `alt`, `placeholder`, `aria-label`, and `title` gets a control.
+- The control default is the original design copy. Do not rewrite, shorten, or re-punctuate it.
+- If the saved value equals that default, the renderer leaves the original markup bytes in place. `esc_html()` is not applied on the identity path, so apostrophes and `&amp;` stay as authored.
+- If the user clears a value, it stays empty. Do not write `!empty( $settings['heading'] ) ? $settings['heading'] : 'Default'`.
+- A missing settings key (widget not saved yet, or an older element) uses the default. `array_key_exists` distinguishes “cleared” from “not saved”.
+- Plain text uses `Controls_Manager::TEXT`. Copy longer than a short label uses `TEXTAREA`. Links use `URL`. Images use `MEDIA`.
+- Do not add color, typography, spacing, border, shadow, animation, or layout controls in this pass.
+- Do not edit widget CSS or widget JavaScript to make a control work. Elementor re-renders the widget PHP, and dynamic widgets remount from the updated `<template>`.
+- Each widget instance reads `$this->get_settings_for_display()`. There is no shared content variable between instances.
+- Admin CSS and admin JS are unchanged. This work does not enqueue them.
+
+### Where the controls live
+
+| File | Role |
+| --- | --- |
+| `widgets/ph-{slug}/markup.html` | Original markup. Still the byte source. Not tokenized. |
+| `widgets/ph-{slug}/content-map.json` | Byte offsets, defaults, and repeater shells for that widget. |
+| `widgets/ph-{slug}/controls-content.php` | Hidden `_schema_version`, then `nexora_ph_register_mapped_controls()`. |
+| `includes/ph-content.php` | Registers the mapped controls and applies settings. |
+| `includes/ph-markup.php` | Calls `nexora_ph_apply_content()` before the `assets/` rewrite and id suffix. |
+| `PROSPECTS_HIVE_CONTENT_INVENTORY.md` | Element-by-element inventory. |
+
+`render.php` passes `$this->get_settings_for_display()` into `nexora_ph_render_section()`.
+
+### Control ids
+
+- Singleton: `{slug}_{fN}`, with hyphens in the slug turned into underscores. Example: `hero_f3`.
+- Repeater: `{slug}_r{N}`.
+- Repeater fields: `text`, `text_2`, `url`, `image`, `alt`, `placeholder`, `aria`, `tooltip`.
+- Text domain: `nexora-elementor`.
+
+The hidden Schema section stays. Content sections are added after it.
+
+### Repeaters
+
+Repeated siblings that share a tag, class list, and field order become one Elementor repeater. Each default item keeps its own HTML shell, so inline SVG and inline styles stay with that item. Extra items clone the last shell. Removing every item is allowed (`prevent_empty` is false). An empty saved repeater prints nothing. A missing repeater key prints the original items.
+
+Elementor has no nested repeaters. The deepest repeated group is the repeater. Text on a parent that contains that group stays as its own control. Process rows alternate image-left and image-right, so those steps are individual controls rather than one repeater.
+
+A later item may omit a trailing field. The logo marquee does this: the first chips have alt text and the aria-hidden copies do not. Those copies stay in the repeater so the marquee count does not change.
+
+### URLs and images
+
+`URL` controls replace the `href` value only. `target` and `rel` stay in the markup, including `target="_blank"` on the original buttons.
+
+`MEDIA` controls replace the image URL only. The default URL points at `assets/images/prospects/{file}`. While the chosen URL is still that default, the markup keeps `assets/{file}` so the existing `assets/` rewrite can run. A different URL is escaped with `esc_url()` and written into the existing `<img>` or SVG `<image>`. Do not switch those tags to `wp_get_attachment_image()`.
+
+Decorative inline SVG icons are not icon controls. The design does not use an icon font or Elementor’s icon library. Symbol-only glyphs (`→`, `✓`, `★`, `▶`) stay in the markup.
+
+### Script-owned copy
+
+Some visible strings are not in the HTML. They are printed by the existing widget script through `{{ }}` holes. Those scripts were not modified, so that copy is not a control:
+
+| Widget | Data | Source |
+| --- | --- | --- |
+| Cases | Slide title, summary, client, industry, services, stats, image, alt | `CASES` in `nexora-ph-cases.js` |
+| Impact | Tab label, title, body, points | `IMPACT` in `nexora-ph-impact.js` |
+| Framework | Tab label and subtitle | `FW` in `nexora-ph-framework.js` |
+| Pricing | Plan tab label | `PLANS` in `nexora-ph-pricing.js` |
+
+The static copy around those holes (headings, framework pane body, pricing prices and feature lists, industry names) is editable. Template class names and click handlers (`{{ ind.c0 }}`, `onClick="{{ }}"`) are behavior, not copy.
+
+### Empty values and escaping
+
+| Situation | Output |
+| --- | --- |
+| Value equals the default | Original bytes |
+| User cleared the value | Empty string, escaped for its context |
+| User edited text | `esc_html()` or `esc_attr()` |
+| User edited a URL or image | `esc_url()` |
+
+### What a future widget should do
+
+Put content controls on that widget’s `controls-content.php`. Use the original design string as `default`. Print the setting into the existing tags and classes. Use a repeater for a real repeated group, with one default item per design item. Do not load another widget’s CSS or JS. Do not load admin assets on the public site.
+
+---
+
 ## Document history
 
 | Item | Value |
 | --- | --- |
 | Derived from | Plugin source at version 1.1.1 |
 | Primary files read | `nexora-for-elementor.php`, `includes/*`, `widgets/class-ele-*.php`, `widgets/gtm-funnel/*`, `widgets/timeline/*`, `widgets/lib/class-funnel-geometry.php`, `assets/js/*`, `assets/css/*` (timeline and admin in full, GTM CSS by structure) |
-| Not modified | Plugin behavior. This file is documentation only. |
+| Not modified | Plugin behavior at the time section 36 was written. Section 37 documents the later Prospects Hive content controls. |
