@@ -1,0 +1,22 @@
+/* Prospects Hive contact styles. Selectors and declarations copied from the design export. */
+.field{height:52px;padding:0 16px;border:1.5px solid #E6DDD3;border-radius:14px;font-family:inherit;font-size:15px;background:#FFFFFF;color:#0B1620;transition:border-color .2s,box-shadow .2s;width:100%}
+.field:focus{outline:none;border-color:#F15E22;box-shadow:0 0 0 4px rgba(241,94,34,.15)}
+.pill-radio{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:1.5px solid #E6DDD3;border-radius:999px;cursor:pointer;font-size:14px;background:#FFFFFF}
+.pill-radio:has(input:checked){border-color:#F15E22;background:#FFF1E9}
+.ct-title{text-wrap:balance;max-width:11.3em}
+.tag-offer{background:#FFFFFF !important;color:#B03E0B !important;border:1px solid rgba(241,94,34,.4) !important;box-shadow:0 8px 20px -12px rgba(11,22,32,.25),inset 0 1px 0 #FFFFFF !important;font-size:12.5px !important}
+.tag-offer::before{background:#F15E22 !important}
+.ct-left{width:fit-content;max-width:100%}
+.founder-card{display:grid;grid-template-columns:112px minmax(0,1fr);gap:22px;align-items:center;width:100%;box-sizing:border-box;padding:20px;border-radius:24px;background:linear-gradient(135deg,#FFFFFF 0%,#FFF8F3 60%,#F4F8FC 100%);border:1px solid rgba(241,94,34,.2)}
+.fc-photo{width:112px;height:112px;border-radius:20px;object-fit:cover;display:block}
+.fc-body{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-width:0}
+.fc-name{font-size:20px;font-weight:700;letter-spacing:-.01em;color:#0B1620;line-height:1.25}
+.fc-role{font-size:14px;color:#56626D;margin-bottom:8px}
+.fc-book{display:inline-flex;align-items:center;gap:6px;font-size:15px;font-weight:600;color:#C2410C;text-decoration:none;transition:gap .2s}
+.fc-book:hover{gap:10px;color:#C2410C}
+.fc-phone{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:500;color:#0B1620;text-decoration:none}
+.fc-phone svg{color:#F15E22}
+.fc-phone:hover{color:#C2410C}
+@media (max-width:760px){.founder-card{grid-template-columns:84px minmax(0,1fr);gap:16px;padding:16px}
+.fc-photo{width:84px;height:84px;border-radius:16px}
+.fc-name{font-size:18px}}

@@ -1,0 +1,20 @@
+/* Prospects Hive video styles. Selectors and declarations copied from the design export. */
+.vbar{height:4px;border-radius:4px;background:rgba(255,255,255,.2);overflow:hidden;flex-grow:1}
+.vbar>span{display:block;height:100%;background:linear-gradient(90deg,#FF8A4C,#F15E22);animation:vprog 10s linear infinite}
+.benefit-pill{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding:10px;border-radius:30px;background:linear-gradient(120deg,rgba(255,255,255,.88) 0%,rgba(255,244,236,.74) 45%,rgba(232,242,251,.78) 100%);border:1px solid rgba(255,255,255,.95);box-shadow:inset 0 1px 0 #FFFFFF,0 0 0 1px rgba(241,94,34,.07),0 30px 60px -32px rgba(11,22,32,.35),0 8px 20px -12px rgba(35,116,172,.22);-webkit-backdrop-filter:blur(20px) saturate(1.6);backdrop-filter:blur(20px) saturate(1.6)}
+.benefit-item{display:flex;gap:16px;align-items:flex-start;padding:22px 24px;border-radius:22px;position:relative;transition:background .25s,transform .25s}
+.benefit-item+.benefit-item::before{content:"";position:absolute;left:0;top:22%;bottom:22%;width:1px;background:linear-gradient(180deg,transparent,rgba(11,22,32,.12),transparent)}
+.benefit-item:hover{background:rgba(255,255,255,.75);transform:translateY(-2px)}
+.benefit-pill{border:1.5px solid transparent !important;background:linear-gradient(120deg,rgba(255,255,255,.94) 0%,rgba(255,246,240,.9) 45%,rgba(236,244,251,.92) 100%) padding-box,linear-gradient(115deg,rgba(241,94,34,.55) 0%,rgba(255,196,170,.5) 22%,rgba(255,255,255,.95) 50%,rgba(156,200,232,.6) 78%,rgba(35,116,172,.55) 100%) border-box !important;box-shadow:inset 0 1px 0 #FFFFFF,0 30px 60px -32px rgba(11,22,32,.3),0 10px 24px -14px rgba(241,94,34,.22),0 0 0 6px rgba(255,255,255,.45) !important}
+.benefit-item+.benefit-item::before{background:linear-gradient(180deg,transparent,rgba(241,94,34,.3),rgba(35,116,172,.3),transparent) !important}
+.vbar-idle>span{animation:none !important;width:0 !important}
+.benefit-pill{background:linear-gradient(120deg,#FFFFFF 0%,#FFF7F1 38%,#FFEFE5 62%,#FFFFFF 100%) padding-box,linear-gradient(115deg,rgba(241,94,34,.5) 0%,rgba(255,196,170,.55) 30%,rgba(255,255,255,.95) 55%,rgba(255,176,140,.6) 80%,rgba(241,94,34,.45) 100%) border-box !important;box-shadow:inset 0 1px 0 #FFFFFF,0 30px 60px -32px rgba(11,22,32,.28),0 14px 30px -16px rgba(241,94,34,.28),0 0 0 6px rgba(255,255,255,.5) !important}
+.benefit-item+.benefit-item::before{background:linear-gradient(180deg,transparent,rgba(241,94,34,.35),transparent) !important}
+.benefit-item:hover{background:rgba(255,255,255,.8) !important}
+.benefit-pill{-webkit-backdrop-filter:none !important;backdrop-filter:none !important}
+@media (max-width:760px){.benefit-pill{grid-template-columns:1fr}
+.benefit-item+.benefit-item::before{display:none}
+.vid-box{aspect-ratio:4/5 !important;gap:10px !important;padding:0 20px}
+.vid-box>img{height:30px !important}
+.vid-box .pulse{width:72px !important;height:72px !important}}
+@keyframes vprog{from{width:0}to{width:100%}}

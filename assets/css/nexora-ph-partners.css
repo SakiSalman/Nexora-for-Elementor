@@ -1,0 +1,9 @@
+/* Prospects Hive partners styles. Selectors and declarations copied from the design export. */
+.g5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}
+@media (max-width:1024px){.g5{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){.g5{grid-template-columns:1fr}
+.partner-grid{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:12px !important}
+.partner-grid>li{padding:18px 10px !important}
+.partner-grid>li:last-child:nth-child(odd){grid-column:1/-1;justify-self:center;width:calc(50% - 6px)}}
+@media (min-width:1025px){.partner-grid{grid-template-columns:repeat(5,minmax(0,1fr)) !important}}
+@media (min-width:761px) and (max-width:1024px){.partner-grid{grid-template-columns:repeat(3,minmax(0,1fr)) !important}}

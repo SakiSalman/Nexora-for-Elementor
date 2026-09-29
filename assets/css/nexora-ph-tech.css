@@ -1,0 +1,41 @@
+/* Prospects Hive tech styles. Selectors and declarations copied from the design export. */
+.marquee.rev{animation-direction:reverse;animation-duration:42s}
+.wf-node.rev{background:linear-gradient(160deg,#223647,#0B1620);color:#FFFFFF;border-color:transparent}
+.wf-node.rev small{color:#A9B6C2}
+.tool-tile{border-radius:20px;overflow:hidden;background:#FFFFFF;border:1px solid #EFE7DE;box-shadow:inset 0 1px 0 #FFFFFF,0 18px 36px -24px rgba(11,22,32,.3);transition:transform .3s}
+.tool-tile:hover{transform:translateY(-4px) rotate(-1deg)}
+.tool-tile img{display:block;width:100%;height:auto;mix-blend-mode:multiply}
+.wf.grad .wf-node.rev{background:linear-gradient(145deg,#FFFFFF,#E9EEF3);color:#0B1620}
+.wf.grad .wf-node.rev small{color:#56626D}
+.tool-rows{display:flex;flex-direction:column;gap:18px}
+.tool-row{gap:22px;animation-duration:36s}
+.tool-row.rev{animation-duration:40s}
+.tool-ic{flex-shrink:0;width:104px;height:104px;border-radius:24px;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#FFFFFF,#F7F9FB);border:1px solid #EEF1F4;box-shadow:inset 0 1px 0 #FFFFFF,0 14px 28px -18px rgba(11,22,32,.35);transition:transform .25s,box-shadow .25s}
+.tool-ic img{width:58px;height:58px;object-fit:contain;display:block}
+.tool-ic:hover{transform:translateY(-4px);box-shadow:inset 0 1px 0 #FFFFFF,0 20px 36px -18px rgba(241,94,34,.45)}
+.tool-rows:hover .tool-row{animation-play-state:paused}
+.tool-rows{position:relative;padding:14px 0}
+.tool-rows::before,.tool-rows::after{content:"";position:absolute;top:0;bottom:0;width:200px;z-index:2;pointer-events:none}
+.tool-rows::before{left:0;background:linear-gradient(90deg,#FFFFFF 0%,rgba(255,255,255,.92) 30%,rgba(255,255,255,.55) 65%,rgba(255,255,255,0) 100%)}
+.tool-rows::after{right:0;background:linear-gradient(270deg,#FFFFFF 0%,rgba(255,255,255,.92) 30%,rgba(255,255,255,.55) 65%,rgba(255,255,255,0) 100%)}
+.tool-rows>div{padding:6px 0 30px;margin-bottom:-18px}
+.tech-sec{background:radial-gradient(900px 480px at 0% 0%,rgba(241,94,34,.10),transparent 60%),radial-gradient(900px 520px at 100% 100%,rgba(35,116,172,.12),transparent 62%),linear-gradient(180deg,#FFFBF8 0%,#FFFFFF 45%,#F4F8FC 100%)}
+.tech-sec>.wrap{position:relative;z-index:1}
+.tech-sec .tool-tile{box-shadow:inset 0 1px 0 #FFFFFF,0 24px 44px -26px rgba(11,22,32,.35),0 0 0 6px rgba(255,255,255,.55)}
+.tool-panel{position:relative;border-radius:36px;padding:34px 0 18px;background:linear-gradient(135deg,rgba(255,255,255,.78) 0%,rgba(255,246,240,.62) 45%,rgba(236,244,251,.7) 100%);border:1px solid rgba(255,255,255,.95);box-shadow:inset 0 1px 0 #FFFFFF,0 0 0 1px rgba(241,94,34,.06),0 40px 80px -44px rgba(11,22,32,.35);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);overflow:hidden}
+.tool-panel>p{margin-bottom:18px}
+.tech-sec .tool-rows::before,.tech-sec .tool-rows::after{display:none}
+.tech-sec .tool-rows>div{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%)}
+.tech-sec .tool-ic{background:linear-gradient(180deg,#FFFFFF,#F8FAFC);border-color:rgba(255,255,255,.95);box-shadow:inset 0 1px 0 #FFFFFF,0 0 0 1px rgba(11,22,32,.05),0 16px 30px -18px rgba(11,22,32,.35)}
+.tool-ic{width:82px !important;height:82px !important;border-radius:20px !important}
+.tool-ic img{width:44px !important;height:44px !important}
+.tool-rows:hover .tool-row{animation-play-state:running !important}
+.tool-panel{-webkit-backdrop-filter:none !important;backdrop-filter:none !important}
+@media (max-width:760px){.tool-ic{width:80px;height:80px;border-radius:18px}
+.tool-ic img{width:44px;height:44px}
+.tool-rows::before,.tool-rows::after{width:70px}
+.tech-grid{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+.tool-panel{border-radius:26px;padding:24px 0 10px}
+.tech-sec .tool-rows>div{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 10%,#000 90%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 10%,#000 90%,transparent 100%)}
+.tool-ic{width:66px !important;height:66px !important;border-radius:16px !important}
+.tool-ic img{width:36px !important;height:36px !important}}

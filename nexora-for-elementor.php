@@ -157,9 +157,15 @@ final class Nexora_For_Elementor {
 		foreach ( Nexora_Ele_Settings::get_enabled_widgets() as $widget ) {
 			$styles = isset( $widget['styles'] ) && is_array( $widget['styles'] ) ? $widget['styles'] : [];
 			foreach ( $styles as $style ) {
-				if ( is_array( $style ) && ! empty( $style['handle'] ) ) {
-					wp_enqueue_style( (string) $style['handle'] );
+				if ( ! is_array( $style ) || empty( $style['handle'] ) ) {
+					continue;
 				}
+				$handle = (string) $style['handle'];
+				// Prospects Hive styles load from get_style_depends when that widget is rendered.
+				if ( 0 === strpos( $handle, 'nexora-ph-' ) ) {
+					continue;
+				}
+				wp_enqueue_style( $handle );
 			}
 		}
 	}
@@ -173,9 +179,15 @@ final class Nexora_For_Elementor {
 		foreach ( Nexora_Ele_Settings::get_enabled_widgets() as $widget ) {
 			$scripts = isset( $widget['scripts'] ) && is_array( $widget['scripts'] ) ? $widget['scripts'] : [];
 			foreach ( $scripts as $script ) {
-				if ( is_array( $script ) && ! empty( $script['handle'] ) ) {
-					wp_enqueue_script( (string) $script['handle'] );
+				if ( ! is_array( $script ) || empty( $script['handle'] ) ) {
+					continue;
 				}
+				$handle = (string) $script['handle'];
+				// Prospects Hive scripts load from get_script_depends when that widget is rendered.
+				if ( 0 === strpos( $handle, 'nexora-ph-' ) ) {
+					continue;
+				}
+				wp_enqueue_script( $handle );
 			}
 		}
 	}

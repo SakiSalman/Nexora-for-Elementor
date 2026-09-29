@@ -1,0 +1,38 @@
+/* Prospects Hive industries styles. Selectors and declarations copied from the design export. */
+.ind-tile{position:relative;overflow:hidden;border-radius:22px;padding:24px;display:flex;flex-direction:column;gap:14px;text-decoration:none;color:#0B1620;background:linear-gradient(180deg,#FFFFFF 0%,#FFFCFA 100%);border:1px solid #EFE7DE;box-shadow:inset 0 1px 0 #FFFFFF,0 18px 40px -30px rgba(11,22,32,.28);transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease,background .3s ease}
+.ind-tile::after{content:"";position:absolute;right:-40px;top:-40px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(241,94,34,.22),transparent 70%);opacity:0;transition:opacity .35s}
+.ind-ic{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;color:#1A5A87;background:linear-gradient(145deg,#F0F7FC,#D8EAF6);box-shadow:inset 0 1px 0 #FFFFFF;transition:all .3s}
+.ind-nm{font-size:18px;font-weight:600}
+.ind-ex{font-size:13.5px;color:#56626D;display:inline-flex;gap:6px;transition:gap .25s,color .25s}
+.ind-tile:hover,.ind-tile.on{transform:translateY(-4px);background:linear-gradient(145deg,#FFF1E8 0%,#FFFFFF 55%,#F2F8FD 100%);border-color:#F7B596;box-shadow:inset 0 1px 0 #FFFFFF,0 0 0 4px rgba(241,94,34,.08),0 26px 50px -28px rgba(241,94,34,.55)}
+.ind-tile:hover::after,.ind-tile.on::after{opacity:1}
+.ind-tile:hover .ind-ic,.ind-tile.on .ind-ic{color:#0B1620;background:linear-gradient(145deg,#FF8350,#F15E22 60%,#D94E14);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 10px 20px -10px rgba(241,94,34,.8)}
+.ind-tile:hover .ind-ex,.ind-tile.on .ind-ex{color:#C2410C;gap:10px}
+.ind-tile.on .ind-nm{color:#0B1620}
+.ind-tile.on,.ind-grid:hover .ind-tile:hover{transform:translateY(-4px);color:#FFFFFF;border-color:transparent;background:radial-gradient(260px 180px at 100% 0%,rgba(241,94,34,.42),transparent 70%),radial-gradient(260px 200px at 0% 100%,rgba(35,116,172,.5),transparent 70%),linear-gradient(160deg,#16283C,#0B1620 70%);box-shadow:0 26px 50px -26px rgba(241,94,34,.6)}
+.ind-grid:hover .ind-tile.on:not(:hover){transform:none;color:#0B1620;border-color:#EFE7DE;background:linear-gradient(180deg,#FFFFFF 0%,#FFFCFA 100%);box-shadow:inset 0 1px 0 #FFFFFF,0 18px 40px -30px rgba(11,22,32,.28)}
+.ind-tile.on .ind-ic,.ind-grid:hover .ind-tile:hover .ind-ic{color:#0B1620;background:linear-gradient(145deg,#FF8350,#F15E22 60%,#D94E14);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 10px 20px -10px rgba(241,94,34,.8)}
+.ind-grid:hover .ind-tile.on:not(:hover) .ind-ic{color:#1A5A87;background:linear-gradient(145deg,#F0F7FC,#D8EAF6);box-shadow:inset 0 1px 0 #FFFFFF}
+.ind-tile.on .ind-ex,.ind-grid:hover .ind-tile:hover .ind-ex{color:#FFB08C;gap:10px}
+.ind-grid:hover .ind-tile.on:not(:hover) .ind-ex{color:#56626D;gap:6px}
+.ind-tile.on .ind-nm,.ind-grid:hover .ind-tile:hover .ind-nm{color:#FFFFFF}
+.ind-grid:hover .ind-tile.on:not(:hover) .ind-nm{color:#0B1620}
+.ind-tile.on::after,.ind-grid:hover .ind-tile:hover::after{opacity:0}
+.ind-tile{position:relative;isolation:isolate}
+.ind-tile::before{content:"";position:absolute;inset:0;border-radius:inherit;z-index:-1;opacity:0;pointer-events:none;background:radial-gradient(320px 200px at 100% 0%,rgba(241,94,34,.38),transparent 70%),radial-gradient(320px 220px at 0% 100%,rgba(35,116,172,.45),transparent 70%),linear-gradient(160deg,#16283C,#0B1620 70%);transition:opacity .6s cubic-bezier(.4,0,.2,1)}
+.ind-tile.on,.ind-grid:hover .ind-tile:hover{background:linear-gradient(180deg,#FFFFFF 0%,#FFFCFA 100%) !important}
+.ind-tile.on::before,.ind-grid:hover .ind-tile:hover::before{opacity:1}
+.ind-grid:hover .ind-tile.on:not(:hover)::before{opacity:0}
+.ind-tile{transition:transform .6s cubic-bezier(.4,0,.2,1),box-shadow .6s cubic-bezier(.4,0,.2,1),border-color .6s ease,color .5s ease !important}
+.ind-nm,.ind-ex{transition:color .5s ease,background .5s ease,gap .4s ease !important}
+.ind-ic{transition:background .5s ease,box-shadow .5s ease,color .5s ease !important}
+.ind-tile.on .ind-ic,.ind-grid:hover .ind-tile:hover .ind-ic{color:#FFFFFF !important}
+.ind-tile::before{opacity:1 !important;clip-path:circle(0% at var(--mx,50%) var(--my,50%));-webkit-clip-path:circle(0% at var(--mx,50%) var(--my,50%));transition:clip-path .75s cubic-bezier(.65,0,.35,1),-webkit-clip-path .75s cubic-bezier(.65,0,.35,1) !important}
+.ind-tile.on::before,.ind-grid:hover .ind-tile:hover::before{clip-path:circle(150% at var(--mx,50%) var(--my,50%));-webkit-clip-path:circle(150% at var(--mx,50%) var(--my,50%))}
+.ind-grid:hover .ind-tile.on:not(:hover)::before{clip-path:circle(0% at var(--mx,50%) var(--my,50%));-webkit-clip-path:circle(0% at var(--mx,50%) var(--my,50%))}
+.ind-nm,.ind-ex{transition-delay:.12s !important}
+.ind-tile::before{clip-path:none !important;-webkit-clip-path:none !important;--hr:0px;-webkit-mask-image:radial-gradient(circle at var(--mx,50%) var(--my,50%),#000 calc(var(--hr) - 1px),transparent var(--hr));mask-image:radial-gradient(circle at var(--mx,50%) var(--my,50%),#000 calc(var(--hr) - 1px),transparent var(--hr));transition:--hr .75s cubic-bezier(.65,0,.35,1) !important}
+.ind-tile.on::before,.ind-grid:hover .ind-tile:hover::before{--hr:780px}
+.ind-grid:hover .ind-tile.on:not(:hover)::before{--hr:0px}
+@media (max-width:760px){.ind-grid{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:12px !important}
+.ind-grid>a{padding:18px !important}}

@@ -1,0 +1,3 @@
+/* Prospects Hive why styles. Selectors and declarations copied from the design export. */
+.icon-top{position:absolute;top:-26px;left:24px;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#FFFFFF,#FFF1E9);border:1.5px solid #F7C9B3;box-shadow:0 10px 24px -12px rgba(241,94,34,.6)}
+.hv-grid:not(:hover) .hv-card.hv-on .icon-top,.hv-grid .hv-card:hover .icon-top{box-shadow:0 0 0 6px rgba(255,255,255,.12),0 14px 28px -12px rgba(241,94,34,.8)}

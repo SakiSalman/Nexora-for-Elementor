@@ -1,0 +1,3 @@
+/* Prospects Hive expertise styles. Selectors and declarations copied from the design export. */
+.span2{grid-column:span 2}
+@media (max-width:760px){.span2{grid-column:auto}}

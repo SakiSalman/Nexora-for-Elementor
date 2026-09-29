@@ -1,0 +1,16 @@
+/* Prospects Hive faq styles. Selectors and declarations copied from the design export. */
+.faq{padding:22px 26px;border-radius:20px;border:1px solid #EFE7DE;background:#FFFFFF;transition:border-color .2s,box-shadow .2s}
+.faq[open]{border-color:#F6C3AA;background:linear-gradient(180deg,#FFF8F3,#FFFFFF);box-shadow:0 20px 40px -28px rgba(241,94,34,.4)}
+.faq .pm{transition:transform .25s;color:#F15E22;font-size:26px;line-height:1;flex-shrink:0}
+.faq[open] .pm{transform:rotate(45deg)}
+.faq{padding:0 !important;overflow:hidden}
+.faq summary{padding:22px 26px;transition:background .25s}
+.faq summary h3{transition:color .2s}
+.faq summary:hover h3{color:#C2410C}
+.faq>p{margin:0 !important;padding:18px 26px 24px;border-top:1px solid #F6D9C8;background:#FFFFFF;color:#3A4753 !important;animation:faqIn .3s ease both}
+.faq[open]{border-color:#F7B596;background:#FFFFFF;box-shadow:0 24px 44px -30px rgba(241,94,34,.45)}
+.faq[open] summary{background:linear-gradient(135deg,#FFF1E8 0%,#FFF8F3 60%,#F4F9FD 100%)}
+.faq[open] summary h3{color:#0B1620}
+.faq .pm{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:#EEF1F4;color:#0B1620;font-size:0;transition:transform .3s ease,background .3s ease,color .3s ease}
+.faq[open] .pm{transform:rotate(180deg);background:linear-gradient(145deg,#FF8350,#F15E22);color:#FFFFFF;box-shadow:0 8px 18px -8px rgba(241,94,34,.7)}
+@keyframes faqIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
