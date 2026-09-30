@@ -53,8 +53,24 @@
 			if (m2 && look(m2[1], scope)) kids(node, scope, out);
 			return;
 		}
-		var el = document.importNode(node, false);
+		var requested = node.localName;
+		var tagAttr = node.getAttribute('data-ph-tag');
+		if (tagAttr && tagAttr.indexOf('{{') > -1) {
+			var chosen = String(interp(tagAttr, scope) || '').toLowerCase();
+			if (/^(h[1-6]|div|span|p)$/.test(chosen)) requested = chosen;
+		}
+		var el = requested === node.localName ? document.importNode(node, false) : document.createElement(requested);
+		if (requested !== node.localName) {
+			Array.prototype.forEach.call(node.attributes, function (a) {
+				if (a.name === 'data-ph-tag' || a.value.indexOf('{{') > -1) return;
+				el.setAttribute(a.name, a.value);
+			});
+		}
 		Array.prototype.slice.call(node.attributes).forEach(function (a) {
+			if (a.name === 'data-ph-tag') {
+				el.removeAttribute('data-ph-tag');
+				return;
+			}
 			if (a.value.indexOf('{{') < 0) return;
 			var w = WHOLE.exec(a.value);
 			if (/^on/i.test(a.name)) {

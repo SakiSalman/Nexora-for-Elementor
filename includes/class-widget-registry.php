@@ -108,7 +108,7 @@ if ( ! class_exists( 'Nexora_Ele_Widget_Registry', false ) ) {
 					'styles'          => [
 					[
 						'handle'   => 'nexora-ph-fonts',
-						'src'      => 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
+						'src'      => 'https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
 						'deps'     => [],
 						'ver'      => null,
 						'external' => true,
@@ -153,7 +153,7 @@ if ( ! class_exists( 'Nexora_Ele_Widget_Registry', false ) ) {
 					'styles'          => [
 					[
 						'handle'   => 'nexora-ph-fonts',
-						'src'      => 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
+						'src'      => 'https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
 						'deps'     => [],
 						'ver'      => null,
 						'external' => true,
@@ -183,7 +183,7 @@ if ( ! class_exists( 'Nexora_Ele_Widget_Registry', false ) ) {
 					'styles'          => [
 					[
 						'handle'   => 'nexora-ph-fonts',
-						'src'      => 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
+						'src'      => 'https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
 						'deps'     => [],
 						'ver'      => null,
 						'external' => true,
@@ -213,7 +213,7 @@ if ( ! class_exists( 'Nexora_Ele_Widget_Registry', false ) ) {
 					'styles'          => [
 					[
 						'handle'   => 'nexora-ph-fonts',
-						'src'      => 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
+						'src'      => 'https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
 						'deps'     => [],
 						'ver'      => null,
 						'external' => true,
@@ -243,7 +243,7 @@ if ( ! class_exists( 'Nexora_Ele_Widget_Registry', false ) ) {
 					'styles'          => [
 					[
 						'handle'   => 'nexora-ph-fonts',
-						'src'      => 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
+						'src'      => 'https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
 						'deps'     => [],
 						'ver'      => null,
 						'external' => true,
@@ -281,7 +281,7 @@ if ( ! class_exists( 'Nexora_Ele_Widget_Registry', false ) ) {
 					'styles'          => [
 					[
 						'handle'   => 'nexora-ph-fonts',
-						'src'      => 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
+						'src'      => 'https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
 						'deps'     => [],
 						'ver'      => null,
 						'external' => true,
@@ -311,7 +311,7 @@ if ( ! class_exists( 'Nexora_Ele_Widget_Registry', false ) ) {
 					'styles'          => [
 					[
 						'handle'   => 'nexora-ph-fonts',
-						'src'      => 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
+						'src'      => 'https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
 						'deps'     => [],
 						'ver'      => null,
 						'external' => true,
@@ -341,7 +341,7 @@ if ( ! class_exists( 'Nexora_Ele_Widget_Registry', false ) ) {
 					'styles'          => [
 					[
 						'handle'   => 'nexora-ph-fonts',
-						'src'      => 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
+						'src'      => 'https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
 						'deps'     => [],
 						'ver'      => null,
 						'external' => true,
@@ -386,7 +386,7 @@ if ( ! class_exists( 'Nexora_Ele_Widget_Registry', false ) ) {
 					'styles'          => [
 					[
 						'handle'   => 'nexora-ph-fonts',
-						'src'      => 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
+						'src'      => 'https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
 						'deps'     => [],
 						'ver'      => null,
 						'external' => true,
@@ -424,7 +424,7 @@ if ( ! class_exists( 'Nexora_Ele_Widget_Registry', false ) ) {
 					'styles'          => [
 					[
 						'handle'   => 'nexora-ph-fonts',
-						'src'      => 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
+						'src'      => 'https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
 						'deps'     => [],
 						'ver'      => null,
 						'external' => true,
@@ -469,7 +469,7 @@ if ( ! class_exists( 'Nexora_Ele_Widget_Registry', false ) ) {
 					'styles'          => [
 					[
 						'handle'   => 'nexora-ph-fonts',
-						'src'      => 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
+						'src'      => 'https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
 						'deps'     => [],
 						'ver'      => null,
 						'external' => true,
@@ -507,7 +507,7 @@ if ( ! class_exists( 'Nexora_Ele_Widget_Registry', false ) ) {
 					'styles'          => [
 					[
 						'handle'   => 'nexora-ph-fonts',
-						'src'      => 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
+						'src'      => 'https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
 						'deps'     => [],
 						'ver'      => null,
 						'external' => true,
@@ -537,7 +537,7 @@ if ( ! class_exists( 'Nexora_Ele_Widget_Registry', false ) ) {
 					'styles'          => [
 					[
 						'handle'   => 'nexora-ph-fonts',
-						'src'      => 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
+						'src'      => 'https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
 						'deps'     => [],
 						'ver'      => null,
 						'external' => true,
@@ -567,7 +567,7 @@ if ( ! class_exists( 'Nexora_Ele_Widget_Registry', false ) ) {
 					'styles'          => [
 					[
 						'handle'   => 'nexora-ph-fonts',
-						'src'      => 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
+						'src'      => 'https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
 						'deps'     => [],
 						'ver'      => null,
 						'external' => true,
@@ -612,7 +612,7 @@ if ( ! class_exists( 'Nexora_Ele_Widget_Registry', false ) ) {
 					'styles'          => [
 					[
 						'handle'   => 'nexora-ph-fonts',
-						'src'      => 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
+						'src'      => 'https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
 						'deps'     => [],
 						'ver'      => null,
 						'external' => true,
@@ -657,7 +657,7 @@ if ( ! class_exists( 'Nexora_Ele_Widget_Registry', false ) ) {
 					'styles'          => [
 					[
 						'handle'   => 'nexora-ph-fonts',
-						'src'      => 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
+						'src'      => 'https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
 						'deps'     => [],
 						'ver'      => null,
 						'external' => true,
@@ -687,7 +687,7 @@ if ( ! class_exists( 'Nexora_Ele_Widget_Registry', false ) ) {
 					'styles'          => [
 					[
 						'handle'   => 'nexora-ph-fonts',
-						'src'      => 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
+						'src'      => 'https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
 						'deps'     => [],
 						'ver'      => null,
 						'external' => true,
@@ -732,7 +732,7 @@ if ( ! class_exists( 'Nexora_Ele_Widget_Registry', false ) ) {
 					'styles'          => [
 					[
 						'handle'   => 'nexora-ph-fonts',
-						'src'      => 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
+						'src'      => 'https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
 						'deps'     => [],
 						'ver'      => null,
 						'external' => true,
@@ -770,7 +770,7 @@ if ( ! class_exists( 'Nexora_Ele_Widget_Registry', false ) ) {
 					'styles'          => [
 					[
 						'handle'   => 'nexora-ph-fonts',
-						'src'      => 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
+						'src'      => 'https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
 						'deps'     => [],
 						'ver'      => null,
 						'external' => true,
@@ -800,7 +800,7 @@ if ( ! class_exists( 'Nexora_Ele_Widget_Registry', false ) ) {
 					'styles'          => [
 					[
 						'handle'   => 'nexora-ph-fonts',
-						'src'      => 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
+						'src'      => 'https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
 						'deps'     => [],
 						'ver'      => null,
 						'external' => true,
@@ -838,7 +838,7 @@ if ( ! class_exists( 'Nexora_Ele_Widget_Registry', false ) ) {
 					'styles'          => [
 					[
 						'handle'   => 'nexora-ph-fonts',
-						'src'      => 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
+						'src'      => 'https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
 						'deps'     => [],
 						'ver'      => null,
 						'external' => true,
@@ -868,7 +868,7 @@ if ( ! class_exists( 'Nexora_Ele_Widget_Registry', false ) ) {
 					'styles'          => [
 					[
 						'handle'   => 'nexora-ph-fonts',
-						'src'      => 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
+						'src'      => 'https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
 						'deps'     => [],
 						'ver'      => null,
 						'external' => true,
@@ -898,7 +898,7 @@ if ( ! class_exists( 'Nexora_Ele_Widget_Registry', false ) ) {
 					'styles'          => [
 					[
 						'handle'   => 'nexora-ph-fonts',
-						'src'      => 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
+						'src'      => 'https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
 						'deps'     => [],
 						'ver'      => null,
 						'external' => true,
@@ -928,7 +928,7 @@ if ( ! class_exists( 'Nexora_Ele_Widget_Registry', false ) ) {
 					'styles'          => [
 					[
 						'handle'   => 'nexora-ph-fonts',
-						'src'      => 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
+						'src'      => 'https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
 						'deps'     => [],
 						'ver'      => null,
 						'external' => true,

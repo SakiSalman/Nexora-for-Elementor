@@ -2198,16 +2198,17 @@ Decorative inline SVG icons are not icon controls. The design does not use an ic
 
 ### Script-owned copy
 
-Some visible strings are not in the HTML. They are printed by the existing widget script through `{{ }}` holes. Those scripts were not modified, so that copy is not a control:
+Some visible strings are not in the HTML. They are printed by the existing widget script through `{{ }}` holes. The Cases, Impact, and Framework scripts were not modified, so that copy is not a control:
 
 | Widget | Data | Source |
 | --- | --- | --- |
 | Cases | Slide title, summary, client, industry, services, stats, image, alt | `CASES` in `nexora-ph-cases.js` |
 | Impact | Tab label, title, body, points | `IMPACT` in `nexora-ph-impact.js` |
 | Framework | Tab label and subtitle | `FW` in `nexora-ph-framework.js` |
-| Pricing | Plan tab label | `PLANS` in `nexora-ph-pricing.js` |
 
-The static copy around those holes (headings, framework pane body, pricing prices and feature lists, industry names) is editable. Template class names and click handlers (`{{ ind.c0 }}`, `onClick="{{ }}"`) are behavior, not copy.
+Pricing is the exception. Plan names, prices, lists, and the custom card come from the Plans repeater. `nexora-ph-pricing.js` reads that saved list and only switches the active tab.
+
+The static copy around the remaining holes (headings, framework pane body, industry names) is editable. Template class names and click handlers (`{{ ind.c0 }}`, `onClick="{{ }}"`) are behavior, not copy.
 
 ### Empty values and escaping
 

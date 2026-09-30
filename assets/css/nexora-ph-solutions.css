@@ -1,1 +1,31 @@
 /* Prospects Hive solutions styles. Selectors and declarations copied from the design export. */
+.sx-box{position:relative;aspect-ratio:480/440;border-radius:32px;padding:0;overflow:hidden;background:radial-gradient(60% 50% at 50% 45%,rgba(241,94,34,.10),transparent 70%),radial-gradient(50% 50% at 90% 90%,rgba(35,116,172,.10),transparent 70%),linear-gradient(160deg,#FFFFFF,#FFF7F2 55%,#F2F8FD)}
+.sx-grid{position:absolute;inset:0;background:radial-gradient(#E6DDD4 1.1px,transparent 1.1px) 0 0/20px 20px;opacity:.7;-webkit-mask-image:radial-gradient(ellipse at 50% 45%,#000 30%,transparent 75%);mask-image:radial-gradient(ellipse at 50% 45%,#000 30%,transparent 75%)}
+.sx-svg{position:absolute;left:0;top:0;width:100%;height:90.9%}
+.sx-dash{stroke-dasharray:6 10;animation:dash 1.4s linear infinite}
+.sx-hub{position:absolute;left:50%;top:46%;width:32%;aspect-ratio:1;transform:translate(-50%,-50%)}
+.sx-ring{position:absolute;inset:-6%;border-radius:50%;border:1.5px solid rgba(241,94,34,.35);animation:ringpulse 3.6s ease-out infinite}
+.sx-ring.d2{animation-delay:1.8s;border-color:rgba(35,116,172,.35)}
+.sx-core{position:absolute;inset:0;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center;background:radial-gradient(circle at 30% 25%,#FFFFFF,#FFF4EC 60%,#FFE6D8);border:1px solid #F6D3BF;box-shadow:0 0 0 8px rgba(255,255,255,.7),0 24px 50px -24px rgba(241,94,34,.55)}
+.sx-core img{width:34px;height:34px;display:block}
+.sx-core b{font-size:15px;font-weight:700;color:#0B1620}
+.sx-core small{font-size:11.5px;color:#56626D}
+.sx-node{position:absolute;display:flex;align-items:center;gap:10px;padding:10px 14px 10px 10px;border-radius:16px;background:#FFFFFF;border:1px solid #EFE3D8;box-shadow:0 16px 30px -20px rgba(11,22,32,.35);animation:nodeglow 3.2s ease-in-out infinite;white-space:nowrap}
+.sx-node b{display:block;font-size:13.5px;font-weight:600;color:#0B1620}
+.sx-node small{display:block;font-size:11.5px;color:#56626D}
+.sx-ic{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#FFF3EC,#FFE0CF)}
+.sx-n2 .sx-ic,.sx-n4 .sx-ic{background:linear-gradient(145deg,#F0F7FC,#D8EAF6)}
+.sx-n1{left:4%;top:17%}
+.sx-n2{right:4%;top:17%;animation-delay:.8s}
+.sx-n3{left:4%;top:62%;animation-delay:1.6s}
+.sx-n4{right:4%;top:62%;animation-delay:2.4s}
+.sx-meet{position:absolute;left:50%;top:3.5%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;padding:7px 12px 7px 7px;border-radius:999px;background:#FFFFFF;border:1px solid #D9EFE1;box-shadow:0 12px 26px -16px rgba(21,128,61,.5);font-size:12px;white-space:nowrap;animation:float 5s ease-in-out infinite}
+.sx-meet b{font-size:12.5px;color:#0B1620}
+.sx-meet small{display:block;font-size:11px;color:#56626D}
+.sx-ok{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#22C55E;color:#FFFFFF;font-size:12px;font-weight:700}
+.sx-bar{position:absolute;left:6%;right:6%;bottom:5%;display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:16px;background:#FFFFFF;border:1px solid #EFE3D8;box-shadow:0 16px 30px -22px rgba(11,22,32,.35);font-size:13px;font-weight:600;color:#3A4753}
+.sx-track{flex:1;height:8px;border-radius:8px;background:#F1E7DE;overflow:hidden}
+.sx-track i{display:block;height:100%;width:0;border-radius:8px;background:linear-gradient(90deg,#2374AC,#5FB0E8 40%,#FF8A4C 75%,#F15E22);animation:sxfill 4s ease-in-out infinite}
+.sx-bar b{color:#15803D}
+@media (max-width:760px){.sx-node{padding:7px 9px 7px 7px;gap:7px}.sx-ic{width:26px;height:26px}.sx-ic svg{width:15px;height:15px}.sx-node b{font-size:11.5px}.sx-node small{display:none}.sx-core b{font-size:12px}.sx-core small{display:none}.sx-core img{width:24px;height:24px}.sx-meet{display:none}}
+@keyframes sxfill{0%{width:8%}60%,100%{width:92%}}
