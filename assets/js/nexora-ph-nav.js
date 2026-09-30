@@ -1,103 +1,218 @@
-/* Prospects Hive nav. Scroll hide/solid and mega-menu state from bindNav().
-   Timeline, card hover, FAQ, growth, and testimonials stay on their own widgets.
-   Hash links resolve [data-ph-anchor] because section ids are suffixed per instance. */
+/* Prospects Hive nav. One open panel per widget root. */
 (function () {
 	'use strict';
 
-	function NexoraPHNav() {
-		NexoraPH.DCLogic.call(this);
-	}
-	NexoraPHNav.prototype = Object.create(NexoraPH.DCLogic.prototype);
-	NexoraPHNav.prototype.constructor = NexoraPHNav;
+	function bind(root) {
+		if (!root || root.nodeType !== 1) return;
+		var header = root.querySelector('header.nav');
+		if (!header) return;
+		try {
+			if (root._nexoraNavAbort && typeof root._nexoraNavAbort.abort === 'function') root._nexoraNavAbort.abort();
+		} catch (e) {}
+		var controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+		var signal = controller ? controller.signal : undefined;
+		if (controller) root._nexoraNavAbort = controller;
 
-	NexoraPHNav.prototype.componentDidMount = function () {
-		var self = this;
-		var root = this.root;
-		var signal = this.signal;
-		this.onKey = function (e) {
-			if (e.key === 'Escape' && self.state && self.state.mega) self.setState({ mega: false });
-		};
-		document.addEventListener('keydown', this.onKey);
+		var open = null;
+		var phone = null;
+		var menu = false;
+
+		function panel(index) {
+			return header.querySelector('[data-nav-panel="' + index + '"]');
+		}
+
+		function closeDesktop() {
+			open = null;
+			header.querySelectorAll('[data-nav-panel]').forEach(function (node) {
+				node.hidden = true;
+			});
+			var scrim = header.querySelector('[data-nav-scrim]');
+			if (scrim) scrim.hidden = true;
+			header.querySelectorAll('[data-nav-open]').forEach(function (button) {
+				button.classList.remove('on');
+				button.setAttribute('aria-expanded', 'false');
+			});
+		}
+
+		function placeDropdown(node, button) {
+			if (!node.classList.contains('dd') || !button) return;
+			var hb = header.getBoundingClientRect();
+			var bb = button.getBoundingClientRect();
+			node.hidden = false;
+			var width = node.offsetWidth || 320;
+			var left = bb.left - hb.left;
+			var max = Math.max(16, header.clientWidth - width - 16);
+			if (left > max) left = max;
+			if (left < 16) left = 16;
+			node.style.left = left + 'px';
+		}
+
+		function showDesktop(index, button) {
+			if (open === index) return;
+			closeDesktop();
+			var node = panel(index);
+			if (!node) return;
+			node.hidden = false;
+			placeDropdown(node, button);
+			if (node.classList.contains('mm')) {
+				var scrim = header.querySelector('[data-nav-scrim]');
+				if (scrim) scrim.hidden = false;
+			}
+			if (button) {
+				button.classList.add('on');
+				button.setAttribute('aria-expanded', 'true');
+			}
+			open = index;
+		}
+
+		function setPhone(next) {
+			menu = next;
+			var box = header.querySelector('[data-nav-phone-menu]');
+			var toggle = header.querySelector('[data-nav-menu]');
+			if (box) box.hidden = !menu;
+			if (toggle) toggle.setAttribute('aria-expanded', menu ? 'true' : 'false');
+			header.classList.toggle('m-open', menu);
+			if (!menu) setPhoneSub(null);
+		}
+
+		function setPhoneSub(index) {
+			phone = index;
+			header.querySelectorAll('[data-nav-sub]').forEach(function (node) {
+				node.hidden = node.getAttribute('data-nav-sub') !== String(index);
+			});
+			header.querySelectorAll('[data-nav-phone]').forEach(function (button) {
+				var on = button.getAttribute('data-nav-phone') === String(index);
+				button.classList.toggle('on', on);
+				button.setAttribute('aria-expanded', on ? 'true' : 'false');
+			});
+		}
+
+		header.addEventListener(
+			'click',
+			function (event) {
+				var openButton = event.target.closest ? event.target.closest('[data-nav-open]') : null;
+				if (openButton && header.contains(openButton)) {
+					showDesktop(openButton.getAttribute('data-nav-open'), openButton);
+					return;
+				}
+				var phoneButton = event.target.closest ? event.target.closest('[data-nav-phone]') : null;
+				if (phoneButton && header.contains(phoneButton)) {
+					var id = phoneButton.getAttribute('data-nav-phone');
+					setPhoneSub(phone === id ? null : id);
+					return;
+				}
+				if (event.target.closest && event.target.closest('[data-nav-menu]')) {
+					setPhone(!menu);
+					return;
+				}
+				if (event.target.closest && event.target.closest('[data-nav-scrim]')) {
+					closeDesktop();
+					return;
+				}
+				if (event.target.closest && event.target.closest('[data-nav-link]')) {
+					closeDesktop();
+					setPhone(false);
+				}
+			},
+			{ signal: signal }
+		);
+
+		header.addEventListener(
+			'mouseover',
+			function (event) {
+				var openButton = event.target.closest ? event.target.closest('[data-nav-open]') : null;
+				if (openButton && header.contains(openButton)) {
+					if (open !== openButton.getAttribute('data-nav-open')) showDesktop(openButton.getAttribute('data-nav-open'), openButton);
+					return;
+				}
+				if (event.target.closest && event.target.closest('[data-nav-link]') && event.target.closest('.hide-md')) {
+					closeDesktop();
+				}
+			},
+			{ signal: signal }
+		);
+
+		header.addEventListener(
+			'mouseleave',
+			function () {
+				closeDesktop();
+			},
+			{ signal: signal }
+		);
+
+		function onKey(event) {
+			if (event.key !== 'Escape') return;
+			closeDesktop();
+			setPhone(false);
+		}
+		document.addEventListener('keydown', onKey, { signal: signal });
+
 		var last = 0;
-		this.onScroll = function (e) {
-			var t = e && e.target;
+		function onScroll(event) {
+			var t = event && event.target;
 			var el = !t || t === document || t === document.documentElement || t === document.body ? document.scrollingElement || document.documentElement : t;
 			if (!el || typeof el.scrollTop !== 'number' || el.scrollHeight - el.clientHeight < 200) return;
 			var y = el.scrollTop;
 			var dy = y - last;
-			var navEl = root.querySelector('header.nav');
-			if (navEl) navEl.classList.toggle('nav-solid', y > 24);
+			header.classList.toggle('nav-solid', y > 24);
 			if (Math.abs(dy) < 6) return;
 			last = y;
-			var st = self.state || {};
-			var nav = root.querySelector('header.nav');
-			if (!nav) return;
 			var heroEl = document.querySelector('.hero-sec');
 			var heroH = heroEl ? heroEl.offsetHeight : 700;
-			var hide = dy > 0 && y > heroH - 90 && !st.mega && !st.menu;
-			nav.classList.toggle('nav-hide', hide);
-			nav.classList.toggle('nav-solid', y > 24);
-		};
-		window.addEventListener('scroll', this.onScroll, true);
-		this.onAnchor = function (e) {
-			var a = e.target && e.target.closest ? e.target.closest('a[href^="#"]') : null;
-			if (!a || !root.contains(a)) return;
-			var hash = a.getAttribute('href') || '';
-			var id = hash.charAt(0) === '#' ? hash.slice(1) : '';
-			if (!id) return;
-			var escaped = window.CSS && CSS.escape ? CSS.escape(id) : id.replace(/"/g, '');
-			var target = document.querySelector('[data-ph-anchor="' + escaped + '"]');
-			if (!target) return;
-			e.preventDefault();
-			target.scrollIntoView();
-		};
-		root.addEventListener('click', this.onAnchor);
+			var hide = dy > 0 && y > heroH - 90 && open === null && !menu;
+			header.classList.toggle('nav-hide', hide);
+			header.classList.toggle('nav-solid', y > 24);
+		}
+		window.addEventListener('scroll', onScroll, true);
 		if (signal) {
 			signal.addEventListener('abort', function () {
-				self.componentWillUnmount();
+				window.removeEventListener('scroll', onScroll, true);
 			});
 		}
-	};
 
-	NexoraPHNav.prototype.componentWillUnmount = function () {
-		if (this._unbound) return;
-		this._unbound = true;
-		if (this.onKey) document.removeEventListener('keydown', this.onKey);
-		if (this.onScroll) window.removeEventListener('scroll', this.onScroll, true);
-		if (this.onAnchor && this.root) this.root.removeEventListener('click', this.onAnchor);
-	};
+		root.addEventListener(
+			'click',
+			function (event) {
+				var anchor = event.target && event.target.closest ? event.target.closest('a[href^="#"]') : null;
+				if (!anchor || !root.contains(anchor)) return;
+				var hash = anchor.getAttribute('href') || '';
+				var id = hash.charAt(0) === '#' ? hash.slice(1) : '';
+				if (!id) return;
+				var escaped = window.CSS && CSS.escape ? CSS.escape(id) : id.replace(/"/g, '');
+				var target = document.querySelector('[data-ph-anchor="' + escaped + '"]');
+				if (!target) return;
+				event.preventDefault();
+				target.scrollIntoView();
+			},
+			{ signal: signal }
+		);
+	}
 
-	NexoraPHNav.prototype.renderVals = function () {
-		var st = this.state || {};
-		return {
-			menuOpen: !!st.menu,
-			menuExpanded: st.menu ? 'true' : 'false',
-			toggleMenu: function () {
-				this.setState({ menu: !st.menu });
-			}.bind(this),
-			closeMenu: function () {
-				this.setState({ menu: false, msvc: false });
-			}.bind(this),
-			megaOpen: !!st.mega,
-			megaExpanded: st.mega ? 'true' : 'false',
-			megaCls: st.mega ? 'navlink navbtn on' : 'navlink navbtn',
-			toggleMega: function () {
-				this.setState({ mega: !st.mega });
-			}.bind(this),
-			closeMega: function () {
-				if (this.state && this.state.mega) this.setState({ mega: false });
-			}.bind(this),
-			openMega: function () {
-				if (!(this.state && this.state.mega)) this.setState({ mega: true });
-			}.bind(this),
-			mSvcOpen: !!st.msvc,
-			mSvcExpanded: st.msvc ? 'true' : 'false',
-			mSvcCls: st.msvc ? 'm-link on' : 'm-link',
-			toggleMSvc: function () {
-				this.setState({ msvc: !st.msvc });
-			}.bind(this),
-		};
-	};
+	function initAll() {
+		Array.prototype.forEach.call(document.querySelectorAll('[data-nexora-ph-nav]'), bind);
+	}
 
-	NexoraPH.boot('ele-ph-nav', '[data-nexora-ph-nav]', NexoraPHNav);
+	if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initAll);
+	else initAll();
+
+	function addHook() {
+		if (typeof elementorFrontend === 'undefined' || !elementorFrontend.hooks) return false;
+		elementorFrontend.hooks.addAction('frontend/element_ready/ele-ph-nav.default', function ($scope) {
+			try {
+				if (!$scope || !$scope[0]) return;
+				var el = $scope[0];
+				var root = el.matches && el.matches('[data-nexora-ph-nav]') ? el : el.querySelector('[data-nexora-ph-nav]');
+				bind(root);
+			} catch (err) {}
+		});
+		return true;
+	}
+
+	if (addHook()) return;
+	if (typeof jQuery === 'undefined') return;
+	jQuery(window).on('elementor/frontend/init', function () {
+		try {
+			addHook();
+		} catch (err) {}
+	});
 })();

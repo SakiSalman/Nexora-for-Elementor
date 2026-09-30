@@ -24,6 +24,7 @@ define( 'NEXORA_ELE_URL', plugin_dir_url( __FILE__ ) );
 require_once NEXORA_ELE_PATH . 'includes/class-widget-registry.php';
 require_once NEXORA_ELE_PATH . 'includes/class-settings.php';
 require_once NEXORA_ELE_PATH . 'includes/class-admin-settings.php';
+require_once NEXORA_ELE_PATH . 'includes/class-nav-menu.php';
 
 /**
  * Main Nexora Plugin Class
