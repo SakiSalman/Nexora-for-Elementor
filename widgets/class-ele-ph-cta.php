@@ -44,7 +44,7 @@ if ( ! class_exists( 'Nexora_PH_Cta_Widget', false ) ) {
 		 * Widget categories.
 		 */
 		public function get_categories(): array {
-			return [ 'general' ];
+			return [ 'nexora' ];
 		}
 
 		/**

@@ -59,7 +59,50 @@ final class Nexora_For_Elementor {
 		add_action( 'wp_enqueue_scripts', [ $this, 'register_assets' ] );
 		add_action( 'elementor/preview/enqueue_styles', [ $this, 'enqueue_preview_styles' ] );
 		add_action( 'elementor/preview/enqueue_scripts', [ $this, 'enqueue_preview_scripts' ] );
+		add_action( 'elementor/elements/categories_registered', [ $this, 'register_category' ] );
 		add_action( 'elementor/widgets/register', [ $this, 'register_widgets' ] );
+	}
+
+	/**
+	 * Register the Nexora panel category and place it under Favorites.
+	 *
+	 * @param \Elementor\Elements_Manager $elements_manager Elements manager.
+	 */
+	public function register_category( $elements_manager ): void {
+		if ( ! is_object( $elements_manager ) || ! method_exists( $elements_manager, 'add_category' ) ) {
+			return;
+		}
+
+		$elements_manager->add_category(
+			'nexora',
+			[
+				'title' => esc_html__( 'Nexora', 'nexora-elementor' ),
+				'icon'  => 'eicon-folder',
+			]
+		);
+
+		$move = \Closure::bind(
+			static function (): void {
+				if ( ! isset( $this->categories['nexora'] ) ) {
+					return;
+				}
+
+				$nexora = [ 'nexora' => $this->categories['nexora'] ];
+				unset( $this->categories['nexora'] );
+
+				if ( isset( $this->categories['favorites'] ) ) {
+					$favorites          = [ 'favorites' => $this->categories['favorites'] ];
+					unset( $this->categories['favorites'] );
+					$this->categories = $favorites + $nexora + $this->categories;
+					return;
+				}
+
+				$this->categories = $nexora + $this->categories;
+			},
+			$elements_manager,
+			$elements_manager
+		);
+		$move();
 	}
 
 	/**

@@ -31,6 +31,13 @@ if ( ! class_exists( 'Nexora_Ele_Widget_Base', false ) ) {
 		}
 
 		/**
+		 * Panel category. Every Nexora widget lives under Nexora.
+		 */
+		public function get_categories(): array {
+			return [ 'nexora' ];
+		}
+
+		/**
 		 * Whether this widget is enabled in Nexora settings.
 		 */
 		protected function is_nexora_widget_enabled(): bool {

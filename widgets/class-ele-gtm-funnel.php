@@ -46,7 +46,7 @@ class Nexora_GTM_Funnel_Widget extends Nexora_Ele_Widget_Base {
 	 * Widget categories.
 	 */
 	public function get_categories(): array {
-		return [ 'general' ];
+		return [ 'nexora' ];
 	}
 
 	/**

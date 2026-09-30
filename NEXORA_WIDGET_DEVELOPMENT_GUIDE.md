@@ -79,7 +79,7 @@ Nexora catalogs widgets in `Nexora_Ele_Widget_Registry::all()`, registers every 
 
 **CURRENT.** There is no:
 
-- Custom Elementor category (both widgets return `get_categories(): ['general']`).
+- A second widget category. Every widget is in the Nexora category.
 - Shared design-system component library (no buttons, cards, modals, or tables as PHP/JS components).
 - Authentication layer, API keys, tokens, or user-permission model beyond WordPress `manage_options` for the settings screen.
 - Server-side “widget result” object. The output is HTML.
@@ -293,7 +293,7 @@ Both definitions live in `Nexora_Ele_Widget_Registry::all()` and are filtered by
 | Class | `Nexora_GTM_Funnel_Widget` |
 | Entry file | `widgets/class-ele-gtm-funnel.php` |
 | Icon | `eicon-favorite` |
-| Category | `general` |
+| Category | `nexora` |
 | Keywords | `gtm`, `funnel`, `process`, `nexora`, `pipeline` |
 | `default_enabled` | `true` |
 | Style handles | `nexora-plus-jakarta-font` (external Google Fonts CSS), `nexora-ele-gtm-funnel` |
@@ -312,7 +312,7 @@ Both definitions live in `Nexora_Ele_Widget_Registry::all()` and are filtered by
 | Class | `Nexora_Timeline_Widget` |
 | Entry file | `widgets/class-ele-timeline.php` |
 | Icon | `eicon-time-line` |
-| Category | `general` |
+| Category | `nexora` |
 | Keywords | `timeline`, `scroll`, `process`, `story`, `nexora` |
 | `default_enabled` | `true` |
 | Style handles | `nexora-plus-jakarta-font`, `nexora-ele-timeline` |
@@ -862,7 +862,7 @@ Widget
 - **STANDARD for new classes:** `Nexora_{StudlySlug}_Widget` in the global namespace (there is no PHP namespace). Example: slug `pricing-table` → `Nexora_Pricing_Table_Widget`, id `ele-pricing-table`.
 - `get_title()` is wrapped in `esc_html__( …, 'nexora-elementor' )`.
 - `get_icon()` is an Elementor `eicon-*` slug.
-- `get_categories()` returns `[ 'general' ]` until this plugin registers its own category. It does not today.
+- `get_categories()` returns `[ 'nexora' ]`. The plugin registers that category as **Nexora** in the Elementor panel.
 - `get_keywords()` includes `'nexora'` plus widget words.
 - `has_widget_inner_wrapper()` returns `false`.
 
@@ -1616,7 +1616,7 @@ There is no plugin CLI script.
 | Symptom | What to check |
 | --- | --- |
 | Does not register | Entry missing from `Nexora_Ele_Widget_Registry::all()`. `file` path wrong or not readable. `class` string does not match the class declaration. Elementor not active (`elementor_missing_notice`). PHP fatal inside the class file (check `wp-content/debug.log` only if the site already has `WP_DEBUG_LOG`; this plugin does not enable it). |
-| Does not appear in the panel | `show_in_panel()` is false because `is_widget_enabled( get_name() )` is false. `get_name()` does not match the registry id. Category `general` is expected; it is not under a Nexora category. |
+| Does not appear in the panel | `show_in_panel()` is false because `is_widget_enabled( get_name() )` is false. `get_name()` does not match the registry id. Look under the Nexora category, not General. |
 | Does not render | `render()` returned early: disabled, or `render.php` path not readable. Timeline-style empty return. PHP notice inside the include. |
 | Invalid input | Control `condition` hiding the field. Render allowlist rewriting the value (badge style, column span, interaction mode). Style-tab control with no `selectors` and no `render_type` `template`, so the editor did not re-render PHP. |
 | Does not receive data | Settings key typo between `add_control` and `$settings['…']`. Repeater stored under a different name. Default function not loaded (`require_once` missing). |
@@ -1847,7 +1847,7 @@ if ( ! class_exists( 'Nexora_Example_Widget', false ) ) {
 		}
 
 		public function get_categories(): array {
-			return [ 'general' ];
+			return [ 'nexora' ];
 		}
 
 		public function get_keywords(): array {
@@ -2012,7 +2012,7 @@ Do not refactor these as part of adding a widget. Extract only when the conditio
 | `_schema_version` | Stored, never read | False sense that migrations exist | Write a migration only in the widget that changes its saved shape, and only then branch on the stored version. |
 | Empty data | Opposite policies | Authors cannot predict a new widget | Each widget states its policy in `render.php` with a one-line comment. |
 | `render_type` | Timeline sets it. GTM geometry sliders do not. | Geometry edits may not rebuild the SVG until a full re-render | New PHP-affecting controls set `render_type` `template`. Fixing GTM is a separate bugfix. |
-| Custom Elementor category | Both widgets use `general` | Harder to find as the catalog grows | **RECOMMENDED** once the catalog is large: register one Nexora category and return it from `get_categories()`. Not required for the next widget. |
+| Custom Elementor category | Every widget returns `[ 'nexora' ]` | One panel group named Nexora | New widgets return `[ 'nexora' ]`. Do not put them in `general`. |
 | Filesystem autoload | Manual `require_once` | Easy to forget a partial | Keep `require_once` in the widget class. A PSR-4 autoloader is a plugin-wide change, not a widget change. |
 | Tests | None | Regressions in the registry and geometry | Add a harness as its own task. |
 | Logging | Silent skips | Missing widgets are invisible | **RECOMMENDED:** a `WP_DEBUG` log line when a registry file or class is missing. Do not log settings. |
@@ -2067,7 +2067,7 @@ Reasons are included only when the code or an in-repo comment states them. Other
 | Preview assets | All enabled widgets enqueued in the Elementor preview | `enqueue_preview_styles()` / `enqueue_preview_scripts()` | Leave it. |
 | Base class load timing | `class-widget-base.php` is required inside `register_widgets()`, not at plugin boot | Comment: “Elementor classes are available on this hook.” The file returns immediately if `Widget_Base` is missing. | Do not `require` the base before Elementor has loaded, except from a widget class that itself only loads on that hook. |
 | External extension | Filter `nexora_ele_widget_registry` | The filter is applied in `all()` | In-repo widgets are hard-coded entries. Use the filter for outside code. |
-| Categories | `general` | No category registration exists | Stay on `general` until a category is added deliberately. |
+| Categories | `nexora`, titled Nexora | `register_category()` on `elementor/elements/categories_registered` | New widgets return `[ 'nexora' ]`. |
 | Inner wrapper | `has_widget_inner_wrapper(): false` | Method comment: “Elementor compatibility.” | Return false on new widgets. |
 | Editor template | PHP `render()` only | `content_template` is absent | Do not add a second JS template. |
 | PHP/JS bridge | `data-config` JSON | Both render files and both scripts | Use it for behavior flags. |
