@@ -82,7 +82,7 @@ final class Nexora_For_Elementor {
 		);
 
 		$move = \Closure::bind(
-			static function (): void {
+			function (): void {
 				if ( ! isset( $this->categories['nexora'] ) ) {
 					return;
 				}
@@ -91,7 +91,7 @@ final class Nexora_For_Elementor {
 				unset( $this->categories['nexora'] );
 
 				if ( isset( $this->categories['favorites'] ) ) {
-					$favorites          = [ 'favorites' => $this->categories['favorites'] ];
+					$favorites        = [ 'favorites' => $this->categories['favorites'] ];
 					unset( $this->categories['favorites'] );
 					$this->categories = $favorites + $nexora + $this->categories;
 					return;
@@ -102,7 +102,9 @@ final class Nexora_For_Elementor {
 			$elements_manager,
 			$elements_manager
 		);
-		$move();
+		if ( $move instanceof \Closure ) {
+			$move();
+		}
 	}
 
 	/**
