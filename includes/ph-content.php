@@ -281,6 +281,10 @@ if ( ! function_exists( 'nexora_ph_add_mapped_control' ) ) {
 				'span' => 'span',
 				'p'    => 'p',
 			];
+		} elseif ( 'select' === $control ) {
+			$args['type']    = $manager::SELECT;
+			$args['default'] = isset( $field['default'] ) ? (string) $field['default'] : '';
+			$args['options'] = ( isset( $field['options'] ) && is_array( $field['options'] ) ) ? $field['options'] : [];
 		} elseif ( 'textarea' === $control ) {
 			$args['type']        = $manager::TEXTAREA;
 			$args['default']     = isset( $field['default'] ) ? (string) $field['default'] : '';
@@ -292,13 +296,21 @@ if ( ! function_exists( 'nexora_ph_add_mapped_control' ) ) {
 				'is_external' => ! empty( $field['isExternal'] ),
 				'nofollow'    => ! empty( $field['nofollow'] ),
 			];
-		} elseif ( 'image' === $control ) {
+		} elseif ( 'image' === $control || 'media' === $control ) {
 			$relative        = isset( $field['relative'] ) ? ltrim( (string) $field['relative'], '/' ) : '';
 			$args['type']    = $manager::MEDIA;
 			$args['default'] = [
 				'url' => '' !== $relative ? NEXORA_ELE_URL . 'assets/images/prospects/' . $relative : '',
 				'id'  => '',
 			];
+			if ( isset( $field['default'] ) && is_array( $field['default'] ) ) {
+				$args['default'] = $field['default'];
+			}
+			if ( isset( $field['mediaTypes'] ) && is_array( $field['mediaTypes'] ) ) {
+				$args['media_types'] = array_values( $field['mediaTypes'] );
+			} elseif ( 'media' === $control ) {
+				$args['media_types'] = [ 'video' ];
+			}
 		} elseif ( 'icon' === $control ) {
 			$args['type']    = $manager::ICONS;
 			$args['default'] = [
@@ -313,7 +325,14 @@ if ( ! function_exists( 'nexora_ph_add_mapped_control' ) ) {
 			$args['default'] = isset( $field['default'] ) ? (string) $field['default'] : '';
 		}
 
-		if ( $in_repeater && 'image' !== $control && 'url' !== $control && 'icon' !== $control ) {
+		if ( isset( $field['condition'] ) && is_array( $field['condition'] ) ) {
+			$args['condition'] = $field['condition'];
+		}
+		if ( isset( $field['description'] ) && is_string( $field['description'] ) && '' !== $field['description'] ) {
+			$args['description'] = $field['description'];
+		}
+
+		if ( $in_repeater && 'image' !== $control && 'media' !== $control && 'url' !== $control && 'icon' !== $control && 'select' !== $control ) {
 			$args['label_block'] = true;
 		}
 
@@ -392,8 +411,11 @@ if ( ! function_exists( 'nexora_ph_control_ranges' ) ) {
 	 */
 	function nexora_ph_control_ranges( array $field, array $settings ) {
 		$control = isset( $field['control'] ) ? (string) $field['control'] : 'text';
-		if ( 'divider' === $control || 'tag' === $control ) {
-			return 'tag' === $control ? nexora_ph_tag_ranges( $field, $settings ) : [];
+		if ( 'divider' === $control || 'select' === $control || 'media' === $control ) {
+			return [];
+		}
+		if ( 'tag' === $control ) {
+			return nexora_ph_tag_ranges( $field, $settings );
 		}
 		if ( ! isset( $field['start'] ) ) {
 			return [];

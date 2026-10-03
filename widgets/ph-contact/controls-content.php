@@ -18,7 +18,7 @@ if ( ! function_exists( 'nexora_ph_contact_register_content_controls' ) ) {
 	 * @param \Elementor\Widget_Base $widget Widget.
 	 */
 	function nexora_ph_contact_register_content_controls( $widget ): void {
-		if ( ! $widget instanceof \Elementor\Widget_Base ) {
+		if ( ! $widget instanceof \Elementor\Widget_Base || ! class_exists( Controls_Manager::class ) ) {
 			return;
 		}
 
@@ -44,5 +44,28 @@ if ( ! function_exists( 'nexora_ph_contact_register_content_controls' ) ) {
 			require_once NEXORA_ELE_PATH . 'includes/ph-content.php';
 		}
 		nexora_ph_register_mapped_controls( $widget, 'contact' );
+
+		$widget->start_controls_section(
+			'section_contact_form',
+			[
+				'label' => esc_html__( 'Contact form', 'nexora-elementor' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+		$widget->add_control(
+			'contact_form_shortcode',
+			[
+				'label'       => esc_html__( 'Form shortcode', 'nexora-elementor' ),
+				'type'        => Controls_Manager::TEXTAREA,
+				'default'     => '',
+				'rows'        => 3,
+				'label_block' => true,
+				'description' => esc_html__( 'Paste a Contact Form 7 shortcode. The form renders in the black panel on the right.', 'nexora-elementor' ),
+				'placeholder' => '[contact-form-7 id="123" title="Contact"]',
+			]
+		);
+
+		$widget->end_controls_section();
 	}
 }

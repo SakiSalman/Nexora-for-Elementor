@@ -252,8 +252,8 @@
 .fb-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 24px}
 .fb-grid>:first-child,.fb-grid>:last-child{grid-column:1/-1}
 .fb-badges{grid-template-columns:repeat(3,minmax(0,1fr))}
-#contact>.wrap{grid-template-columns:minmax(0,1fr) !important}
-#contact form{max-width:640px}}
+.nexora-ph-contact .wrap{grid-template-columns:minmax(0,1fr) !important}
+.nexora-ph-contact .ct-form-panel{max-width:640px}}
 @media (max-width:760px){.g2,.g3,.g4{grid-template-columns:1fr}
 .wrap{padding:0 20px}
 .sec{padding:88px 0}
