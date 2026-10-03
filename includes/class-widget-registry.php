@@ -231,7 +231,15 @@ if ( ! class_exists( 'Nexora_Ele_Widget_Registry', false ) ) {
 						'ver'    => true,
 					],
 					],
-					'scripts'         => [],
+					'scripts'         => [
+						[
+							'handle'    => 'nexora-ph-video',
+							'src'       => 'assets/js/nexora-ph-video.js',
+							'deps'      => [ 'jquery' ],
+							'ver'       => true,
+							'in_footer' => true,
+						],
+					],
 				],
 				'ele-ph-expertise' => [
 					'id'              => 'ele-ph-expertise',

@@ -73,7 +73,7 @@ if ( ! class_exists( 'Nexora_PH_Video_Widget', false ) ) {
 				return [];
 			}
 
-			return [];
+			return [ 'nexora-ph-video' ];
 		}
 
 		/**
