@@ -209,12 +209,21 @@ if ( ! function_exists( 'nexora_ph_add_mapped_control' ) ) {
 				'url' => '' !== $relative ? NEXORA_ELE_URL . 'assets/images/prospects/' . $relative : '',
 				'id'  => '',
 			];
+		} elseif ( 'icon' === $control ) {
+			$args['type']    = $manager::ICONS;
+			$args['default'] = [
+				'value'   => '',
+				'library' => '',
+			];
+			if ( isset( $field['default'] ) && is_array( $field['default'] ) ) {
+				$args['default'] = $field['default'];
+			}
 		} else {
 			$args['type']    = $manager::TEXT;
 			$args['default'] = isset( $field['default'] ) ? (string) $field['default'] : '';
 		}
 
-		if ( $in_repeater && 'image' !== $control && 'url' !== $control ) {
+		if ( $in_repeater && 'image' !== $control && 'url' !== $control && 'icon' !== $control ) {
 			$args['label_block'] = true;
 		}
 
@@ -353,6 +362,23 @@ if ( ! function_exists( 'nexora_ph_field_range' ) ) {
 		$end     = isset( $field['end'] ) ? (int) $field['end'] : 0;
 		$has     = '' !== $id && array_key_exists( $id, $settings );
 		$raw     = $has ? $settings[ $id ] : null;
+
+		if ( 'icon' === $control ) {
+			if ( ! $has || ! is_array( $raw ) || empty( $raw['value'] ) || ! class_exists( '\Elementor\Icons_Manager' ) ) {
+				return null;
+			}
+			ob_start();
+			\Elementor\Icons_Manager::render_icon( $raw, [ 'aria-hidden' => 'true' ] );
+			$icon_html = trim( (string) ob_get_clean() );
+			if ( '' === $icon_html ) {
+				return null;
+			}
+			return [
+				'start' => $start,
+				'end'   => $end,
+				'value' => $icon_html,
+			];
+		}
 
 		if ( 'image' === $control ) {
 			$relative = isset( $field['relative'] ) ? ltrim( (string) $field['relative'], '/' ) : '';
