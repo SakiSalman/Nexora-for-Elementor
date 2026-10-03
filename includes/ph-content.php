@@ -47,9 +47,75 @@ if ( ! function_exists( 'nexora_ph_content_map' ) ) {
 	}
 }
 
+if ( ! function_exists( 'nexora_ph_register_mapped_repeater_control' ) ) {
+	/**
+	 * Register one mapped repeater control on an open section.
+	 *
+	 * @param \Elementor\Widget_Base $widget       Widget.
+	 * @param array<string, mixed>   $repeater_map Repeater map.
+	 */
+	function nexora_ph_register_mapped_repeater_control( $widget, array $repeater_map ): void {
+		if ( ! $widget instanceof \Elementor\Widget_Base || empty( $repeater_map['id'] ) || empty( $repeater_map['fields'] ) || ! is_array( $repeater_map['fields'] ) ) {
+			return;
+		}
+		if ( ! class_exists( '\Elementor\Repeater' ) || ! class_exists( '\Elementor\Controls_Manager' ) ) {
+			return;
+		}
+
+		$manager  = \Elementor\Controls_Manager::class;
+		$repeater = new \Elementor\Repeater();
+		foreach ( $repeater_map['fields'] as $field ) {
+			if ( is_array( $field ) ) {
+				nexora_ph_add_mapped_control( $repeater, $field, true );
+			}
+		}
+
+		$defaults = isset( $repeater_map['defaults'] ) && is_array( $repeater_map['defaults'] ) ? $repeater_map['defaults'] : [];
+		foreach ( $defaults as &$default_item ) {
+			if ( ! is_array( $default_item ) ) {
+				continue;
+			}
+			foreach ( $default_item as &$default_value ) {
+				if ( ! is_array( $default_value ) || empty( $default_value['relative'] ) ) {
+					continue;
+				}
+				$default_value['url'] = NEXORA_ELE_URL . 'assets/images/prospects/' . ltrim( (string) $default_value['relative'], '/' );
+				unset( $default_value['relative'] );
+			}
+			unset( $default_value );
+		}
+		unset( $default_item );
+
+		$title = '';
+		if ( ! empty( $repeater_map['titleField'] ) ) {
+			$title = (string) $repeater_map['titleField'];
+			// Allow "a — b" templates like GTM Funnel.
+			if ( false === strpos( $title, '{{{' ) ) {
+				$title = '{{{ ' . $title . ' }}}';
+			}
+		}
+
+		$widget->add_control(
+			(string) $repeater_map['id'],
+			[
+				'label'         => isset( $repeater_map['label'] ) ? (string) $repeater_map['label'] : esc_html__( 'Items', 'nexora-elementor' ),
+				'type'          => $manager::REPEATER,
+				'fields'        => $repeater->get_controls(),
+				'default'       => $defaults,
+				'prevent_empty' => false,
+				'title_field'   => $title,
+			]
+		);
+	}
+}
+
 if ( ! function_exists( 'nexora_ph_register_mapped_controls' ) ) {
 	/**
 	 * Register mapped content controls on a widget.
+	 *
+	 * Optional content-map key `panel` lists section labels in sidebar order.
+	 * Matching singleton fields and repeaters are merged into each section
+	 * (GTM Funnel-style grouping).
 	 *
 	 * @param \Elementor\Widget_Base $widget Widget.
 	 * @param string                 $slug   Widget slug.
@@ -64,94 +130,118 @@ if ( ! function_exists( 'nexora_ph_register_mapped_controls' ) ) {
 			return;
 		}
 
-		$manager = \Elementor\Controls_Manager::class;
-		$singles = isset( $map['singletons'] ) && is_array( $map['singletons'] ) ? $map['singletons'] : [];
-
-		if ( $singles ) {
-			$groups = [];
-			foreach ( $singles as $field ) {
-				if ( ! is_array( $field ) ) {
-					continue;
-				}
-				$section = isset( $field['section'] ) && '' !== (string) $field['section'] ? (string) $field['section'] : __( 'Content', 'nexora-elementor' );
-				if ( ! isset( $groups[ $section ] ) ) {
-					$groups[ $section ] = [];
-				}
-				$groups[ $section ][] = $field;
-			}
-			$group_index = 0;
-			foreach ( $groups as $section_label => $fields ) {
-				$group_index++;
-				$widget->start_controls_section(
-					'section_ph_' . $slug . '_' . $group_index,
-					[
-						'label' => $section_label,
-						'tab'   => $manager::TAB_CONTENT,
-					]
-				);
-				foreach ( $fields as $field ) {
-					if ( isset( $field['control'] ) && 'divider' === $field['control'] ) {
-						$widget->add_control(
-							(string) $field['id'],
-							[
-								'label'     => isset( $field['label'] ) ? (string) $field['label'] : '',
-								'type'      => $manager::HEADING,
-								'separator' => 'before',
-							]
-						);
-						continue;
-					}
-					nexora_ph_add_mapped_control( $widget, $field );
-				}
-				$widget->end_controls_section();
-			}
-		}
-
+		$manager   = \Elementor\Controls_Manager::class;
+		$singles   = isset( $map['singletons'] ) && is_array( $map['singletons'] ) ? $map['singletons'] : [];
 		$repeaters = isset( $map['repeaters'] ) && is_array( $map['repeaters'] ) ? $map['repeaters'] : [];
-		foreach ( $repeaters as $repeater_map ) {
-			if ( empty( $repeater_map['id'] ) || empty( $repeater_map['fields'] ) || ! is_array( $repeater_map['fields'] ) ) {
+
+		$groups = [];
+		foreach ( $singles as $field ) {
+			if ( ! is_array( $field ) ) {
 				continue;
 			}
-			$section_label = isset( $repeater_map['section'] ) && '' !== (string) $repeater_map['section']
+			$section = isset( $field['section'] ) && '' !== (string) $field['section'] ? (string) $field['section'] : __( 'Content', 'nexora-elementor' );
+			if ( ! isset( $groups[ $section ] ) ) {
+				$groups[ $section ] = [];
+			}
+			$groups[ $section ][] = $field;
+		}
+
+		$repeaters_by_section = [];
+		foreach ( $repeaters as $repeater_map ) {
+			if ( ! is_array( $repeater_map ) || empty( $repeater_map['id'] ) ) {
+				continue;
+			}
+			$section = isset( $repeater_map['section'] ) && '' !== (string) $repeater_map['section']
 				? (string) $repeater_map['section']
 				: ( isset( $repeater_map['label'] ) ? (string) $repeater_map['label'] : __( 'Items', 'nexora-elementor' ) );
+			if ( ! isset( $repeaters_by_section[ $section ] ) ) {
+				$repeaters_by_section[ $section ] = [];
+			}
+			$repeaters_by_section[ $section ][] = $repeater_map;
+		}
+
+		$panel = isset( $map['panel'] ) && is_array( $map['panel'] ) ? $map['panel'] : [];
+		if ( ! $panel ) {
+			$panel = array_values(
+				array_unique(
+					array_merge( array_keys( $groups ), array_keys( $repeaters_by_section ) )
+				)
+			);
+		}
+
+		$group_index = 0;
+		foreach ( $panel as $section_label ) {
+			$section_label = (string) $section_label;
+			$fields        = isset( $groups[ $section_label ] ) ? $groups[ $section_label ] : [];
+			$reps          = isset( $repeaters_by_section[ $section_label ] ) ? $repeaters_by_section[ $section_label ] : [];
+			if ( ! $fields && ! $reps ) {
+				continue;
+			}
+
+			$group_index++;
 			$widget->start_controls_section(
-				'section_' . $repeater_map['id'],
+				'section_ph_' . $slug . '_' . $group_index,
 				[
 					'label' => $section_label,
 					'tab'   => $manager::TAB_CONTENT,
 				]
 			);
-			$repeater = new \Elementor\Repeater();
-			foreach ( $repeater_map['fields'] as $field ) {
-				nexora_ph_add_mapped_control( $repeater, $field, true );
-			}
-			$defaults = isset( $repeater_map['defaults'] ) && is_array( $repeater_map['defaults'] ) ? $repeater_map['defaults'] : [];
-			foreach ( $defaults as &$default_item ) {
-				if ( ! is_array( $default_item ) ) {
+
+			foreach ( $fields as $field ) {
+				if ( isset( $field['control'] ) && 'divider' === $field['control'] ) {
+					$widget->add_control(
+						(string) $field['id'],
+						[
+							'label'     => isset( $field['label'] ) ? (string) $field['label'] : '',
+							'type'      => $manager::HEADING,
+							'separator' => 'before',
+						]
+					);
 					continue;
 				}
-				foreach ( $default_item as &$default_value ) {
-					if ( ! is_array( $default_value ) || empty( $default_value['relative'] ) ) {
-						continue;
-					}
-					$default_value['url'] = NEXORA_ELE_URL . 'assets/images/prospects/' . ltrim( (string) $default_value['relative'], '/' );
-					unset( $default_value['relative'] );
-				}
-				unset( $default_value );
+				nexora_ph_add_mapped_control( $widget, $field );
 			}
-			unset( $default_item );
-			$widget->add_control(
-				(string) $repeater_map['id'],
+
+			foreach ( $reps as $repeater_map ) {
+				nexora_ph_register_mapped_repeater_control( $widget, $repeater_map );
+			}
+
+			$widget->end_controls_section();
+			unset( $groups[ $section_label ], $repeaters_by_section[ $section_label ] );
+		}
+
+		// Leftover sections keep working if panel omitted a label.
+		foreach ( $groups as $section_label => $fields ) {
+			$reps = isset( $repeaters_by_section[ $section_label ] ) ? $repeaters_by_section[ $section_label ] : [];
+			$group_index++;
+			$widget->start_controls_section(
+				'section_ph_' . $slug . '_' . $group_index,
 				[
-					'label'         => isset( $repeater_map['label'] ) ? (string) $repeater_map['label'] : esc_html__( 'Items', 'nexora-elementor' ),
-					'type'          => $manager::REPEATER,
-					'fields'        => $repeater->get_controls(),
-					'default'       => $defaults,
-					'prevent_empty' => false,
-					'title_field'   => ! empty( $repeater_map['titleField'] ) ? '{{{ ' . $repeater_map['titleField'] . ' }}}' : '',
+					'label' => (string) $section_label,
+					'tab'   => $manager::TAB_CONTENT,
 				]
 			);
+			foreach ( $fields as $field ) {
+				nexora_ph_add_mapped_control( $widget, $field );
+			}
+			foreach ( $reps as $repeater_map ) {
+				nexora_ph_register_mapped_repeater_control( $widget, $repeater_map );
+			}
+			$widget->end_controls_section();
+			unset( $repeaters_by_section[ $section_label ] );
+		}
+		foreach ( $repeaters_by_section as $section_label => $reps ) {
+			$group_index++;
+			$widget->start_controls_section(
+				'section_ph_' . $slug . '_' . $group_index,
+				[
+					'label' => (string) $section_label,
+					'tab'   => $manager::TAB_CONTENT,
+				]
+			);
+			foreach ( $reps as $repeater_map ) {
+				nexora_ph_register_mapped_repeater_control( $widget, $repeater_map );
+			}
 			$widget->end_controls_section();
 		}
 	}
