@@ -16,8 +16,9 @@
 .ai-btn:hover{background:linear-gradient(145deg,#FF8A4C,#F15E22);border-color:transparent;color:#0B1620;transform:translateY(-3px);box-shadow:0 14px 28px -12px rgba(241,94,34,.7)}
 .ai-hint{margin-left:auto;font-size:13.5px;color:#8FA0AF}
 .fb .ft-col{display:flex;flex-direction:column;gap:11px;font-size:15px;color:#A9B6C2}
-.fb .ft-col a{color:#A9B6C2;text-decoration:none;transition:color .2s}
-.fb .ft-col a:hover{color:#FFB08C}
+.fb .ft-col a:not(.btn){color:#A9B6C2;text-decoration:none;transition:color .2s}
+.fb .ft-col a:not(.btn):hover{color:#FFB08C}
+.fb .ft-col a.btn-primary{color:#FFFFFF}
 .fb .ft-h{font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:#FFFFFF;padding-bottom:12px;margin-bottom:4px;border-bottom:1px solid #1F3141}
 .fb .ft-soc{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#DCE4EA;background:rgba(255,255,255,.05);border:1px solid #2A3D4D;transition:all .2s}
 .fb .ft-soc:hover{color:#0B1620;background:linear-gradient(145deg,#FF8A4C,#F15E22);border-color:transparent;transform:translateY(-2px)}

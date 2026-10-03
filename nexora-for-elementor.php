@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Nexora for Elementor
  * Description:       Modern Elementor widgets for building high-converting websites.
- * Version:           1.1.1
+ * Version:           1.1.5
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            wpsaki
@@ -34,7 +34,7 @@ final class Nexora_For_Elementor {
 	/**
 	 * Plugin version.
 	 */
-	const VERSION = '1.1.1';
+	const VERSION = '1.1.5';
 
 	/**
 	 * Constructor.

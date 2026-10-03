@@ -1,7 +1,58 @@
 /* Prospects Hive shared styles. Copied from the design export. Element selectors are prefixed with .nexora-ph so they do not restyle WordPress. The body rule is retargeted to .nexora-ph. Declarations are unchanged. */
 .nexora-ph{margin:0;font-family:Poppins,"Segoe UI",system-ui,sans-serif;color:#0B1620;background:#FFFFFF;-webkit-font-smoothing:antialiased}
-.nexora-ph a{color:#1A5A87}
-.nexora-ph a:hover{color:#C2410C}
+/* Only bare links get the brand link color — never override component classes. */
+.nexora-ph a:not([class]){color:#1A5A87}
+.nexora-ph a:not([class]):hover{color:#C2410C}
+/* Default colors for interactive elements (beat theme / Elementor link styles). */
+.nexora-ph a.btn-primary,
+.nexora-ph a.btn-primary:hover,
+.nexora-ph a.btn-dark,
+.nexora-ph a.btn-dark:hover,
+.nexora-ph a.btn-primary .btn-arr,
+.nexora-ph a.btn-dark .btn-arr{color:#FFFFFF}
+.nexora-ph a.btn-white,
+.nexora-ph a.btn-white:hover{color:#0B1620}
+.nexora-ph a.btn-case{color:#C2410C}
+.nexora-ph a.btn-case:hover,
+.nexora-ph a.btn-case:hover .btn-arr{color:#FFFFFF}
+.nexora-ph a.btn-primary{background:linear-gradient(180deg,#FF8350 0%,#F15E22 55%,#DC5016 100%)}
+.nexora-ph a.btn-dark{background:linear-gradient(180deg,#223647 0%,#0B1620 100%)}
+.nexora-ph a.btn-white{background:linear-gradient(180deg,#FFFFFF,#F6F2EE)}
+.nexora-ph a.btn-case{background:#FFF4EC}
+.nexora-ph a.more{color:#C2410C}
+.nexora-ph a.more:hover{color:#C2410C}
+.nexora-ph a.navlink,
+.nexora-ph button.navlink{color:#2B3843}
+.nexora-ph a.navlink:hover,
+.nexora-ph button.navlink:hover{color:#C2410C}
+.nexora-ph a.navlink.on,
+.nexora-ph button.navlink.on{color:#0B1620}
+.nexora-ph a.m-link{color:#0B1620}
+.nexora-ph a.mm-all{color:#1A5A87}
+.nexora-ph a.mm-all:hover{color:#C2410C}
+.nexora-ph a.mm-item{color:#0B1620}
+.nexora-ph a.mm-item .mm-tx span{color:#56626D}
+.nexora-ph a.mm-other{color:#0B1620}
+.nexora-ph a.mm-cta{color:#FFFFFF}
+.nexora-ph a.mm-cta>span>span{color:#C9D3DC}
+.nexora-ph .dd a{color:#0B1620}
+.nexora-ph .dd a span{color:#56626D}
+.nexora-ph .m-sub a{color:#2B3843}
+.nexora-ph a.ind-tile{color:#0B1620}
+.nexora-ph a.fc-book,
+.nexora-ph a.fc-book:hover{color:#C2410C}
+.nexora-ph a.fc-phone{color:#0B1620}
+.nexora-ph a.fc-phone:hover{color:#C2410C}
+.nexora-ph a.ft-soc{color:#DCE4EA}
+.nexora-ph a.ft-soc:hover{color:#0B1620}
+.nexora-ph a.ai-btn{color:#FFFFFF}
+.nexora-ph a.ai-btn:hover{color:#0B1620}
+.nexora-ph .fb .ft-col a:not(.btn){color:#A9B6C2}
+.nexora-ph .fb .ft-col a:not(.btn):hover{color:#FFB08C}
+.nexora-ph a.fb-aib{color:#FFFFFF}
+.nexora-ph .fb-bottom a{color:#8FA0AF}
+.nexora-ph .fb-bottom a:hover{color:#FFB08C}
+.nexora-ph .fb-bottom a.fb-top{color:#FFFFFF}
 .nexora-ph h1,.nexora-ph h2,.nexora-ph h3,.nexora-ph h4,.nexora-ph p{margin:0;text-wrap:pretty}
 .nexora-ph summary{list-style:none;cursor:pointer}
 .nexora-ph summary::-webkit-details-marker{display:none}
@@ -26,8 +77,8 @@
 .center{align-items:center;text-align:center;margin:0 auto}
 .head{display:flex;flex-direction:column;gap:18px}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:56px;padding:0 28px;border-radius:999px;font-family:inherit;font-weight:600;font-size:16px;text-decoration:none;border:none;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,background .2s ease;white-space:nowrap}
-.btn-primary{background:linear-gradient(180deg,#FF8350 0%,#F15E22 55%,#DC5016 100%);color:#0B1620;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 12px 30px -10px rgba(241,94,34,.6)}
-.btn-primary:hover{transform:translateY(-2px);color:#0B1620;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 18px 40px -10px rgba(241,94,34,.75)}
+.btn-primary{background:linear-gradient(180deg,#FF8350 0%,#F15E22 55%,#DC5016 100%);color:#FFFFFF;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 12px 30px -10px rgba(241,94,34,.6)}
+.btn-primary:hover{transform:translateY(-2px);color:#FFFFFF;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 18px 40px -10px rgba(241,94,34,.75)}
 .btn-white{background:linear-gradient(180deg,#FFFFFF,#F6F2EE);color:#0B1620;border:1px solid #E6DDD3;box-shadow:inset 0 1px 0 #FFFFFF,0 10px 24px -14px rgba(11,22,32,.3)}
 .btn-white:hover{transform:translateY(-2px);color:#0B1620}
 .btn-dark{background:linear-gradient(180deg,#223647 0%,#0B1620 100%);color:#FFFFFF;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 12px 30px -12px rgba(11,22,32,.6)}
@@ -42,8 +93,8 @@
 .chip{display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:999px;font-size:13px;font-weight:500;background:#EEF5FB;color:#1A5A87}
 .chip.o{background:#FFF1E9;color:#B03E0B}
 .ink .chip{background:rgba(255,255,255,.08);color:#DCE4EA}
-.more{font-size:15px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:gap .2s}
-.more:hover{gap:10px}
+.more{font-size:15px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:gap .2s;color:#C2410C}
+.more:hover{gap:10px;color:#C2410C}
 .g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
 .g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
 .g4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
@@ -241,3 +292,96 @@
 @keyframes tlInR{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
 @keyframes shine2{from{background-position:0% 50%}to{background-position:200% 50%}}
 @property --hr{syntax:'<length>';inherits:false;initial-value:0px}
+
+/* ============================================================
+   All PH addons — locked brand defaults vs theme / Elementor kit
+   ============================================================ */
+.nexora-ph{color:#0B1620}
+.nexora-ph .h2,.nexora-ph h1,.nexora-ph h2,.nexora-ph h3,.nexora-ph h4{color:inherit}
+.nexora-ph .lead{color:#3A4753 !important}
+.nexora-ph .ink .lead,.nexora-ph .mid .lead{color:#C9D3DC !important}
+.nexora-ph .muted{color:#56626D !important}
+.nexora-ph .ink .muted,.nexora-ph .mid .muted{color:#A9B6C2 !important}
+.nexora-ph .hl{color:#F15E22 !important}
+.nexora-ph .tag{color:#C2410C !important}
+.nexora-ph .tag.blue{color:#1A5A87 !important}
+.nexora-ph .ink .tag,.nexora-ph .mid .tag{color:#FFC2A6 !important}
+.nexora-ph .chip{color:#1A5A87 !important}
+.nexora-ph .chip.o{color:#B03E0B !important}
+.nexora-ph .check{color:#FFFFFF !important}
+.nexora-ph a:not([class]){color:#1A5A87 !important}
+.nexora-ph a:not([class]):hover{color:#C2410C !important}
+.nexora-ph a.btn.btn-primary,
+.nexora-ph a.btn.btn-primary:hover,
+.nexora-ph a.btn.btn-primary:focus-visible{
+	background:linear-gradient(180deg,#FF8350 0%,#F15E22 55%,#DC5016 100%) !important;
+	color:#FFFFFF !important;
+	border:none !important
+}
+.nexora-ph a.btn.btn-dark{
+	background:linear-gradient(180deg,#223647 0%,#0B1620 100%) !important;
+	color:#FFFFFF !important;
+	border:none !important
+}
+.nexora-ph a.btn.btn-dark:hover,
+.nexora-ph a.btn.btn-dark:focus-visible{
+	background:linear-gradient(180deg,#FF8350 0%,#F15E22 55%,#DC5016 100%) !important;
+	color:#FFFFFF !important
+}
+.nexora-ph a.btn.btn-white,
+.nexora-ph a.btn.btn-white:hover{
+	background:linear-gradient(180deg,#FFFFFF,#F6F2EE) !important;
+	color:#0B1620 !important
+}
+.nexora-ph a.btn.btn-case{
+	background:#FFF4EC !important;
+	color:#C2410C !important;
+	border:1.5px solid #F15E22 !important
+}
+.nexora-ph a.btn.btn-case:hover,
+.nexora-ph a.btn.btn-case:focus-visible{
+	background:linear-gradient(180deg,#FF8350 0%,#F15E22 55%,#DC5016 100%) !important;
+	color:#FFFFFF !important
+}
+.nexora-ph a.btn .btn-arr{color:inherit !important}
+.nexora-ph a.more,
+.nexora-ph a.more:hover{color:#C2410C !important}
+.nexora-ph a.navlink,
+.nexora-ph button.navlink{color:#2B3843 !important}
+.nexora-ph a.navlink:hover,
+.nexora-ph button.navlink:hover{color:#C2410C !important}
+.nexora-ph a.navlink.on,
+.nexora-ph button.navlink.on{color:#0B1620 !important}
+.nexora-ph a.m-link{color:#0B1620 !important}
+.nexora-ph a.mm-all{color:#1A5A87 !important}
+.nexora-ph a.mm-all:hover{color:#C2410C !important}
+.nexora-ph a.mm-item{color:#0B1620 !important}
+.nexora-ph a.mm-item .mm-tx span{color:#56626D !important}
+.nexora-ph a.mm-other{color:#0B1620 !important}
+.nexora-ph a.mm-cta{color:#FFFFFF !important}
+.nexora-ph a.mm-cta>span>span{color:#C9D3DC !important}
+.nexora-ph .dd a{color:#0B1620 !important}
+.nexora-ph .dd a span{color:#56626D !important}
+.nexora-ph .m-sub a{color:#2B3843 !important}
+.nexora-ph a.ind-tile{color:#0B1620 !important}
+.nexora-ph a.ind-tile .ind-ex{color:#56626D !important}
+.nexora-ph a.fc-book,
+.nexora-ph a.fc-book:hover{color:#C2410C !important}
+.nexora-ph a.fc-phone{color:#0B1620 !important}
+.nexora-ph a.fc-phone:hover{color:#C2410C !important}
+.nexora-ph a.hero-rating{color:#0B1620 !important}
+.nexora-ph a.hero-rating .hr-sub{color:#56626D !important}
+.nexora-ph a.hero-rating .hr-sub b{color:#0B1620 !important}
+.nexora-ph a.ft-soc{color:#DCE4EA !important}
+.nexora-ph a.ft-soc:hover{color:#0B1620 !important}
+.nexora-ph a.ai-btn{color:#FFFFFF !important}
+.nexora-ph a.ai-btn:hover{color:#0B1620 !important}
+.nexora-ph .fb .ft-col a:not(.btn){color:#A9B6C2 !important}
+.nexora-ph .fb .ft-col a:not(.btn):hover{color:#FFB08C !important}
+.nexora-ph a.fb-aib{color:#FFFFFF !important}
+.nexora-ph .fb-bottom a{color:#8FA0AF !important}
+.nexora-ph .fb-bottom a:hover{color:#FFB08C !important}
+.nexora-ph .fb-bottom a.fb-top{color:#FFFFFF !important}
+.nexora-ph .offer-pill{color:#C2410C !important}
+.nexora-ph .hv-grid:not(:hover) .hv-card.hv-on .more,
+.nexora-ph .hv-grid .hv-card:hover .more{color:#FFB08C !important}

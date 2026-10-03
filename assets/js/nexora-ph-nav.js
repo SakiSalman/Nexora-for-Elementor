@@ -148,26 +148,37 @@
 		document.addEventListener('keydown', onKey, { signal: signal });
 
 		var last = 0;
+		function syncScrollSolid(y) {
+			header.classList.toggle('nav-solid', y > 24);
+		}
 		function onScroll(event) {
 			var t = event && event.target;
 			var el = !t || t === document || t === document.documentElement || t === document.body ? document.scrollingElement || document.documentElement : t;
-			if (!el || typeof el.scrollTop !== 'number' || el.scrollHeight - el.clientHeight < 200) return;
+			if (!el || typeof el.scrollTop !== 'number') return;
 			var y = el.scrollTop;
 			var dy = y - last;
-			header.classList.toggle('nav-solid', y > 24);
+			syncScrollSolid(y);
+			if (el.scrollHeight - el.clientHeight < 200) return;
 			if (Math.abs(dy) < 6) return;
 			last = y;
 			var heroEl = document.querySelector('.hero-sec');
 			var heroH = heroEl ? heroEl.offsetHeight : 700;
 			var hide = dy > 0 && y > heroH - 90 && open === null && !menu;
 			header.classList.toggle('nav-hide', hide);
-			header.classList.toggle('nav-solid', y > 24);
 		}
 		window.addEventListener('scroll', onScroll, true);
 		if (signal) {
 			signal.addEventListener('abort', function () {
 				window.removeEventListener('scroll', onScroll, true);
 			});
+		}
+		try {
+			var startEl = document.scrollingElement || document.documentElement;
+			var startY = startEl && typeof startEl.scrollTop === 'number' ? startEl.scrollTop : 0;
+			last = startY;
+			syncScrollSolid(startY);
+		} catch (e) {
+			syncScrollSolid(0);
 		}
 
 		root.addEventListener(
