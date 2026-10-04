@@ -5,8 +5,10 @@
  * fixed matches the demo’s viewport-pinned header behaviour.
  */
 .nav{position:fixed;top:0;left:0;right:0;width:100%;z-index:1000;padding:14px 20px;margin-bottom:0;pointer-events:none}
+/* WP admin bar is fixed ≥601px; ≤600px it is absolute and scrolls away — keep nav flush then. */
 body.admin-bar .nav{top:32px}
 @media screen and (max-width:782px){body.admin-bar .nav{top:46px}}
+@media screen and (max-width:600px){body.admin-bar .nav{top:0}}
 .elementor-widget-ele-ph-nav,
 .elementor-widget-ele-ph-nav > .elementor-widget-container,
 .elementor-widget-ele-ph-nav .nexora-ph{
@@ -32,6 +34,7 @@ body.admin-bar .nav{top:32px}
 	color:var(--ph-ink,#0B1620) !important;
 	font-weight:600 !important
 }
+.nav-links{display:flex;gap:6px;align-items:center}
 .nav a.mm-item{color:var(--ph-ink,#0B1620)}
 .nav a.mm-other{color:var(--ph-ink,#0B1620)}
 .nav a.mm-all{color:var(--ph-link-blue,#1A5A87)}
@@ -39,7 +42,38 @@ body.admin-bar .nav{top:32px}
 .nav .m-menu a.m-link{color:var(--ph-ink,#0B1620)}
 .nav .m-sub a{color:var(--ph-nav-text,#2B3843)}
 .nav .dd a{color:var(--ph-ink,#0B1620)}
-.menu-btn{display:none;width:46px;height:46px;border-radius:50%;border:1px solid color-mix(in srgb,var(--ph-ink,#0B1620) 10%,transparent);background:linear-gradient(var(--ph-nav-menu-btn-angle,180deg),var(--ph-nav-menu-btn,#FFFFFF) var(--ph-nav-menu-btn-start-stop,0%),var(--ph-nav-menu-btn-end,#F4F7FA) var(--ph-nav-menu-btn-end-stop,100%));box-shadow:inset 0 1px 0 var(--ph-surface,#FFFFFF),0 8px 18px -10px color-mix(in srgb,var(--ph-ink,#0B1620) 35%,transparent);align-items:center;justify-content:center;cursor:pointer;color:var(--ph-ink,#0B1620);flex-shrink:0}
+.menu-btn{
+	display:none;
+	-webkit-appearance:none;
+	appearance:none;
+	box-sizing:border-box;
+	width:46px;
+	height:46px;
+	min-width:46px;
+	min-height:46px;
+	padding:0;
+	margin:0;
+	border-radius:50%;
+	border:1px solid color-mix(in srgb,var(--ph-ink,#0B1620) 10%,transparent);
+	background:linear-gradient(var(--ph-nav-menu-btn-angle,180deg),var(--ph-nav-menu-btn,#FFFFFF) var(--ph-nav-menu-btn-start-stop,0%),var(--ph-nav-menu-btn-end,#F4F7FA) var(--ph-nav-menu-btn-end-stop,100%));
+	box-shadow:inset 0 1px 0 var(--ph-surface,#FFFFFF),0 8px 18px -10px color-mix(in srgb,var(--ph-ink,#0B1620) 35%,transparent);
+	align-items:center;
+	justify-content:center;
+	cursor:pointer;
+	color:var(--ph-ink,#0B1620);
+	flex-shrink:0;
+	line-height:1;
+	font-size:0
+}
+.menu-btn svg{
+	width:20px;
+	height:20px;
+	display:block;
+	flex-shrink:0;
+	stroke:currentColor;
+	fill:none;
+	pointer-events:none
+}
 .m-menu{pointer-events:auto;position:absolute;left:20px;right:20px;top:86px;max-width:1200px;margin:0 auto;border-radius:26px;padding:10px;display:flex;flex-direction:column;background:linear-gradient(var(--ph-nav-menu-angle,160deg),var(--ph-nav-menu,rgba(255,255,255,.96)) var(--ph-nav-menu-start-stop,0%),color-mix(in srgb,var(--ph-nav-menu-mid,#FFF4EC) 94%,transparent) 55%,var(--ph-nav-menu-end,rgba(234,243,251,.96)) var(--ph-nav-menu-end-stop,100%));border:1px solid rgba(255,255,255,.95);box-shadow:0 30px 60px -24px color-mix(in srgb,var(--ph-ink,#0B1620) 45%,transparent);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);animation:menuIn .28s cubic-bezier(.2,.8,.2,1) both}
 .m-menu a.m-link{display:flex;justify-content:space-between;align-items:center;padding:15px 16px;border-radius:16px;font-size:17px;font-weight:600;color:var(--ph-ink,#0B1620);text-decoration:none}
 .m-menu a.m-link:hover{background:rgba(255,255,255,.8)}
@@ -156,17 +190,118 @@ body.admin-bar .nav{top:32px}
 .m-sub a > span:not(.mm-sic):not(.mm-oic){display:flex;flex-direction:column;gap:2px}
 .mm-foot:not(:has(.mm-others)){grid-template-columns:minmax(0,380px);justify-content:end}
 .mm-foot:not(:has(.mm-cta)){grid-template-columns:minmax(0,1fr)}
-@media (max-width:1024px){.menu-btn{display:flex}
-.nav-cta{margin-left:auto}
-.mm,.mm-scrim,.dd{display:none !important}}
-@media (min-width:1025px){.m-menu{display:none}}
-@media (max-width:760px){.nav{padding:10px 12px}
-.nav>nav{padding:0 6px 0 18px !important;height:60px !important}
-.nav-cta{display:none !important}
-.menu-btn{margin-left:auto}
-.m-menu{top:78px;left:12px;right:12px}
-.nav>nav{padding:0 12px 0 18px !important;height:60px !important}
-.m-menu{top:68px !important}}
+/* Tablet/phone: hide desktop links, keep Book A Call + hamburger. */
+@media (max-width:1024px){
+	.nav .hide-md{display:none !important}
+	.nav a.nav-cta,
+	.nav a.btn.nav-cta,
+	.nav a.btn.btn-dark.nav-cta{
+		display:inline-flex !important;
+		visibility:visible !important;
+		opacity:1 !important;
+		margin-left:auto !important;
+		pointer-events:auto !important
+	}
+	.nexora-ph button.menu-btn,
+	.nav button.menu-btn,
+	.menu-btn{
+		display:inline-flex !important;
+		align-items:center !important;
+		justify-content:center !important;
+		width:46px !important;
+		height:46px !important;
+		min-width:46px !important;
+		min-height:46px !important;
+		padding:0 !important;
+		border-radius:50% !important;
+		border:1px solid color-mix(in srgb,var(--ph-ink,#0B1620) 10%,transparent) !important;
+		background:linear-gradient(var(--ph-nav-menu-btn-angle,180deg),var(--ph-nav-menu-btn,#FFFFFF) var(--ph-nav-menu-btn-start-stop,0%),var(--ph-nav-menu-btn-end,#F4F7FA) var(--ph-nav-menu-btn-end-stop,100%)) !important;
+		color:var(--ph-ink,#0B1620) !important;
+		box-shadow:inset 0 1px 0 var(--ph-surface,#FFFFFF),0 8px 18px -10px color-mix(in srgb,var(--ph-ink,#0B1620) 35%,transparent) !important;
+		opacity:1 !important;
+		visibility:visible !important;
+		pointer-events:auto !important;
+		z-index:2
+	}
+	.nexora-ph button.menu-btn svg,
+	.nav button.menu-btn svg,
+	.menu-btn svg{
+		width:20px !important;
+		height:20px !important;
+		display:block !important;
+		stroke:var(--ph-ink,#0B1620) !important;
+		color:var(--ph-ink,#0B1620) !important;
+		fill:none !important;
+		opacity:1 !important;
+		visibility:visible !important
+	}
+	.nexora-ph button.menu-btn svg path,
+	.nav button.menu-btn svg path,
+	.menu-btn svg path{
+		stroke:var(--ph-ink,#0B1620) !important;
+		fill:none !important
+	}
+	.mm,.mm-scrim,.dd{display:none !important}
+}
+@media (min-width:1025px){.m-menu{display:none !important}}
+/* Phone: logo + Book A Call + hamburger; bar flush to viewport top. */
+@media (max-width:760px){
+	.nav{
+		top:0;
+		padding:0 !important;
+		margin:0 !important
+	}
+	.nav>nav{
+		padding:0 12px 0 18px !important;
+		height:60px !important;
+		gap:10px !important;
+		justify-content:flex-start !important
+	}
+	.nav>nav > a:first-child{
+		display:flex !important;
+		align-items:center !important;
+		flex:0 1 auto !important;
+		min-width:0 !important;
+		margin-right:auto !important
+	}
+	.nav>nav > a:first-child img{
+		height:26px !important;
+		width:auto !important;
+		max-width:140px !important;
+		display:block !important
+	}
+	.nav a.nav-cta,
+	.nav a.btn.nav-cta,
+	.nav a.btn.btn-dark.nav-cta{
+		display:inline-flex !important;
+		align-items:center !important;
+		justify-content:center !important;
+		visibility:visible !important;
+		opacity:1 !important;
+		margin-left:0 !important;
+		flex:0 0 auto !important;
+		height:40px !important;
+		padding:0 14px !important;
+		font-size:13px !important;
+		gap:6px !important;
+		white-space:nowrap !important;
+		pointer-events:auto !important;
+		z-index:2
+	}
+	.nav a.nav-cta .btn-arr,
+	.nav a.btn.nav-cta .btn-arr{
+		width:15px !important;
+		height:15px !important
+	}
+	.nexora-ph button.menu-btn,
+	.nav button.menu-btn,
+	.menu-btn{
+		margin-left:0 !important;
+		margin-right:0 !important;
+		flex:0 0 46px !important
+	}
+	.m-menu{top:68px !important;left:12px;right:12px}
+}
 @keyframes menuIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
 @keyframes mmIn{from{opacity:0;transform:translateY(-10px) scale(.985)}to{opacity:1;transform:none}}
 @keyframes mmFade{from{opacity:0}to{opacity:1}}

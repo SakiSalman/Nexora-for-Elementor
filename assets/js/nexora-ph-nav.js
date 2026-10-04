@@ -155,6 +155,16 @@
 		function pageScrollEl() {
 			return document.scrollingElement || document.documentElement;
 		}
+		/* ≤600px WP admin bar is absolute (scrolls away). Sit under it at y≈0, flush after. */
+		function syncMobileTop(y) {
+			var hasBar = document.body.classList.contains('admin-bar');
+			var phoneAdmin = hasBar && window.matchMedia && window.matchMedia('(max-width:600px)').matches;
+			if (!phoneAdmin) {
+				header.style.top = '';
+				return;
+			}
+			header.style.top = y > 46 ? '0px' : '46px';
+		}
 		function onScroll(event) {
 			var t = event && event.target;
 			var page = pageScrollEl();
@@ -167,6 +177,7 @@
 			var y = el.scrollTop;
 			var dy = y - last;
 			header.classList.toggle('nav-solid', y > 24);
+			syncMobileTop(y);
 			if (Math.abs(dy) < 6) return;
 			last = y;
 			var heroEl = document.querySelector('.hero-sec');
@@ -187,9 +198,11 @@
 			last = startY;
 			header.classList.toggle('nav-solid', startY > 24);
 			header.classList.remove('nav-hide');
+			syncMobileTop(startY);
 		} catch (e) {
 			header.classList.remove('nav-solid');
 			header.classList.remove('nav-hide');
+			syncMobileTop(0);
 		}
 
 		root.addEventListener(

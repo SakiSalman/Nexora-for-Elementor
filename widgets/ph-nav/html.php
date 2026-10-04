@@ -145,9 +145,12 @@ if ( ! function_exists( 'nexora_ph_nav_html' ) ) {
 		return '<header class="nav">'
 			. '<nav aria-label="Main" class="wrap" style="height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 24px">'
 			. '<a' . nexora_ph_nav_attr_url( $logo_url ) . ' style="display: flex; align-items: center; text-decoration: none" aria-label="' . nexora_ph_nav_h( $logo_label ) . '">' . $logo_img . '</a>'
-			. '<div class="hide-md" style="display: flex; gap: 6px; align-items: center">' . $desktop . '</div>'
+			. '<div class="hide-md nav-links">' . $desktop . '</div>'
 			. $button
-			. '<button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" data-nav-menu><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"></path></svg></button>'
+			. '<button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" data-nav-menu>'
+			. '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+			. '<path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h10"></path>'
+			. '</svg></button>'
 			. '</nav>'
 			. $scrim_html
 			. $panels
