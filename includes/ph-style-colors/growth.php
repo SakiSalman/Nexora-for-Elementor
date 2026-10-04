@@ -22,7 +22,32 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_growth' ) ) {
 	function nexora_ph_style_colors_inventory_growth(): array {
 		$shared = nexora_ph_style_colors_shared_subset(
 			[ 'on-accent', 'surface', 'accent', 'ink', 'tag-border', 'muted', 'link', 'chip-blue', 'link-blue', 'blue-accent', 'lead', 'grad-warm', 'grad-rose', 'grad-sky' ],
-			[ 'tag', 'ivory_orange', 'ivory_blue', 'ivory_base', 'grad_text' ]
+			[ 'tag', 'ivory_orange', 'ivory_blue', 'ivory_base', 'grad_text' ],
+			[
+			'solids'    => [
+				'ink' => 'Heading / body text',
+				'muted' => 'Step description / captions',
+				'lead' => 'Lead / supporting text',
+				'surface' => 'Section background',
+				'on-accent' => 'Text on buttons / accent fills',
+				'accent' => 'Accent / highlight',
+				'link' => 'Link / icon stroke',
+				'link-blue' => 'Blue link / chip text',
+				'blue-accent' => 'Blue accent / tag dot',
+				'grad-warm' => 'Heading gradient — warm stop',
+				'grad-rose' => 'Heading gradient — rose stop',
+				'grad-sky' => 'Heading gradient — sky stop',
+				'tag-border' => 'Eyebrow tag border',
+				'chip-blue' => 'Blue chip surface',
+			],
+			'gradients' => [
+				'tag' => 'Eyebrow tag',
+				'grad_text' => 'Heading highlight gradient',
+				'ivory_orange' => 'Ivory section glow — orange',
+				'ivory_blue' => 'Ivory section glow — blue',
+				'ivory_base' => 'Ivory section background',
+			],
+			]
 		);
 
 		return [
@@ -32,7 +57,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_growth' ) ) {
 				[
 					[
 						'token'   => 'live-dot',
-						'label'   => 'Pipeline results dot',
+						'label'   => 'Results panel bullet',
 						'default' => '#22C55E',
 						'group'   => 'accent',
 					],
@@ -99,7 +124,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_growth' ) ) {
 					] ),
 					nexora_ph_style_colors_stops_gradient( [
 						'name'     => 'gs_step_card',
-						'label'    => 'Step card',
+						'label'    => 'Step card background',
 						'group'    => 'fill',
 						'selector' => '{{WRAPPER}} .nexora-ph',
 						'prefix'   => 'ph-growth-step-card',
@@ -125,7 +150,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_growth' ) ) {
 					] ),
 					nexora_ph_style_colors_stops_gradient( [
 						'name'     => 'gs_you_card',
-						'label'    => 'Your-role card',
+						'label'    => 'Your-role card background',
 						'group'    => 'fill',
 						'selector' => '{{WRAPPER}} .nexora-ph',
 						'prefix'   => 'ph-growth-you-card',
@@ -178,7 +203,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_growth' ) ) {
 					),
 					nexora_ph_style_colors_stops_gradient( [
 						'name'     => 'gs_panel_base',
-						'label'    => 'Results panel — base',
+						'label'    => 'Results panel background',
 						'group'    => 'fill',
 						'selector' => '{{WRAPPER}} .nexora-ph',
 						'prefix'   => 'ph-growth-panel-base',
@@ -259,7 +284,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_growth' ) ) {
 					] ),
 					nexora_ph_style_colors_stops_gradient( [
 						'name'     => 'gs_step_active',
-						'label'    => 'Active step card',
+						'label'    => 'Active step card background',
 						'group'    => 'fill',
 						'selector' => '{{WRAPPER}} .nexora-ph',
 						'prefix'   => 'ph-growth-step-active',

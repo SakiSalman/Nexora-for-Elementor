@@ -34,7 +34,27 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_nav' ) ) {
 				'blue-accent',
 				'btn-mid',
 			],
-			[ 'btn_primary', 'btn_dark', 'btn_dark_hover' ]
+			[ 'btn_primary', 'btn_dark', 'btn_dark_hover' ],
+			[
+			'solids'    => [
+				'ink' => 'Brand / fallback text',
+				'muted' => 'Menu description text',
+				'surface' => 'Section background',
+				'on-accent' => 'Text on primary button',
+				'on-dark' => 'Menu text on dark panels',
+				'lead-on-dark' => 'Menu description on dark',
+				'accent' => 'Accent / highlight',
+				'link' => 'Link / icon stroke',
+				'link-blue' => 'Blue link / chip text',
+				'blue-accent' => 'Blue accent / tag dot',
+				'btn-mid' => 'Primary button middle stop',
+			],
+			'gradients' => [
+				'btn_primary' => 'Primary button',
+				'btn_dark' => 'Dark button',
+				'btn_dark_hover' => 'Dark button (hover)',
+			],
+			]
 		);
 
 		// Every nav gradient sets its variables on the header so panels inherit them.
@@ -47,7 +67,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_nav' ) ) {
 				[
 					[
 						'token'   => 'text',
-						'label'   => 'Menu link text',
+						'label'   => 'Menu link',
 						'default' => '#2B3843',
 						'group'   => 'text',
 					],
@@ -59,7 +79,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_nav' ) ) {
 					],
 					[
 						'token'   => 'item-border',
-						'label'   => 'Menu item hover / featured border',
+						'label'   => 'Menu item border (hover) / featured',
 						'default' => '#FBD3BF',
 						'group'   => 'surface',
 					],
@@ -77,25 +97,25 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_nav' ) ) {
 					],
 					[
 						'token'   => 'bar-mid',
-						'label'   => 'Nav bar middle tint (45%, 70% opacity)',
+						'label'   => 'Nav bar — middle tint',
 						'default' => '#FFF4EC',
 						'group'   => 'fill',
 					],
 					[
 						'token'   => 'bar-solid-mid',
-						'label'   => 'Scrolled nav bar middle tint (45%, 86% opacity)',
+						'label'   => 'Nav bar scrolled — middle tint',
 						'default' => '#FFF6F0',
 						'group'   => 'fill',
 					],
 					[
 						'token'   => 'mega-mid',
-						'label'   => 'Mega panel middle tint (45%, 90% opacity)',
+						'label'   => 'Mega menu panel — middle tint',
 						'default' => '#FFF6F0',
 						'group'   => 'fill',
 					],
 					[
 						'token'   => 'menu-mid',
-						'label'   => 'Dropdown / phone menu middle tint (55%, 94% opacity)',
+						'label'   => 'Dropdown / phone menu — middle tint',
 						'default' => '#FFF4EC',
 						'group'   => 'fill',
 					],
@@ -131,9 +151,9 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_nav' ) ) {
 					nexora_ph_style_colors_linear_gradient( 'others', 'Other services panel', 'fill', $root, 'ph-nav-others', 'rgba(240,247,252,.95)', 'rgba(255,255,255,.9)', 135 ),
 					nexora_ph_style_colors_linear_gradient( 'oic', 'Other-service icon tile', 'fill', $root, 'ph-nav-oic', '#E4F1FA', '#C7DFF1', 145 ),
 					nexora_ph_style_colors_linear_gradient( 'arrow', 'Call-to-action card arrow', 'fill', $root, 'ph-nav-arrow', '#FF8350', '#F15E22', 145 ),
-					nexora_ph_style_colors_radial_gradient( 'cta_orange', 'Call-to-action card wash — orange', 'fill', $root, 'ph-nav-cta-orange', '300px 180px', '100% 0%', 'rgba(241,94,34,.55)', 'rgba(241,94,34,0)', 70 ),
-					nexora_ph_style_colors_radial_gradient( 'cta_blue', 'Call-to-action card wash — blue', 'fill', $root, 'ph-nav-cta-blue', '300px 200px', '0% 100%', 'rgba(35,116,172,.5)', 'rgba(35,116,172,0)', 70 ),
-					nexora_ph_style_colors_linear_gradient( 'cta_base', 'Call-to-action card base', 'fill', $root, 'ph-nav-cta-base', '#16283C', '#0B1620', 160 ),
+					nexora_ph_style_colors_radial_gradient( 'cta_orange', 'Call-to-action card glow — orange', 'fill', $root, 'ph-nav-cta-orange', '300px 180px', '100% 0%', 'rgba(241,94,34,.55)', 'rgba(241,94,34,0)', 70 ),
+					nexora_ph_style_colors_radial_gradient( 'cta_blue', 'Call-to-action card glow — blue', 'fill', $root, 'ph-nav-cta-blue', '300px 200px', '0% 100%', 'rgba(35,116,172,.5)', 'rgba(35,116,172,0)', 70 ),
+					nexora_ph_style_colors_linear_gradient( 'cta_base', 'Call-to-action card background', 'fill', $root, 'ph-nav-cta-base', '#16283C', '#0B1620', 160 ),
 					nexora_ph_style_colors_linear_gradient( 'menu_btn', 'Phone menu button', 'button', $root, 'ph-nav-menu-btn', '#FFFFFF', '#F4F7FA', 180 ),
 				]
 			),

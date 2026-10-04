@@ -31,7 +31,24 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_partners' ) ) {
 				'card-border',
 				'card-hover-border',
 			],
-			[ 'tag', 'card' ]
+			[ 'tag', 'card' ],
+			[
+			'solids'    => [
+				'ink' => 'Heading / body text',
+				'muted' => 'Description / captions',
+				'surface' => 'Section background',
+				'accent' => 'Accent / highlight',
+				'link' => 'Link / icon stroke',
+				'link-blue' => 'Blue link / chip text',
+				'card-border' => 'Card border',
+				'card-hover-border' => 'Card border (hover)',
+				'tag-border' => 'Eyebrow tag border',
+			],
+			'gradients' => [
+				'tag' => 'Eyebrow tag',
+				'card' => 'Card background',
+			],
+			]
 		);
 
 		return [
@@ -41,19 +58,19 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_partners' ) ) {
 				[
 					[
 						'token'   => 'band-mid',
-						'label'   => 'Band middle tint (45%)',
+						'label'   => 'Partners band — middle tint',
 						'default' => '#FFFBF8',
 						'group'   => 'fill',
 					],
 					[
 						'token'   => 'band-border-top',
-						'label'   => 'Band top border',
+						'label'   => 'Partners band — top border',
 						'default' => '#F0E8DF',
 						'group'   => 'surface',
 					],
 					[
 						'token'   => 'band-border-bottom',
-						'label'   => 'Band bottom border',
+						'label'   => 'Partners band — bottom border',
 						'default' => '#E6EEF5',
 						'group'   => 'surface',
 					],

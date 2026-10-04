@@ -40,7 +40,40 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_approach' ) ) {
 				'tag-border',
 				'chip-blue',
 			],
-			[ 'tag', 'card', 'check', 'grad_text', 'mid_orange', 'mid_blue', 'mid_base', 'ivory_orange', 'ivory_blue', 'ivory_base' ]
+			[ 'tag', 'card', 'check', 'grad_text', 'mid_orange', 'mid_blue', 'mid_base', 'ivory_orange', 'ivory_blue', 'ivory_base' ],
+			[
+			'solids'    => [
+				'ink' => 'Heading / body text',
+				'muted' => 'Card description / captions',
+				'lead' => 'Lead / supporting text',
+				'surface' => 'Section background',
+				'on-accent' => 'Text on buttons / accent fills',
+				'on-dark' => 'Dark panel title',
+				'tag-on-dark' => 'Tag text on dark panel',
+				'accent' => 'Accent / highlight',
+				'link' => 'Link / icon stroke',
+				'link-blue' => 'Blue link / chip text',
+				'grad-warm' => 'Heading gradient — warm stop',
+				'grad-rose' => 'Heading gradient — rose stop',
+				'grad-sky' => 'Heading gradient — sky stop',
+				'card-border' => 'Card border',
+				'card-hover-border' => 'Card border (hover)',
+				'tag-border' => 'Eyebrow tag border',
+				'chip-blue' => 'Blue chip surface',
+			],
+			'gradients' => [
+				'tag' => 'Eyebrow tag',
+				'card' => 'Card background',
+				'grad_text' => 'Heading highlight gradient',
+				'check' => 'Checkmark badge',
+				'mid_orange' => 'Dark panel glow — orange',
+				'mid_blue' => 'Dark panel glow — blue',
+				'mid_base' => 'Dark panel background',
+				'ivory_orange' => 'Ivory section glow — orange',
+				'ivory_blue' => 'Ivory section glow — blue',
+				'ivory_base' => 'Ivory section background',
+			],
+			]
 		);
 
 		return [

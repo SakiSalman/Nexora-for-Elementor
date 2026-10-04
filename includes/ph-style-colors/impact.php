@@ -37,7 +37,32 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_impact' ) ) {
 				'tag-border',
 				'tag-blue-border',
 			],
-			[ 'tag', 'tag_blue', 'check', 'grad_text' ]
+			[ 'tag', 'tag_blue', 'check', 'grad_text' ],
+			[
+			'solids'    => [
+				'ink' => 'Heading / body text',
+				'muted' => 'Description / captions',
+				'surface' => 'Section background',
+				'on-accent' => 'Text on buttons / accent fills',
+				'on-dark' => 'Stat / title on dark',
+				'accent' => 'Accent / highlight',
+				'link' => 'Link / icon stroke',
+				'link-blue' => 'Blue link / chip text',
+				'blue-accent' => 'Blue accent / tag dot',
+				'btn-mid' => 'Primary button middle stop',
+				'grad-warm' => 'Heading gradient — warm stop',
+				'grad-rose' => 'Heading gradient — rose stop',
+				'grad-sky' => 'Heading gradient — sky stop',
+				'tag-border' => 'Eyebrow tag border',
+				'tag-blue-border' => 'Blue eyebrow tag border',
+			],
+			'gradients' => [
+				'tag' => 'Eyebrow tag',
+				'tag_blue' => 'Blue eyebrow tag',
+				'grad_text' => 'Heading highlight gradient',
+				'check' => 'Checkmark badge',
+			],
+			]
 		);
 
 		return [
@@ -64,7 +89,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_impact' ) ) {
 				[
 					[
 						'name'           => 'tab_on',
-						'label'          => 'Active tab',
+						'label'          => 'Active tab background',
 						'group'          => 'button',
 						'selector'       => '{{WRAPPER}} .nexora-ph .tab.on',
 						'default'        => [
@@ -82,7 +107,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_impact' ) ) {
 					],
 					[
 						'name'           => 'frame',
-						'label'          => 'Panel frame',
+						'label'          => 'Panel frame border',
 						'group'          => 'fill',
 						'selector'       => '{{WRAPPER}} .nexora-ph .imp-frame',
 						'default'        => [
@@ -98,7 +123,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_impact' ) ) {
 						'fields_options' => nexora_ph_style_colors_bridge( nexora_ph_style_colors_vars( 'ph-impact-frame' ) ),
 						'notes'          => 'The Panel frame middle stop solid stays the fixed middle stop (45%) so the two-stop picker controls the outer colors.',
 					],
-					nexora_ph_style_colors_linear_gradient( 'panel', 'Panel surface', 'fill', '{{WRAPPER}} .nexora-ph .imp-panel', 'ph-impact-panel', '#FFF4ED', '#FFFFFF', 165, 0, 55 ),
+					nexora_ph_style_colors_linear_gradient( 'panel', 'Panel background', 'fill', '{{WRAPPER}} .nexora-ph .imp-panel', 'ph-impact-panel', '#FFF4ED', '#FFFFFF', 165, 0, 55 ),
 				]
 			),
 		];

@@ -92,7 +92,34 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_hero' ) ) {
 				'btn-mid',
 				'tag-border',
 			],
-			[ 'btn_primary', 'tag', 'icon', 'icon_b', 'grad_text', 'grid_horizontal', 'grid_vertical' ]
+			[ 'btn_primary', 'tag', 'icon', 'icon_b', 'grad_text', 'grid_horizontal', 'grid_vertical' ],
+			[
+			'solids'    => [
+				'ink' => 'Heading / body text',
+				'muted' => 'Supporting text / captions',
+				'lead' => 'Lead paragraph',
+				'surface' => 'Hero surface / wash middle stop',
+				'on-accent' => 'Text on buttons / accent fills',
+				'accent' => 'Accent / highlight',
+				'link' => 'Link / icon stroke',
+				'link-blue' => 'Blue link / chip text',
+				'blue-accent' => 'Blue accent / orbit accents',
+				'btn-mid' => 'Primary button middle stop',
+				'grad-warm' => 'Heading gradient — warm stop',
+				'grad-rose' => 'Heading gradient — rose stop',
+				'grad-sky' => 'Heading gradient — sky stop',
+				'tag-border' => 'Eyebrow tag border',
+			],
+			'gradients' => [
+				'tag' => 'Eyebrow tag',
+				'btn_primary' => 'Primary button',
+				'icon' => 'Accent icon tile',
+				'icon_b' => 'Blue icon tile',
+				'grad_text' => 'Heading highlight gradient',
+				'grid_horizontal' => 'Background grid — horizontal',
+				'grid_vertical' => 'Background grid — vertical',
+			],
+			]
 		);
 
 		return [
@@ -102,25 +129,25 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_hero' ) ) {
 				[
 					[
 						'token'   => 'signal-blue',
-						'label'   => 'Signal blue',
+						'label'   => 'Signal accent',
 						'default' => '#5FB0E8',
 						'group'   => 'accent',
 					],
 					[
 						'token'   => 'quiet-text',
-						'label'   => 'Quiet text',
+						'label'   => 'Secondary caption text',
 						'default' => '#8FA0AF',
 						'group'   => 'text',
 					],
 					[
 						'token'   => 'rating-start',
-						'label'   => 'Rating gradient start',
+						'label'   => 'Rating badge gradient — start',
 						'default' => '#FF9D6B',
 						'group'   => 'accent',
 					],
 					[
 						'token'   => 'rating-end',
-						'label'   => 'Rating gradient end',
+						'label'   => 'Rating badge gradient — end',
 						'default' => '#E4501A',
 						'group'   => 'accent',
 					],
@@ -135,13 +162,13 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_hero' ) ) {
 			'gradients'      => array_merge(
 				$shared['gradients'],
 				[
-					nexora_ph_style_colors_hero_wash_gradient( 'orange_top', 'Hero wash — orange top', '88% 8%', '760px 520px', 'rgba(241,94,34,.26)', 'rgba(241,94,34,0)', 60 ),
-					nexora_ph_style_colors_hero_wash_gradient( 'blue_bottom', 'Hero wash — blue bottom', '72% 70%', '820px 560px', 'rgba(35,116,172,.26)', 'rgba(35,116,172,0)', 62 ),
-					nexora_ph_style_colors_hero_wash_gradient( 'blue_top', 'Hero wash — blue top', '0% 0%', '700px 500px', 'rgba(35,116,172,.18)', 'rgba(35,116,172,0)', 60 ),
-					nexora_ph_style_colors_hero_wash_gradient( 'orange_bottom', 'Hero wash — orange bottom', '8% 95%', '640px 460px', 'rgba(241,94,34,.16)', 'rgba(241,94,34,0)', 60 ),
+					nexora_ph_style_colors_hero_wash_gradient( 'orange_top', 'Hero glow — orange top', '88% 8%', '760px 520px', 'rgba(241,94,34,.26)', 'rgba(241,94,34,0)', 60 ),
+					nexora_ph_style_colors_hero_wash_gradient( 'blue_bottom', 'Hero glow — blue bottom', '72% 70%', '820px 560px', 'rgba(35,116,172,.26)', 'rgba(35,116,172,0)', 62 ),
+					nexora_ph_style_colors_hero_wash_gradient( 'blue_top', 'Hero glow — blue top', '0% 0%', '700px 500px', 'rgba(35,116,172,.18)', 'rgba(35,116,172,0)', 60 ),
+					nexora_ph_style_colors_hero_wash_gradient( 'orange_bottom', 'Hero glow — orange bottom', '8% 95%', '640px 460px', 'rgba(241,94,34,.16)', 'rgba(241,94,34,0)', 60 ),
 					[
 						'name'           => 'wash_base',
-						'label'          => 'Hero wash — base',
+						'label'          => 'Hero background',
 						'group'          => 'fill',
 						'selector'       => '{{WRAPPER}} .nexora-ph .hero-sec',
 						'default'        => [
@@ -159,7 +186,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_hero' ) ) {
 					],
 					[
 						'name'           => 'ghost_text',
-						'label'          => 'Ghost word',
+						'label'          => 'Ghost word fill',
 						'group'          => 'fill',
 						'selector'       => '{{WRAPPER}} .nexora-ph .ghost-word',
 						'default'        => [
@@ -176,7 +203,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_hero' ) ) {
 					],
 					[
 						'name'           => 'orbit_orange',
-						'label'          => 'Orange orbit node',
+						'label'          => 'Orbit node (orange)',
 						'group'          => 'fill',
 						'selector'       => '{{WRAPPER}} .nexora-ph .hero-orbit-orange',
 						'default'        => [
@@ -193,7 +220,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_hero' ) ) {
 					],
 					[
 						'name'           => 'core_surface',
-						'label'          => 'Hero core surface',
+						'label'          => 'Hero core glass',
 						'group'          => 'fill',
 						'selector'       => '{{WRAPPER}} .nexora-ph .hero-core',
 						'default'        => [

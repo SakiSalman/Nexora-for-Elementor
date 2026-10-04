@@ -30,7 +30,22 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_footer' ) ) {
 				'link-blue',
 				'btn-mid',
 			],
-			[ 'btn_primary' ]
+			[ 'btn_primary' ],
+			[
+			'solids'    => [
+				'ink' => 'Fallback text',
+				'surface' => 'Fallback surface',
+				'on-accent' => 'Text on primary button',
+				'on-dark' => 'Heading / white text on dark',
+				'accent' => 'Accent / highlight',
+				'link' => 'Accent link stroke',
+				'link-blue' => 'Blue accent link',
+				'btn-mid' => 'Primary button middle stop',
+			],
+			'gradients' => [
+				'btn_primary' => 'Primary button',
+			],
+			]
 		);
 
 		$root = '{{WRAPPER}} .nexora-ph';
@@ -42,31 +57,31 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_footer' ) ) {
 				[
 					[
 						'token'   => 'base',
-						'label'   => 'Footer base',
+						'label'   => 'Footer background',
 						'default' => '#0A131B',
 						'group'   => 'fill',
 					],
 					[
 						'token'   => 'text',
-						'label'   => 'Footer text and links',
+						'label'   => 'Footer body / links',
 						'default' => '#C9D3DC',
 						'group'   => 'text',
 					],
 					[
 						'token'   => 'text-soft',
-						'label'   => 'Footer column text (alternate layout)',
+						'label'   => 'Footer column text',
 						'default' => '#A9B6C2',
 						'group'   => 'text',
 					],
 					[
 						'token'   => 'text-muted',
-						'label'   => 'Footer muted text',
+						'label'   => 'Footer muted / copyright',
 						'default' => '#8FA0AF',
 						'group'   => 'text',
 					],
 					[
 						'token'   => 'hover',
-						'label'   => 'Footer link hover / email / call to action',
+						'label'   => 'Footer link (hover) / email / CTA',
 						'default' => '#FFB08C',
 						'group'   => 'accent',
 					],
@@ -123,9 +138,9 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_footer' ) ) {
 			'gradients'      => array_merge(
 				$shared['gradients'],
 				[
-					nexora_ph_style_colors_radial_gradient( 'wash_orange', 'Footer wash — orange top', 'fill', '{{WRAPPER}} .nexora-ph .footer-sec', 'ph-footer-wash-orange', '700px 360px', '92% 0%', 'rgba(241,94,34,.16)', 'rgba(241,94,34,0)', 60 ),
-					nexora_ph_style_colors_radial_gradient( 'wash_blue', 'Footer wash — blue left', 'fill', '{{WRAPPER}} .nexora-ph .footer-sec', 'ph-footer-wash-blue', '700px 400px', '0% 30%', 'rgba(35,116,172,.18)', 'rgba(35,116,172,0)', 62 ),
-					nexora_ph_style_colors_linear_gradient( 'hover_fill', 'Social / AI button hover fill', 'button', $root, 'ph-footer-hover-fill', '#FF8A4C', '#F15E22', 145 ),
+					nexora_ph_style_colors_radial_gradient( 'wash_orange', 'Footer glow — orange', 'fill', '{{WRAPPER}} .nexora-ph .footer-sec', 'ph-footer-wash-orange', '700px 360px', '92% 0%', 'rgba(241,94,34,.16)', 'rgba(241,94,34,0)', 60 ),
+					nexora_ph_style_colors_radial_gradient( 'wash_blue', 'Footer glow — blue', 'fill', '{{WRAPPER}} .nexora-ph .footer-sec', 'ph-footer-wash-blue', '700px 400px', '0% 30%', 'rgba(35,116,172,.18)', 'rgba(35,116,172,0)', 62 ),
+					nexora_ph_style_colors_linear_gradient( 'hover_fill', 'Social / AI button (hover)', 'button', $root, 'ph-footer-hover-fill', '#FF8A4C', '#F15E22', 145 ),
 				]
 			),
 		];

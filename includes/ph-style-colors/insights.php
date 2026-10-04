@@ -43,7 +43,38 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_insights' ) ) {
 				'chip-orange-text',
 				'btn-mid',
 			],
-			[ 'tag', 'tag_blue', 'card', 'grad_text', 'btn_dark', 'btn_dark_hover' ]
+			[ 'tag', 'tag_blue', 'card', 'grad_text', 'btn_dark', 'btn_dark_hover' ],
+			[
+			'solids'    => [
+				'ink' => 'Heading / body text',
+				'muted' => 'Card description / captions',
+				'surface' => 'Section background',
+				'on-accent' => 'Text on buttons / accent fills',
+				'accent' => 'Accent / highlight',
+				'link' => 'Link / icon stroke',
+				'link-blue' => 'Blue link / chip text',
+				'blue-accent' => 'Blue accent / tag dot',
+				'btn-mid' => 'Primary button middle stop',
+				'grad-warm' => 'Heading gradient — warm stop',
+				'grad-rose' => 'Heading gradient — rose stop',
+				'grad-sky' => 'Heading gradient — sky stop',
+				'card-border' => 'Card border',
+				'card-hover-border' => 'Card border (hover)',
+				'tag-border' => 'Eyebrow tag border',
+				'tag-blue-border' => 'Blue eyebrow tag border',
+				'chip-blue' => 'Blue chip surface',
+				'chip-orange' => 'Orange chip surface',
+				'chip-orange-text' => 'Orange chip text',
+			],
+			'gradients' => [
+				'tag' => 'Eyebrow tag',
+				'tag_blue' => 'Blue eyebrow tag',
+				'card' => 'Card background',
+				'btn_dark' => 'Dark button',
+				'btn_dark_hover' => 'Dark button (hover)',
+				'grad_text' => 'Heading highlight gradient',
+			],
+			]
 		);
 
 		return [

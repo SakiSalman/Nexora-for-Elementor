@@ -22,7 +22,35 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_solutions' ) ) {
 	function nexora_ph_style_colors_inventory_solutions(): array {
 		$shared = nexora_ph_style_colors_shared_subset(
 			[ 'accent', 'blue-accent', 'ink', 'muted', 'surface', 'on-accent', 'lead', 'link', 'link-blue', 'tag-border', 'btn-mid', 'grad-warm', 'grad-rose', 'grad-sky' ],
-			[ 'btn_dark', 'tag', 'icon', 'ivory_orange', 'ivory_blue', 'ivory_base', 'grad_text', 'btn_dark_hover' ]
+			[ 'btn_dark', 'tag', 'icon', 'ivory_orange', 'ivory_blue', 'ivory_base', 'grad_text', 'btn_dark_hover' ],
+			[
+			'solids'    => [
+				'ink' => 'Heading / body text',
+				'muted' => 'Description / captions',
+				'lead' => 'Lead / supporting text',
+				'surface' => 'Section background',
+				'on-accent' => 'Text on buttons / accent fills',
+				'accent' => 'Accent / highlight',
+				'link' => 'Link / icon stroke',
+				'link-blue' => 'Blue link / chip text',
+				'blue-accent' => 'Blue accent / tag dot',
+				'btn-mid' => 'Primary button middle stop',
+				'grad-warm' => 'Heading gradient — warm stop',
+				'grad-rose' => 'Heading gradient — rose stop',
+				'grad-sky' => 'Heading gradient — sky stop',
+				'tag-border' => 'Eyebrow tag border',
+			],
+			'gradients' => [
+				'tag' => 'Eyebrow tag',
+				'btn_dark' => 'Dark button',
+				'btn_dark_hover' => 'Dark button (hover)',
+				'icon' => 'Accent icon tile',
+				'grad_text' => 'Heading highlight gradient',
+				'ivory_orange' => 'Ivory section glow — orange',
+				'ivory_blue' => 'Ivory section glow — blue',
+				'ivory_base' => 'Ivory section background',
+			],
+			]
 		);
 
 		return [
@@ -103,7 +131,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_solutions' ) ) {
 				[
 					nexora_ph_style_colors_stops_gradient( [
 						'name'     => 'sx_box_orange',
-						'label'    => 'Diagram — orange glow',
+						'label'    => 'Diagram glow — orange',
 						'group'    => 'fill',
 						'selector' => '{{WRAPPER}} .nexora-ph .sx-box',
 						'prefix'   => 'ph-solutions-box-orange',
@@ -117,7 +145,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_solutions' ) ) {
 					] ),
 					nexora_ph_style_colors_stops_gradient( [
 						'name'     => 'sx_box_blue',
-						'label'    => 'Diagram — blue glow',
+						'label'    => 'Diagram glow — blue',
 						'group'    => 'fill',
 						'selector' => '{{WRAPPER}} .nexora-ph .sx-box',
 						'prefix'   => 'ph-solutions-box-blue',
@@ -131,7 +159,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_solutions' ) ) {
 					] ),
 					nexora_ph_style_colors_stops_gradient( [
 						'name'     => 'sx_box_base',
-						'label'    => 'Diagram — base',
+						'label'    => 'Diagram background',
 						'group'    => 'fill',
 						'selector' => '{{WRAPPER}} .nexora-ph .sx-box',
 						'prefix'   => 'ph-solutions-box-base',

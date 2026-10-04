@@ -35,7 +35,28 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_faq' ) ) {
 				'card-border',
 				'tag-border',
 			],
-			[ 'tag', 'grad_text' ]
+			[ 'tag', 'grad_text' ],
+			[
+			'solids'    => [
+				'ink' => 'Heading / body text',
+				'muted' => 'Answer text / captions',
+				'lead' => 'Question lead text',
+				'surface' => 'Section background',
+				'on-accent' => 'Text on buttons / accent fills',
+				'accent' => 'Accent / highlight',
+				'link' => 'Link / icon stroke',
+				'link-blue' => 'Blue link / chip text',
+				'grad-warm' => 'Heading gradient — warm stop',
+				'grad-rose' => 'Heading gradient — rose stop',
+				'grad-sky' => 'Heading gradient — sky stop',
+				'card-border' => 'Card border',
+				'tag-border' => 'Eyebrow tag border',
+			],
+			'gradients' => [
+				'tag' => 'Eyebrow tag',
+				'grad_text' => 'Heading highlight gradient',
+			],
+			]
 		);
 
 		return [

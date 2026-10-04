@@ -40,7 +40,38 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_challenge' ) ) {
 				'card-hover-border',
 				'tag-border',
 			],
-			[ 'tag', 'card', 'icon_o', 'grad_text', 'hv_orange', 'hv_blue', 'hv_dark', 'hv_icon' ]
+			[ 'tag', 'card', 'icon_o', 'grad_text', 'hv_orange', 'hv_blue', 'hv_dark', 'hv_icon' ],
+			[
+			'solids'    => [
+				'ink' => 'Heading / body text',
+				'muted' => 'Card description / captions',
+				'lead' => 'Lead / supporting text',
+				'surface' => 'Section background',
+				'on-accent' => 'Text on buttons / accent fills',
+				'on-dark' => 'Card title (hover)',
+				'lead-on-dark' => 'Card description (hover)',
+				'accent' => 'Accent / highlight',
+				'link' => 'Learn more link / icon stroke',
+				'link-blue' => 'Blue link / chip text',
+				'btn-mid' => 'Primary button middle stop',
+				'grad-warm' => 'Heading gradient — warm stop',
+				'grad-rose' => 'Heading gradient — rose stop',
+				'grad-sky' => 'Heading gradient — sky stop',
+				'card-border' => 'Card border',
+				'card-hover-border' => 'Card border (hover)',
+				'tag-border' => 'Eyebrow tag border',
+			],
+			'gradients' => [
+				'tag' => 'Eyebrow tag',
+				'card' => 'Card background',
+				'icon_o' => 'Orange icon tile',
+				'grad_text' => 'Heading highlight gradient',
+				'hv_orange' => 'Card panel glow — orange (hover)',
+				'hv_blue' => 'Card panel glow — blue (hover)',
+				'hv_dark' => 'Card panel (hover)',
+				'hv_icon' => 'Card icon tile (hover)',
+			],
+			]
 		);
 
 		return [

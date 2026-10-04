@@ -22,7 +22,35 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_framework' ) ) {
 	function nexora_ph_style_colors_inventory_framework(): array {
 		$shared = nexora_ph_style_colors_shared_subset(
 			[ 'on-dark', 'lead-on-dark', 'tag-on-dark', 'chip-on-dark', 'ink', 'accent', 'chip-orange', 'chip-orange-text', 'muted-on-dark', 'blue-accent', 'surface', 'link-blue', 'link', 'tag-border', 'lead', 'grad-warm', 'grad-rose', 'grad-sky' ],
-			[ 'tag', 'grad_text', 'grid_horizontal', 'grid_vertical' ]
+			[ 'tag', 'grad_text', 'grid_horizontal', 'grid_vertical' ],
+			[
+			'solids'    => [
+				'ink' => 'Heading / body text',
+				'lead' => 'Lead / supporting text',
+				'surface' => 'Section background',
+				'on-dark' => 'Panel title on dark',
+				'lead-on-dark' => 'Panel description on dark',
+				'muted-on-dark' => 'Muted text on dark',
+				'tag-on-dark' => 'Tag text on dark',
+				'chip-on-dark' => 'Chip text on dark',
+				'accent' => 'Accent / highlight',
+				'link' => 'Link / icon stroke',
+				'link-blue' => 'Blue link / chip text',
+				'blue-accent' => 'Blue accent / tag dot',
+				'grad-warm' => 'Heading gradient — warm stop',
+				'grad-rose' => 'Heading gradient — rose stop',
+				'grad-sky' => 'Heading gradient — sky stop',
+				'tag-border' => 'Eyebrow tag border',
+				'chip-orange' => 'Orange chip surface',
+				'chip-orange-text' => 'Orange chip text',
+			],
+			'gradients' => [
+				'tag' => 'Eyebrow tag',
+				'grad_text' => 'Heading highlight gradient',
+				'grid_horizontal' => 'Background grid — horizontal',
+				'grid_vertical' => 'Background grid — vertical',
+			],
+			]
 		);
 
 		return [
@@ -32,61 +60,61 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_framework' ) ) {
 				[
 					[
 						'token'   => 'panel-base',
-						'label'   => 'Panel base',
+						'label'   => 'Visual panel background',
 						'default' => '#132436',
 						'group'   => 'surface',
 					],
 					[
 						'token'   => 'chip-bg',
-						'label'   => 'Chip and node background',
+						'label'   => 'Chip / node surface',
 						'default' => '#1E3248',
 						'group'   => 'surface',
 					],
 					[
 						'token'   => 'signal-blue',
-						'label'   => 'Signal blue',
+						'label'   => 'Signal accent',
 						'default' => '#5FB0E8',
 						'group'   => 'accent',
 					],
 					[
 						'token'   => 'sky-blue',
-						'label'   => 'Sky blue',
+						'label'   => 'Sky accent',
 						'default' => '#7CC2F0',
 						'group'   => 'accent',
 					],
 					[
 						'token'   => 'quiet-text',
-						'label'   => 'Quiet text',
+						'label'   => 'Secondary caption text',
 						'default' => '#8FA0AF',
 						'group'   => 'text',
 					],
 					[
 						'token'   => 'hub-deep',
-						'label'   => 'Hub gradient end',
+						'label'   => 'Hub fill — end',
 						'default' => '#D9480F',
 						'group'   => 'accent',
 					],
 					[
 						'token'   => 'hub-warm',
-						'label'   => 'Hub gradient start',
+						'label'   => 'Hub fill — start',
 						'default' => '#FF8A4C',
 						'group'   => 'accent',
 					],
 					[
 						'token'   => 'packet-warm',
-						'label'   => 'Data packet (warm)',
+						'label'   => 'Data packet fill',
 						'default' => '#FFB08C',
 						'group'   => 'accent',
 					],
 					[
 						'token'   => 'sec-base-mid',
-						'label'   => 'Section wash — base — middle stop 1',
+						'label'   => 'Section background — middle stop 1',
 						'default' => '#0F1D2C',
 						'group'   => 'fill',
 					],
 					[
 						'token'   => 'sec-base-mid-2',
-						'label'   => 'Section wash — base — middle stop 2',
+						'label'   => 'Section background — middle stop 2',
 						'default' => '#0B1620',
 						'group'   => 'fill',
 					],
@@ -103,7 +131,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_framework' ) ) {
 				[
 					nexora_ph_style_colors_stops_gradient( [
 						'name'     => 'fw_sec_orange',
-						'label'    => 'Section wash — orange glow',
+						'label'    => 'Section glow — orange',
 						'group'    => 'fill',
 						'selector' => '{{WRAPPER}} .nexora-ph .fw-sec',
 						'prefix'   => 'ph-framework-sec-orange',
@@ -117,7 +145,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_framework' ) ) {
 					] ),
 					nexora_ph_style_colors_stops_gradient( [
 						'name'     => 'fw_sec_blue',
-						'label'    => 'Section wash — blue glow',
+						'label'    => 'Section glow — blue',
 						'group'    => 'fill',
 						'selector' => '{{WRAPPER}} .nexora-ph .fw-sec',
 						'prefix'   => 'ph-framework-sec-blue',
@@ -131,7 +159,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_framework' ) ) {
 					] ),
 					nexora_ph_style_colors_stops_gradient( [
 						'name'     => 'fw_sec_sky',
-						'label'    => 'Section wash — sky glow',
+						'label'    => 'Section glow — sky',
 						'group'    => 'fill',
 						'selector' => '{{WRAPPER}} .nexora-ph .fw-sec',
 						'prefix'   => 'ph-framework-sec-sky',
@@ -145,7 +173,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_framework' ) ) {
 					] ),
 					nexora_ph_style_colors_stops_gradient( [
 						'name'     => 'fw_sec_base',
-						'label'    => 'Section wash — base',
+						'label'    => 'Section background',
 						'group'    => 'fill',
 						'selector' => '{{WRAPPER}} .nexora-ph .fw-sec',
 						'prefix'   => 'ph-framework-sec-base',
@@ -160,7 +188,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_framework' ) ) {
 					] ),
 					nexora_ph_style_colors_stops_gradient( [
 						'name'     => 'fw_tab_active',
-						'label'    => 'Active tab',
+						'label'    => 'Active tab background',
 						'group'    => 'fill',
 						'selector' => '{{WRAPPER}} .nexora-ph .ftab.on',
 						'prefix'   => 'ph-framework-tab-active',
@@ -174,7 +202,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_framework' ) ) {
 					] ),
 					nexora_ph_style_colors_stops_gradient( [
 						'name'     => 'fw_vis_blue',
-						'label'    => 'Visual panel — blue glow',
+						'label'    => 'Visual panel glow — blue',
 						'group'    => 'fill',
 						'selector' => '{{WRAPPER}} .nexora-ph .fw-vis',
 						'prefix'   => 'ph-framework-vis-blue',
@@ -188,7 +216,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_framework' ) ) {
 					] ),
 					nexora_ph_style_colors_stops_gradient( [
 						'name'     => 'fw_vis_orange',
-						'label'    => 'Visual panel — orange glow',
+						'label'    => 'Visual panel glow — orange',
 						'group'    => 'fill',
 						'selector' => '{{WRAPPER}} .nexora-ph .fw-vis',
 						'prefix'   => 'ph-framework-vis-orange',
@@ -202,7 +230,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_framework' ) ) {
 					] ),
 					nexora_ph_style_colors_stops_gradient( [
 						'name'     => 'fw_vis_base',
-						'label'    => 'Visual panel — base',
+						'label'    => 'Visual panel background',
 						'group'    => 'fill',
 						'selector' => '{{WRAPPER}} .nexora-ph .fw-vis',
 						'prefix'   => 'ph-framework-vis-base',
@@ -215,7 +243,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_framework' ) ) {
 					] ),
 					nexora_ph_style_colors_stops_gradient( [
 						'name'     => 'fw_card_light',
-						'label'    => 'Light bubble and mover card',
+						'label'    => 'Light bubble / mover card',
 						'group'    => 'fill',
 						'selector' => '{{WRAPPER}} .nexora-ph .fw-bubble, {{WRAPPER}} .nexora-ph .fw-mover',
 						'prefix'   => 'ph-framework-card-light',

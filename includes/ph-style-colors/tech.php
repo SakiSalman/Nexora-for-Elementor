@@ -22,7 +22,34 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_tech' ) ) {
 	function nexora_ph_style_colors_inventory_tech(): array {
 		$shared = nexora_ph_style_colors_shared_subset(
 			[ 'on-dark', 'muted-on-dark', 'surface', 'card-border', 'ink', 'muted', 'accent', 'blue-accent', 'lead', 'link-blue', 'link', 'tag-border', 'tag-blue-border', 'grad-warm', 'grad-rose', 'grad-sky' ],
-			[ 'tag', 'tag_blue', 'grad_text', 'grid_horizontal', 'grid_vertical' ]
+			[ 'tag', 'tag_blue', 'grad_text', 'grid_horizontal', 'grid_vertical' ],
+			[
+			'solids'    => [
+				'ink' => 'Heading / body text',
+				'muted' => 'Description / captions',
+				'lead' => 'Lead / supporting text',
+				'surface' => 'Section background',
+				'on-dark' => 'Title on dark panels',
+				'muted-on-dark' => 'Muted text on dark',
+				'accent' => 'Accent / highlight',
+				'link' => 'Link / icon stroke',
+				'link-blue' => 'Blue link / chip text',
+				'blue-accent' => 'Blue accent / tag dot',
+				'grad-warm' => 'Heading gradient — warm stop',
+				'grad-rose' => 'Heading gradient — rose stop',
+				'grad-sky' => 'Heading gradient — sky stop',
+				'card-border' => 'Card border',
+				'tag-border' => 'Eyebrow tag border',
+				'tag-blue-border' => 'Blue eyebrow tag border',
+			],
+			'gradients' => [
+				'tag' => 'Eyebrow tag',
+				'tag_blue' => 'Blue eyebrow tag',
+				'grad_text' => 'Heading highlight gradient',
+				'grid_horizontal' => 'Background grid — horizontal',
+				'grid_vertical' => 'Background grid — vertical',
+			],
+			]
 		);
 
 		return [
@@ -38,7 +65,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_tech' ) ) {
 					],
 					[
 						'token'   => 'sec-base-mid',
-						'label'   => 'Section wash — base — middle stop',
+						'label'   => 'Section background — middle stop',
 						'default' => '#FFFFFF',
 						'group'   => 'fill',
 					],
@@ -93,7 +120,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_tech' ) ) {
 					] ),
 					nexora_ph_style_colors_stops_gradient( [
 						'name'     => 'tc_tool_icon',
-						'label'    => 'Tool icon',
+						'label'    => 'Tool icon tile',
 						'group'    => 'fill',
 						'selector' => '{{WRAPPER}} .nexora-ph .tool-ic',
 						'prefix'   => 'ph-tech-tool-icon',
@@ -106,7 +133,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_tech' ) ) {
 					] ),
 					nexora_ph_style_colors_stops_gradient( [
 						'name'     => 'tc_sec_orange',
-						'label'    => 'Section wash — orange glow',
+						'label'    => 'Section glow — orange',
 						'group'    => 'fill',
 						'selector' => '{{WRAPPER}} .nexora-ph .tech-sec',
 						'prefix'   => 'ph-tech-sec-orange',
@@ -120,7 +147,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_tech' ) ) {
 					] ),
 					nexora_ph_style_colors_stops_gradient( [
 						'name'     => 'tc_sec_blue',
-						'label'    => 'Section wash — blue glow',
+						'label'    => 'Section glow — blue',
 						'group'    => 'fill',
 						'selector' => '{{WRAPPER}} .nexora-ph .tech-sec',
 						'prefix'   => 'ph-tech-sec-blue',
@@ -134,7 +161,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_tech' ) ) {
 					] ),
 					nexora_ph_style_colors_stops_gradient( [
 						'name'     => 'tc_sec_base',
-						'label'    => 'Section wash — base',
+						'label'    => 'Section background',
 						'group'    => 'fill',
 						'selector' => '{{WRAPPER}} .nexora-ph .tech-sec',
 						'prefix'   => 'ph-tech-sec-base',
@@ -162,7 +189,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_tech' ) ) {
 					] ),
 					nexora_ph_style_colors_stops_gradient( [
 						'name'     => 'tc_tool_icon_sec',
-						'label'    => 'Tool icon (section)',
+						'label'    => 'Tool icon tile (section)',
 						'group'    => 'fill',
 						'selector' => '{{WRAPPER}} .nexora-ph .tech-sec .tool-ic',
 						'prefix'   => 'ph-tech-tool-icon-sec',

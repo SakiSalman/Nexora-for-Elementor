@@ -22,7 +22,31 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_industries' ) ) {
 	function nexora_ph_style_colors_inventory_industries(): array {
 		$shared = nexora_ph_style_colors_shared_subset(
 			[ 'ink', 'card-border', 'surface', 'link-blue', 'muted', 'accent', 'link', 'on-dark', 'more-on-dark', 'tag-border', 'grad-warm', 'grad-rose', 'grad-sky' ],
-			[ 'tag', 'ivory_orange', 'ivory_blue', 'ivory_base', 'grad_text' ]
+			[ 'tag', 'ivory_orange', 'ivory_blue', 'ivory_base', 'grad_text' ],
+			[
+			'solids'    => [
+				'ink' => 'Heading / body text',
+				'muted' => 'Tile description / captions',
+				'surface' => 'Section background',
+				'on-dark' => 'Tile title (hover)',
+				'more-on-dark' => 'Learn more link (hover)',
+				'accent' => 'Accent / highlight',
+				'link' => 'Link / icon stroke',
+				'link-blue' => 'Blue link / chip text',
+				'grad-warm' => 'Heading gradient — warm stop',
+				'grad-rose' => 'Heading gradient — rose stop',
+				'grad-sky' => 'Heading gradient — sky stop',
+				'card-border' => 'Card border',
+				'tag-border' => 'Eyebrow tag border',
+			],
+			'gradients' => [
+				'tag' => 'Eyebrow tag',
+				'grad_text' => 'Heading highlight gradient',
+				'ivory_orange' => 'Ivory section glow — orange',
+				'ivory_blue' => 'Ivory section glow — blue',
+				'ivory_base' => 'Ivory section background',
+			],
+			]
 		);
 
 		return [
@@ -49,7 +73,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_industries' ) ) {
 				[
 					nexora_ph_style_colors_stops_gradient( [
 						'name'     => 'ind_tile',
-						'label'    => 'Tile',
+						'label'    => 'Industry tile background',
 						'group'    => 'fill',
 						'selector' => '{{WRAPPER}} .nexora-ph .ind-tile, {{WRAPPER}} .nexora-ph .ind-grid:hover .ind-tile.on:not(:hover), {{WRAPPER}} .nexora-ph .ind-tile.on, {{WRAPPER}} .nexora-ph .ind-grid:hover .ind-tile:hover',
 						'prefix'   => 'ph-industries-tile',
@@ -76,7 +100,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_industries' ) ) {
 					] ),
 					nexora_ph_style_colors_stops_gradient( [
 						'name'     => 'ind_icon',
-						'label'    => 'Industry icon',
+						'label'    => 'Industry icon tile',
 						'group'    => 'fill',
 						'selector' => '{{WRAPPER}} .nexora-ph .ind-ic, {{WRAPPER}} .nexora-ph .ind-grid:hover .ind-tile.on:not(:hover) .ind-ic',
 						'prefix'   => 'ph-industries-icon',
@@ -89,7 +113,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_industries' ) ) {
 					] ),
 					nexora_ph_style_colors_stops_gradient( [
 						'name'     => 'ind_icon_active',
-						'label'    => 'Active industry icon',
+						'label'    => 'Active industry icon tile',
 						'group'    => 'fill',
 						'selector' => '{{WRAPPER}} .nexora-ph .ind-tile:hover .ind-ic, {{WRAPPER}} .nexora-ph .ind-tile.on .ind-ic, {{WRAPPER}} .nexora-ph .ind-grid:hover .ind-tile:hover .ind-ic',
 						'prefix'   => 'ph-industries-icon-active',
@@ -103,7 +127,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_industries' ) ) {
 					] ),
 					nexora_ph_style_colors_stops_gradient( [
 						'name'     => 'ind_wipe_orange',
-						'label'    => 'Hover wipe — orange glow',
+						'label'    => 'Tile wipe glow — orange (hover)',
 						'group'    => 'fill',
 						'selector' => '{{WRAPPER}} .nexora-ph .ind-tile::before',
 						'prefix'   => 'ph-industries-wipe-orange',
@@ -117,7 +141,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_industries' ) ) {
 					] ),
 					nexora_ph_style_colors_stops_gradient( [
 						'name'     => 'ind_wipe_blue',
-						'label'    => 'Hover wipe — blue glow',
+						'label'    => 'Tile wipe glow — blue (hover)',
 						'group'    => 'fill',
 						'selector' => '{{WRAPPER}} .nexora-ph .ind-tile::before',
 						'prefix'   => 'ph-industries-wipe-blue',
@@ -131,7 +155,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_industries' ) ) {
 					] ),
 					nexora_ph_style_colors_stops_gradient( [
 						'name'     => 'ind_wipe_base',
-						'label'    => 'Hover wipe — base',
+						'label'    => 'Tile wipe (hover)',
 						'group'    => 'fill',
 						'selector' => '{{WRAPPER}} .nexora-ph .ind-tile::before',
 						'prefix'   => 'ph-industries-wipe-base',

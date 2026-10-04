@@ -445,10 +445,10 @@ if ( ! function_exists( 'nexora_ph_style_colors_shared_subset' ) ) {
 	 * @param list<string> $gradient_names  Shared gradient names.
 	 * @return array{solids: list<array<string, mixed>>, gradients: list<array<string, mixed>>}
 	 */
-	function nexora_ph_style_colors_shared_subset( array $solid_tokens, array $gradient_names ): array {
+	function nexora_ph_style_colors_shared_subset( array $solid_tokens, array $gradient_names, array $label_overrides = [] ): array {
 		$catalog = nexora_ph_style_colors_shared_catalog();
 
-		return [
+		$slice = [
 			'solids'    => array_values(
 				array_filter(
 					$catalog['solids'],
@@ -461,6 +461,56 @@ if ( ! function_exists( 'nexora_ph_style_colors_shared_subset' ) ) {
 					static fn( array $gradient ): bool => in_array( $gradient['name'], $gradient_names, true )
 				)
 			),
+		];
+
+		if ( ! $label_overrides ) {
+			return $slice;
+		}
+
+		return nexora_ph_style_colors_apply_labels(
+			$slice,
+			isset( $label_overrides['solids'] ) && is_array( $label_overrides['solids'] ) ? $label_overrides['solids'] : [],
+			isset( $label_overrides['gradients'] ) && is_array( $label_overrides['gradients'] ) ? $label_overrides['gradients'] : []
+		);
+	}
+}
+
+if ( ! function_exists( 'nexora_ph_style_colors_apply_labels' ) ) {
+	/**
+	 * Overlay paint-role labels onto solids (by token) and gradients (by name).
+	 *
+	 * @param array{solids?: list<array<string, mixed>>, gradients?: list<array<string, mixed>>} $slice Inventory slice.
+	 * @param array<string, string>                                                               $solid_labels    token => label.
+	 * @param array<string, string>                                                               $gradient_labels name => label.
+	 * @return array{solids: list<array<string, mixed>>, gradients: list<array<string, mixed>>}
+	 */
+	function nexora_ph_style_colors_apply_labels( array $slice, array $solid_labels = [], array $gradient_labels = [] ): array {
+		$solids = isset( $slice['solids'] ) && is_array( $slice['solids'] ) ? $slice['solids'] : [];
+		$grads  = isset( $slice['gradients'] ) && is_array( $slice['gradients'] ) ? $slice['gradients'] : [];
+
+		foreach ( $solids as $i => $solid ) {
+			if ( ! is_array( $solid ) ) {
+				continue;
+			}
+			$token = isset( $solid['token'] ) ? (string) $solid['token'] : '';
+			if ( '' !== $token && isset( $solid_labels[ $token ] ) ) {
+				$solids[ $i ]['label'] = (string) $solid_labels[ $token ];
+			}
+		}
+
+		foreach ( $grads as $i => $gradient ) {
+			if ( ! is_array( $gradient ) ) {
+				continue;
+			}
+			$name = isset( $gradient['name'] ) ? (string) $gradient['name'] : '';
+			if ( '' !== $name && isset( $gradient_labels[ $name ] ) ) {
+				$grads[ $i ]['label'] = (string) $gradient_labels[ $name ];
+			}
+		}
+
+		return [
+			'solids'    => array_values( $solids ),
+			'gradients' => array_values( $grads ),
 		];
 	}
 }
@@ -476,126 +526,126 @@ if ( ! function_exists( 'nexora_ph_style_colors_shared_catalog' ) ) {
 			'solids'    => [
 				[
 					'token'   => 'ink',
-					'label'   => 'Ink',
+					'label'   => 'Heading / body text',
 					'default' => '#0B1620',
 					'group'   => 'text',
 					'shared'  => true,
 				],
 				[
 					'token'   => 'muted',
-					'label'   => 'Muted text',
+					'label'   => 'Description / captions',
 					'default' => '#56626D',
 					'group'   => 'text',
 					'shared'  => true,
 				],
 				[
 					'token'   => 'lead',
-					'label'   => 'Lead text',
+					'label'   => 'Supporting text',
 					'default' => '#3A4753',
 					'group'   => 'text',
 					'shared'  => true,
 				],
 				[
 					'token'   => 'on-accent',
-					'label'   => 'Text on accent',
+					'label'   => 'Text on buttons / accent fills',
 					'default' => '#FFFFFF',
 					'group'   => 'text',
 					'shared'  => true,
 				],
 				[
 					'token'   => 'on-dark',
-					'label'   => 'Text on dark sections',
+					'label'   => 'Title on dark / card title (hover)',
 					'default' => '#FFFFFF',
 					'group'   => 'text',
 					'shared'  => true,
 				],
 				[
 					'token'   => 'lead-on-dark',
-					'label'   => 'Lead text on dark sections',
+					'label'   => 'Description on dark / card description (hover)',
 					'default' => '#C9D3DC',
 					'group'   => 'text',
 					'shared'  => true,
 				],
 				[
 					'token'   => 'muted-on-dark',
-					'label'   => 'Muted text on dark sections',
+					'label'   => 'Muted text on dark',
 					'default' => '#A9B6C2',
 					'group'   => 'text',
 					'shared'  => true,
 				],
 				[
 					'token'   => 'tag-on-dark',
-					'label'   => 'Tag text on dark sections',
+					'label'   => 'Tag text on dark',
 					'default' => '#FFC2A6',
 					'group'   => 'tag',
 					'shared'  => true,
 				],
 				[
 					'token'   => 'chip-on-dark',
-					'label'   => 'Chip text on dark hover cards',
+					'label'   => 'Chip text (hover)',
 					'default' => '#DCE4EA',
 					'group'   => 'tag',
 					'shared'  => true,
 				],
 				[
 					'token'   => 'more-on-dark',
-					'label'   => 'Learn-more link on dark hover cards',
+					'label'   => 'Learn more link (hover)',
 					'default' => '#FFB08C',
 					'group'   => 'accent',
 					'shared'  => true,
 				],
 				[
 					'token'   => 'accent',
-					'label'   => 'Accent',
+					'label'   => 'Accent / highlight',
 					'default' => '#F15E22',
 					'group'   => 'accent',
 					'shared'  => true,
 				],
 				[
 					'token'   => 'link',
-					'label'   => 'Orange link',
+					'label'   => 'Link / icon stroke',
 					'default' => '#C2410C',
 					'group'   => 'accent',
 					'shared'  => true,
 				],
 				[
 					'token'   => 'link-blue',
-					'label'   => 'Blue link',
+					'label'   => 'Blue link / chip text',
 					'default' => '#1A5A87',
 					'group'   => 'accent',
 					'shared'  => true,
 				],
 				[
 					'token'   => 'blue-accent',
-					'label'   => 'Blue accent',
+					'label'   => 'Blue accent / tag dot',
 					'default' => '#2374AC',
 					'group'   => 'accent',
 					'shared'  => true,
 				],
 				[
 					'token'   => 'grad-warm',
-					'label'   => 'Gradient text — warm orange (20% / 84%)',
+					'label'   => 'Heading gradient — warm stop',
 					'default' => '#FF8A4C',
 					'group'   => 'accent',
 					'shared'  => true,
 				],
 				[
 					'token'   => 'grad-rose',
-					'label'   => 'Gradient text — rose (36% / 68%)',
+					'label'   => 'Heading gradient — rose stop',
 					'default' => '#E0617A',
 					'group'   => 'accent',
 					'shared'  => true,
 				],
 				[
 					'token'   => 'grad-sky',
-					'label'   => 'Gradient text — sky blue (52%)',
+					'label'   => 'Heading gradient — sky stop',
 					'default' => '#2B8AE0',
 					'group'   => 'accent',
 					'shared'  => true,
 				],
 				[
 					'token'   => 'surface',
-					'label'   => 'Surface',
+					'label'   => 'Section / card surface',
 					'default' => '#FFFFFF',
 					'group'   => 'surface',
 					'shared'  => true,
@@ -609,42 +659,42 @@ if ( ! function_exists( 'nexora_ph_style_colors_shared_catalog' ) ) {
 				],
 				[
 					'token'   => 'card-hover-border',
-					'label'   => 'Card hover border',
+					'label'   => 'Card border (hover)',
 					'default' => '#F6C3AA',
 					'group'   => 'surface',
 					'shared'  => true,
 				],
 				[
 					'token'   => 'btn-mid',
-					'label'   => 'Primary button / icon middle stop',
+					'label'   => 'Primary button middle stop',
 					'default' => '#F15E22',
 					'group'   => 'button',
 					'shared'  => true,
 				],
 				[
 					'token'   => 'btn-white-border',
-					'label'   => 'White button border',
+					'label'   => 'Secondary button border',
 					'default' => '#E6DDD3',
 					'group'   => 'button',
 					'shared'  => true,
 				],
 				[
 					'token'   => 'btn-case-surface',
-					'label'   => 'Case button surface',
+					'label'   => 'Case study button surface',
 					'default' => '#FFF4EC',
 					'group'   => 'button',
 					'shared'  => true,
 				],
 				[
 					'token'   => 'tag-border',
-					'label'   => 'Tag border',
+					'label'   => 'Eyebrow tag border',
 					'default' => '#FBD3BF',
 					'group'   => 'tag',
 					'shared'  => true,
 				],
 				[
 					'token'   => 'tag-blue-border',
-					'label'   => 'Blue tag border',
+					'label'   => 'Blue eyebrow tag border',
 					'default' => '#C9E0F1',
 					'group'   => 'tag',
 					'shared'  => true,
@@ -672,21 +722,21 @@ if ( ! function_exists( 'nexora_ph_style_colors_shared_catalog' ) ) {
 				],
 				[
 					'token'   => 'soft-surface',
-					'label'   => 'Soft wash base',
+					'label'   => 'Soft section background',
 					'default' => '#FFF9F5',
 					'group'   => 'fill',
 					'shared'  => true,
 				],
 				[
 					'token'   => 'cool-surface',
-					'label'   => 'Cool wash base',
+					'label'   => 'Cool section background',
 					'default' => '#F7FAFD',
 					'group'   => 'fill',
 					'shared'  => true,
 				],
 				[
 					'token'   => 'ink-surface',
-					'label'   => 'Ink wash base',
+					'label'   => 'Dark section background',
 					'default' => '#0B1620',
 					'group'   => 'fill',
 					'shared'  => true,
@@ -734,7 +784,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_shared_catalog' ) ) {
 				],
 				[
 					'name'           => 'btn_dark_hover',
-					'label'          => 'Dark button hover',
+					'label'          => 'Dark button (hover)',
 					'group'          => 'button',
 					'selector'       => '{{WRAPPER}} .nexora-ph a.btn-dark, {{WRAPPER}} .nexora-ph .btn-dark',
 					'default'        => [
@@ -763,7 +813,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_shared_catalog' ) ) {
 				],
 				[
 					'name'     => 'btn_case',
-					'label'    => 'Case button hover',
+					'label'    => 'Case study button (hover)',
 					'group'    => 'button',
 					'selector' => '{{WRAPPER}} .nexora-ph a.btn-case:hover, {{WRAPPER}} .nexora-ph a.btn-case:focus-visible',
 					'default'  => [
@@ -798,7 +848,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_shared_catalog' ) ) {
 				],
 				[
 					'name'     => 'tag',
-					'label'    => 'Tag',
+					'label'    => 'Eyebrow tag',
 					'group'    => 'tag',
 					'selector' => '{{WRAPPER}} .nexora-ph .tag:not(.blue)',
 					'default'  => [
@@ -819,10 +869,10 @@ if ( ! function_exists( 'nexora_ph_style_colors_shared_catalog' ) ) {
 						]
 					),
 				],
-				nexora_ph_style_colors_linear_gradient( 'tag_blue', 'Blue tag', 'tag', '{{WRAPPER}} .nexora-ph .tag.blue', 'ph-tag-blue', '#F2F8FD', '#E1EEF8', 180 ),
+				nexora_ph_style_colors_linear_gradient( 'tag_blue', 'Blue eyebrow tag', 'tag', '{{WRAPPER}} .nexora-ph .tag.blue', 'ph-tag-blue', '#F2F8FD', '#E1EEF8', 180 ),
 				[
 					'name'     => 'icon',
-					'label'    => 'Accent icon',
+					'label'    => 'Accent icon tile',
 					'group'    => 'fill',
 					'selector' => '{{WRAPPER}} .nexora-ph .icon',
 					'default'  => [
@@ -844,10 +894,10 @@ if ( ! function_exists( 'nexora_ph_style_colors_shared_catalog' ) ) {
 					),
 					'notes'    => 'Three-stop CSS-var bridge keeps --ph-btn-mid (#F15E22) at 60%; the gradient control owns the outer stops.',
 				],
-				nexora_ph_style_colors_linear_gradient( 'icon_o', 'Orange icon', 'fill', '{{WRAPPER}} .nexora-ph', 'ph-icon-o', '#FFF3EC', '#FFE0CF', 145 ),
+				nexora_ph_style_colors_linear_gradient( 'icon_o', 'Orange icon tile', 'fill', '{{WRAPPER}} .nexora-ph', 'ph-icon-o', '#FFF3EC', '#FFE0CF', 145 ),
 				[
 					'name'     => 'icon_b',
-					'label'    => 'Blue icon',
+					'label'    => 'Blue icon tile',
 					'group'    => 'fill',
 					'selector' => '{{WRAPPER}} .nexora-ph',
 					'default'  => [
@@ -870,7 +920,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_shared_catalog' ) ) {
 				],
 				[
 					'name'     => 'card',
-					'label'    => 'Card',
+					'label'    => 'Card background',
 					'group'    => 'fill',
 					'selector' => '{{WRAPPER}} .nexora-ph',
 					'default'  => [
@@ -884,15 +934,15 @@ if ( ! function_exists( 'nexora_ph_style_colors_shared_catalog' ) ) {
 					'fields_options' => nexora_ph_style_colors_bridge( nexora_ph_style_colors_vars( 'ph-card' ) ),
 					'notes'          => 'Vars are set on the widget root so Elementor cannot paint over .card / .hv-card fills.',
 				],
-				nexora_ph_style_colors_radial_gradient( 'soft_orange', 'Soft section wash — orange', 'fill', '{{WRAPPER}} .nexora-ph .soft', 'ph-soft-orange', '760px 420px', '100% 0%', 'rgba(241,94,34,.09)', 'rgba(241,94,34,0)', 62, true ),
-				nexora_ph_style_colors_radial_gradient( 'soft_blue', 'Soft section wash — blue', 'fill', '{{WRAPPER}} .nexora-ph .soft', 'ph-soft-blue', '760px 420px', '0% 100%', 'rgba(35,116,172,.09)', 'rgba(35,116,172,0)', 62, true ),
-				nexora_ph_style_colors_radial_gradient( 'cool_blue', 'Cool section wash — blue', 'fill', '{{WRAPPER}} .nexora-ph .cool', 'ph-cool-blue', '760px 420px', '0% 0%', 'rgba(35,116,172,.08)', 'rgba(35,116,172,0)', 62, true ),
-				nexora_ph_style_colors_radial_gradient( 'cool_orange', 'Cool section wash — orange', 'fill', '{{WRAPPER}} .nexora-ph .cool', 'ph-cool-orange', '760px 420px', '100% 100%', 'rgba(241,94,34,.07)', 'rgba(241,94,34,0)', 62, true ),
-				nexora_ph_style_colors_radial_gradient( 'ink_orange', 'Ink section wash — orange', 'fill', '{{WRAPPER}} .nexora-ph .ink', 'ph-ink-orange', '700px 420px', '90% 0%', 'rgba(241,94,34,.28)', 'rgba(241,94,34,0)', 62, true ),
-				nexora_ph_style_colors_radial_gradient( 'ink_blue', 'Ink section wash — blue', 'fill', '{{WRAPPER}} .nexora-ph .ink', 'ph-ink-blue', '700px 420px', '0% 100%', 'rgba(35,116,172,.36)', 'rgba(35,116,172,0)', 62, true ),
+				nexora_ph_style_colors_radial_gradient( 'soft_orange', 'Soft section glow — orange', 'fill', '{{WRAPPER}} .nexora-ph .soft', 'ph-soft-orange', '760px 420px', '100% 0%', 'rgba(241,94,34,.09)', 'rgba(241,94,34,0)', 62, true ),
+				nexora_ph_style_colors_radial_gradient( 'soft_blue', 'Soft section glow — blue', 'fill', '{{WRAPPER}} .nexora-ph .soft', 'ph-soft-blue', '760px 420px', '0% 100%', 'rgba(35,116,172,.09)', 'rgba(35,116,172,0)', 62, true ),
+				nexora_ph_style_colors_radial_gradient( 'cool_blue', 'Cool section glow — blue', 'fill', '{{WRAPPER}} .nexora-ph .cool', 'ph-cool-blue', '760px 420px', '0% 0%', 'rgba(35,116,172,.08)', 'rgba(35,116,172,0)', 62, true ),
+				nexora_ph_style_colors_radial_gradient( 'cool_orange', 'Cool section glow — orange', 'fill', '{{WRAPPER}} .nexora-ph .cool', 'ph-cool-orange', '760px 420px', '100% 100%', 'rgba(241,94,34,.07)', 'rgba(241,94,34,0)', 62, true ),
+				nexora_ph_style_colors_radial_gradient( 'ink_orange', 'Dark section glow — orange', 'fill', '{{WRAPPER}} .nexora-ph .ink', 'ph-ink-orange', '700px 420px', '90% 0%', 'rgba(241,94,34,.28)', 'rgba(241,94,34,0)', 62, true ),
+				nexora_ph_style_colors_radial_gradient( 'ink_blue', 'Dark section glow — blue', 'fill', '{{WRAPPER}} .nexora-ph .ink', 'ph-ink-blue', '700px 420px', '0% 100%', 'rgba(35,116,172,.36)', 'rgba(35,116,172,0)', 62, true ),
 				[
 					'name'     => 'grad_text',
-					'label'    => 'Gradient text',
+					'label'    => 'Heading highlight gradient',
 					'group'    => 'fill',
 					'selector' => '{{WRAPPER}} .nexora-ph .grad-text',
 					'default'  => [
@@ -916,19 +966,19 @@ if ( ! function_exists( 'nexora_ph_style_colors_shared_catalog' ) ) {
 					),
 					'notes'    => 'Restores the shipped effective look: 90deg, seven stops #F15E22 0%, #FF8A4C 20%, #E0617A 36%, #2B8AE0 52%, #E0617A 68%, #FF8A4C 84%, #F15E22 100%, 200% 100% repeating, shine2 9s. Elementor edits the two outer stops and angle; the fixed mid stops bridge through the shared grad-warm, grad-rose and grad-sky tokens at their original positions.',
 				],
-				nexora_ph_style_colors_radial_gradient( 'mid_orange', 'Mid section wash — orange', 'fill', '{{WRAPPER}} .nexora-ph .mid', 'ph-mid-orange', '700px 420px', '88% 0%', 'rgba(241,94,34,.32)', 'rgba(241,94,34,0)', 60, true ),
-				nexora_ph_style_colors_radial_gradient( 'mid_blue', 'Mid section wash — blue', 'fill', '{{WRAPPER}} .nexora-ph .mid', 'ph-mid-blue', '760px 460px', '0% 100%', 'rgba(35,116,172,.42)', 'rgba(35,116,172,0)', 60, true ),
-				nexora_ph_style_colors_linear_gradient( 'mid_base', 'Mid section base', 'fill', '{{WRAPPER}} .nexora-ph .mid', 'ph-mid-base', '#16283C', '#0B1620', 160, 0, 62 ),
-				nexora_ph_style_colors_radial_gradient( 'ivory_orange', 'Ivory section wash — orange', 'fill', '{{WRAPPER}} .nexora-ph .ivory', 'ph-ivory-orange', '820px 460px', '100% 0%', 'rgba(241,94,34,.10)', 'rgba(241,94,34,0)', 62, true ),
-				nexora_ph_style_colors_radial_gradient( 'ivory_blue', 'Ivory section wash — blue', 'fill', '{{WRAPPER}} .nexora-ph .ivory', 'ph-ivory-blue', '820px 460px', '0% 100%', 'rgba(35,116,172,.10)', 'rgba(35,116,172,0)', 62, true ),
-				nexora_ph_style_colors_linear_gradient( 'ivory_base', 'Ivory section base', 'fill', '{{WRAPPER}} .nexora-ph .ivory', 'ph-ivory-base', '#FFFCF9', '#FFF6F0', 180 ),
-				nexora_ph_style_colors_linear_gradient( 'check', 'Check badge', 'fill', '{{WRAPPER}} .nexora-ph .check', 'ph-check', '#FF8350', '#F15E22', 145 ),
-				nexora_ph_style_colors_radial_gradient( 'hv_orange', 'Hover card dark — orange glow', 'fill', '{{WRAPPER}} .nexora-ph', 'ph-hv-orange', '320px 200px', '100% 0%', 'rgba(241,94,34,.38)', 'rgba(241,94,34,0)', 70, true ),
-				nexora_ph_style_colors_radial_gradient( 'hv_blue', 'Hover card dark — blue glow', 'fill', '{{WRAPPER}} .nexora-ph', 'ph-hv-blue', '320px 220px', '0% 100%', 'rgba(35,116,172,.45)', 'rgba(35,116,172,0)', 70, true ),
-				nexora_ph_style_colors_linear_gradient( 'hv_dark', 'Hover card dark — base', 'fill', '{{WRAPPER}} .nexora-ph', 'ph-hv-dark', '#16283C', '#0B1620', 160, 0, 70 ),
+				nexora_ph_style_colors_radial_gradient( 'mid_orange', 'Mid section glow — orange', 'fill', '{{WRAPPER}} .nexora-ph .mid', 'ph-mid-orange', '700px 420px', '88% 0%', 'rgba(241,94,34,.32)', 'rgba(241,94,34,0)', 60, true ),
+				nexora_ph_style_colors_radial_gradient( 'mid_blue', 'Mid section glow — blue', 'fill', '{{WRAPPER}} .nexora-ph .mid', 'ph-mid-blue', '760px 460px', '0% 100%', 'rgba(35,116,172,.42)', 'rgba(35,116,172,0)', 60, true ),
+				nexora_ph_style_colors_linear_gradient( 'mid_base', 'Mid section background', 'fill', '{{WRAPPER}} .nexora-ph .mid', 'ph-mid-base', '#16283C', '#0B1620', 160, 0, 62 ),
+				nexora_ph_style_colors_radial_gradient( 'ivory_orange', 'Ivory section glow — orange', 'fill', '{{WRAPPER}} .nexora-ph .ivory', 'ph-ivory-orange', '820px 460px', '100% 0%', 'rgba(241,94,34,.10)', 'rgba(241,94,34,0)', 62, true ),
+				nexora_ph_style_colors_radial_gradient( 'ivory_blue', 'Ivory section glow — blue', 'fill', '{{WRAPPER}} .nexora-ph .ivory', 'ph-ivory-blue', '820px 460px', '0% 100%', 'rgba(35,116,172,.10)', 'rgba(35,116,172,0)', 62, true ),
+				nexora_ph_style_colors_linear_gradient( 'ivory_base', 'Ivory section background', 'fill', '{{WRAPPER}} .nexora-ph .ivory', 'ph-ivory-base', '#FFFCF9', '#FFF6F0', 180 ),
+				nexora_ph_style_colors_linear_gradient( 'check', 'Checkmark badge', 'fill', '{{WRAPPER}} .nexora-ph .check', 'ph-check', '#FF8350', '#F15E22', 145 ),
+				nexora_ph_style_colors_radial_gradient( 'hv_orange', 'Card panel glow — orange (hover)', 'fill', '{{WRAPPER}} .nexora-ph', 'ph-hv-orange', '320px 200px', '100% 0%', 'rgba(241,94,34,.38)', 'rgba(241,94,34,0)', 70, true ),
+				nexora_ph_style_colors_radial_gradient( 'hv_blue', 'Card panel glow — blue (hover)', 'fill', '{{WRAPPER}} .nexora-ph', 'ph-hv-blue', '320px 220px', '0% 100%', 'rgba(35,116,172,.45)', 'rgba(35,116,172,0)', 70, true ),
+				nexora_ph_style_colors_linear_gradient( 'hv_dark', 'Card panel (hover)', 'fill', '{{WRAPPER}} .nexora-ph', 'ph-hv-dark', '#16283C', '#0B1620', 160, 0, 70 ),
 				[
 					'name'           => 'hv_icon',
-					'label'          => 'Hover card icon',
+					'label'          => 'Card icon tile (hover)',
 					'group'          => 'fill',
 					'selector'       => '{{WRAPPER}} .nexora-ph',
 					'default'        => [
@@ -962,11 +1012,11 @@ if ( ! function_exists( 'nexora_ph_style_colors_shared_catalog' ) ) {
 					'fields_options' => nexora_ph_style_colors_bridge( nexora_ph_style_colors_vars( 'ph-play' ) ),
 					'notes'          => 'Three-stop CSS-var bridge keeps --ph-btn-mid (#F15E22) at 60%; the gradient control owns the outer stops.',
 				],
-				nexora_ph_style_colors_radial_gradient( 'media_empty_glow', 'Empty video poster — glow', 'fill', '{{WRAPPER}} .nexora-ph .ph-story-poster--empty, {{WRAPPER}} .nexora-ph .ph-video-cover--empty', 'ph-media-empty-glow', '300px 200px', '80% 20%', 'rgba(241,94,34,.35)', 'rgba(241,94,34,0)', 70 ),
-				nexora_ph_style_colors_linear_gradient( 'media_empty_base', 'Empty video poster — base', 'fill', '{{WRAPPER}} .nexora-ph .ph-story-poster--empty, {{WRAPPER}} .nexora-ph .ph-video-cover--empty', 'ph-media-empty-base', '#16283C', '#0B1620', 160 ),
+				nexora_ph_style_colors_radial_gradient( 'media_empty_glow', 'Empty video poster glow', 'fill', '{{WRAPPER}} .nexora-ph .ph-story-poster--empty, {{WRAPPER}} .nexora-ph .ph-video-cover--empty', 'ph-media-empty-glow', '300px 200px', '80% 20%', 'rgba(241,94,34,.35)', 'rgba(241,94,34,0)', 70 ),
+				nexora_ph_style_colors_linear_gradient( 'media_empty_base', 'Empty video poster background', 'fill', '{{WRAPPER}} .nexora-ph .ph-story-poster--empty, {{WRAPPER}} .nexora-ph .ph-video-cover--empty', 'ph-media-empty-base', '#16283C', '#0B1620', 160 ),
 				[
 					'name'           => 'grid_horizontal',
-					'label'          => 'Grid lines — horizontal',
+					'label'          => 'Background grid — horizontal',
 					'group'          => 'fill',
 					'selector'       => '{{WRAPPER}} .nexora-ph .gridlines',
 					'default'        => [
@@ -990,7 +1040,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_shared_catalog' ) ) {
 				],
 				[
 					'name'           => 'grid_vertical',
-					'label'          => 'Grid lines — vertical',
+					'label'          => 'Background grid — vertical',
 					'group'          => 'fill',
 					'selector'       => '{{WRAPPER}} .nexora-ph .gridlines',
 					'default'        => [

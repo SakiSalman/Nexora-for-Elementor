@@ -33,7 +33,25 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_logos' ) ) {
 				'grad-rose',
 				'grad-sky',
 			],
-			[ 'grad_text' ]
+			[ 'grad_text' ],
+			[
+			'solids'    => [
+				'ink' => 'Heading / body text',
+				'muted' => 'Description / captions',
+				'lead' => 'Lead / supporting text',
+				'surface' => 'Section background',
+				'accent' => 'Accent / highlight',
+				'link' => 'Link / icon stroke',
+				'link-blue' => 'Blue link / chip text',
+				'blue-accent' => 'Blue accent / tag dot',
+				'grad-warm' => 'Heading gradient — warm stop',
+				'grad-rose' => 'Heading gradient — rose stop',
+				'grad-sky' => 'Heading gradient — sky stop',
+			],
+			'gradients' => [
+				'grad_text' => 'Heading highlight gradient',
+			],
+			]
 		);
 
 		$avatar_selector = '{{WRAPPER}} .nexora-ph .logo-av-';
@@ -45,7 +63,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_logos' ) ) {
 				[
 					[
 						'token'   => 'pill-mid',
-						'label'   => 'Logo pill middle tint (45%, 74% opacity)',
+						'label'   => 'Logo pill — middle tint',
 						'default' => '#FFF4EC',
 						'group'   => 'fill',
 					],
@@ -72,10 +90,10 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_logos' ) ) {
 						'fields_options' => nexora_ph_style_colors_bridge( nexora_ph_style_colors_vars( 'ph-logos-pill' ) ),
 						'notes'          => 'The Logo pill middle tint solid stays the fixed middle stop (45%, 74% opacity) so the two-stop picker controls the outer colors.',
 					],
-					nexora_ph_style_colors_linear_gradient( 'avatar_1', 'Avatar 1', 'fill', $avatar_selector . '1', 'ph-logos-av1', '#FF9D72', '#F15E22', 135 ),
-					nexora_ph_style_colors_linear_gradient( 'avatar_2', 'Avatar 2', 'fill', $avatar_selector . '2', 'ph-logos-av2', '#7CC2F0', '#2374AC', 135 ),
-					nexora_ph_style_colors_linear_gradient( 'avatar_3', 'Avatar 3', 'fill', $avatar_selector . '3', 'ph-logos-av3', '#DCE4EA', '#8FA0AF', 135 ),
-					nexora_ph_style_colors_linear_gradient( 'avatar_4', 'Avatar 4', 'fill', $avatar_selector . '4', 'ph-logos-av4', '#FFD7C4', '#F5A77E', 135 ),
+					nexora_ph_style_colors_linear_gradient( 'avatar_1', 'Avatar 1 fill', 'fill', $avatar_selector . '1', 'ph-logos-av1', '#FF9D72', '#F15E22', 135 ),
+					nexora_ph_style_colors_linear_gradient( 'avatar_2', 'Avatar 2 fill', 'fill', $avatar_selector . '2', 'ph-logos-av2', '#7CC2F0', '#2374AC', 135 ),
+					nexora_ph_style_colors_linear_gradient( 'avatar_3', 'Avatar 3 fill', 'fill', $avatar_selector . '3', 'ph-logos-av3', '#DCE4EA', '#8FA0AF', 135 ),
+					nexora_ph_style_colors_linear_gradient( 'avatar_4', 'Avatar 4 fill', 'fill', $avatar_selector . '4', 'ph-logos-av4', '#FFD7C4', '#F5A77E', 135 ),
 				]
 			),
 		];

@@ -36,7 +36,31 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_cta' ) ) {
 				'grad-rose',
 				'grad-sky',
 			],
-			[ 'btn_primary', 'grad_text', 'mid_orange', 'mid_blue', 'mid_base' ]
+			[ 'btn_primary', 'grad_text', 'mid_orange', 'mid_blue', 'mid_base' ],
+			[
+			'solids'    => [
+				'ink' => 'Heading / body text',
+				'lead' => 'Supporting sentence',
+				'surface' => 'Section background',
+				'on-accent' => 'Text on buttons / accent fills',
+				'on-dark' => 'Heading on dark band',
+				'lead-on-dark' => 'Supporting text on dark band',
+				'accent' => 'Accent / highlight',
+				'link' => 'Link / icon stroke',
+				'link-blue' => 'Blue link / chip text',
+				'btn-mid' => 'Primary button middle stop',
+				'grad-warm' => 'Heading gradient — warm stop',
+				'grad-rose' => 'Heading gradient — rose stop',
+				'grad-sky' => 'Heading gradient — sky stop',
+			],
+			'gradients' => [
+				'btn_primary' => 'Primary button',
+				'grad_text' => 'Heading highlight gradient',
+				'mid_orange' => 'CTA band glow — orange',
+				'mid_blue' => 'CTA band glow — blue',
+				'mid_base' => 'CTA band background',
+			],
+			]
 		);
 
 		return [
