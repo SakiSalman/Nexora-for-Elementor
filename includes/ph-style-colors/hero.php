@@ -67,10 +67,11 @@ if ( ! function_exists( 'nexora_ph_style_colors_hero_wash_gradient' ) ) {
 
 if ( ! function_exists( 'nexora_ph_style_colors_inventory_hero' ) ) {
 	/**
-	 * Return hero-only colors plus the shared PH entries the hero renders.
+	 * Return hero + logo-strip colors plus the shared PH entries they render.
 	 *
 	 * The hero uses these shared rules: body/link/lead/muted text, the primary
 	 * button, tag, accent and blue icons, gradient text, and the glass surface.
+	 * Logo strip adds pill / avatar fills (merged from the former logos widget).
 	 *
 	 * @return array<string, mixed>
 	 */
@@ -157,6 +158,12 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_hero' ) ) {
 						'default' => '#EDE7E1',
 						'group'   => 'surface',
 					],
+					[
+						'token'   => 'pill-mid',
+						'label'   => 'Logo pill — middle tint',
+						'default' => '#FFF4EC',
+						'group'   => 'fill',
+					],
 				]
 			),
 			'gradients'      => array_merge(
@@ -240,6 +247,28 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_hero' ) ) {
 						),
 						'notes'          => 'The white translucent midpoint (rgba(255,255,255,.82) at 55%) is an excluded glass overlay and stays fixed in CSS.',
 					],
+					[
+						'name'           => 'pill',
+						'label'          => 'Logo pill background',
+						'group'          => 'fill',
+						'selector'       => '{{WRAPPER}} .nexora-ph .logo-pill',
+						'default'        => [
+							'background'     => 'gradient',
+							'color'          => 'rgba(255,255,255,.86)',
+							'color_b'        => 'rgba(232,242,251,.78)',
+							'color_stop'     => [ 'unit' => '%', 'size' => 0 ],
+							'color_b_stop'   => [ 'unit' => '%', 'size' => 100 ],
+							'gradient_type'  => 'linear',
+							'gradient_angle' => [ 'unit' => 'deg', 'size' => 120 ],
+						],
+						'signature'      => 'linear-gradient(var(--ph-hero-pill-angle,120deg),var(--ph-hero-pill,rgba(255,255,255,.86)) var(--ph-hero-pill-start-stop,0%),color-mix(in srgb,var(--ph-hero-pill-mid,#FFF4EC) 74%,transparent) 45%,var(--ph-hero-pill-end,rgba(232,242,251,.78)) var(--ph-hero-pill-end-stop,100%))',
+						'fields_options' => nexora_ph_style_colors_bridge( nexora_ph_style_colors_vars( 'ph-hero-pill' ) ),
+						'notes'          => 'The Logo pill middle tint solid stays the fixed middle stop (45%, 74% opacity).',
+					],
+					nexora_ph_style_colors_linear_gradient( 'avatar_1', 'Avatar 1 fill', 'fill', '{{WRAPPER}} .nexora-ph .logo-av-1', 'ph-hero-av1', '#FF9D72', '#F15E22', 135 ),
+					nexora_ph_style_colors_linear_gradient( 'avatar_2', 'Avatar 2 fill', 'fill', '{{WRAPPER}} .nexora-ph .logo-av-2', 'ph-hero-av2', '#7CC2F0', '#2374AC', 135 ),
+					nexora_ph_style_colors_linear_gradient( 'avatar_3', 'Avatar 3 fill', 'fill', '{{WRAPPER}} .nexora-ph .logo-av-3', 'ph-hero-av3', '#DCE4EA', '#8FA0AF', 135 ),
+					nexora_ph_style_colors_linear_gradient( 'avatar_4', 'Avatar 4 fill', 'fill', '{{WRAPPER}} .nexora-ph .logo-av-4', 'ph-hero-av4', '#FFD7C4', '#F5A77E', 135 ),
 				]
 			),
 		];

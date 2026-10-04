@@ -295,6 +295,17 @@ Labels are the Elementor sidebar names. HTML Tag is the default tag for that hea
 | hero | Title | `hero_f20` | Buying signal | No | Buying signal | — |
 | hero | Text | `hero_f21` | Buying signal | No | Just raised Series A | — |
 | hero | Text | `hero_r1.text` | Labels | Yes (4) | ICP · Signals · Outreach · CRM | — |
+| hero | Accessible label (Clients) | `logos_f3` | Logo strip | No | Clients | — |
+| hero | Accessible label (Rated 5 out of 5) | `logos_f4` | Logo strip | No | Rated 5 out of 5 | — |
+| hero | Highlight | `logos_f5` | Logo strip | No | 200+ | — |
+| hero | Text (startups supported) | `logos_f6` | Logo strip | No | startups supported | — |
+| hero | Text (B2B teams from around the world t...) | `logos_f7` | Logo strip | No | B2B teams from around the world trust us to build their pipeline. | — |
+| hero | Text (Certified partner of) | `logos_f8` | Logo strip | No | Certified partner of | — |
+| hero | Title | `logos_f9` | Logo strip | No | Instantly, HeyReach, GetSales, lemlist & Apollo | — |
+| hero | Image | `logos_r1.image` | Logos | Yes (10) | logoc1.png · logoc2.png · logoc3.png · logoc4.png · logoc5.png · logoc1.png ·... | — |
+| hero | Image alt | `logos_r1.alt` | Logos | Yes (10) | Createful Spaces · Aerodei · Simply Downsized · Earnworthy · Relativity · · ·... | — |
+| hero | Image | `logos_r2.image` | Badges | Yes (5) | badge-instantly.webp · badge-getsales.webp · badge-heyreach.webp · badge-leml... | — |
+| hero | Image alt | `logos_r2.alt` | Badges | Yes (5) | Instantly certified partner · GetSales certified partner · HeyReach certified... | — |
 
 ## impact
 
@@ -342,19 +353,7 @@ Labels are the Elementor sidebar names. HTML Tag is the default tag for that hea
 
 ## logos
 
-| Widget | Content Element | Control | Location | Repeater | Default | HTML Tag |
-| --- | --- | --- | --- | --- | --- | --- |
-| logos | Accessible label (Clients) | `logos_f3` | Header | No | Clients | — |
-| logos | Accessible label (Rated 5 out of 5) | `logos_f4` | Header | No | Rated 5 out of 5 | — |
-| logos | Highlight | `logos_f5` | Header | No | 200+ | — |
-| logos | Text (startups supported) | `logos_f6` | Header | No | startups supported | — |
-| logos | Text (B2B teams from around the world t...) | `logos_f7` | Header | No | B2B teams from around the world trust us to build their pipeline. | — |
-| logos | Text (Certified partner of) | `logos_f8` | Header | No | Certified partner of | — |
-| logos | Title | `logos_f9` | Header | No | Instantly, HeyReach, GetSales, lemlist & Apollo | — |
-| logos | Image | `logos_r1.image` | Logos | Yes (10) | logoc1.png · logoc2.png · logoc3.png · logoc4.png · logoc5.png · logoc1.png ·... | — |
-| logos | Image alt | `logos_r1.alt` | Logos | Yes (10) | Createful Spaces · Aerodei · Simply Downsized · Earnworthy · Relativity · · ·... | — |
-| logos | Image | `logos_r2.image` | Badges | Yes (5) | badge-instantly.webp · badge-getsales.webp · badge-heyreach.webp · badge-leml... | — |
-| logos | Image alt | `logos_r2.alt` | Badges | Yes (5) | Instantly certified partner · GetSales certified partner · HeyReach certified... | — |
+> **Merged into PH Hero (2026-10-05).** The `ele-ph-logos` widget was hard-removed. Logo strip controls (`logos_*`) now live on the hero widget — see `## hero` above. Remove any leftover Logo Strip instances from Elementor pages.
 
 ## nav
 

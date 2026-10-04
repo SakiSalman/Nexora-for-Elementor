@@ -34,7 +34,6 @@ const PH_SC_SLUGS = [
 	'impact',
 	'industries',
 	'insights',
-	'logos',
 	'nav',
 	'partners',
 	'pricing',

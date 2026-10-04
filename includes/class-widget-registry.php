@@ -146,7 +146,7 @@ if ( ! class_exists( 'Nexora_Ele_Widget_Registry', false ) ) {
 				'ele-ph-hero' => [
 					'id'              => 'ele-ph-hero',
 					'title'           => __( 'PH Hero', 'nexora-elementor' ),
-					'description'     => __( 'Prospects Hive hero with rating and robot artwork.', 'nexora-elementor' ),
+					'description'     => __( 'Prospects Hive hero with rating, artwork, and logo strip.', 'nexora-elementor' ),
 					'file'            => 'widgets/class-ele-ph-hero.php',
 					'class'           => 'Nexora_PH_Hero_Widget',
 					'default_enabled' => true,
@@ -167,36 +167,6 @@ if ( ! class_exists( 'Nexora_Ele_Widget_Registry', false ) ) {
 					[
 						'handle' => 'nexora-ph-hero',
 						'src'    => 'assets/css/nexora-ph-hero.css',
-						'deps'   => [ 'nexora-ph-shared' ],
-						'ver'    => true,
-					],
-					],
-					'scripts'         => [],
-				],
-				'ele-ph-logos' => [
-					'id'              => 'ele-ph-logos',
-					'title'           => __( 'PH Logo Strip', 'nexora-elementor' ),
-					'description'     => __( 'Prospects Hive logo marquee.', 'nexora-elementor' ),
-					'file'            => 'widgets/class-ele-ph-logos.php',
-					'class'           => 'Nexora_PH_Logos_Widget',
-					'default_enabled' => true,
-					'styles'          => [
-					[
-						'handle'   => 'nexora-ph-fonts',
-						'src'      => 'https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
-						'deps'     => [],
-						'ver'      => null,
-						'external' => true,
-					],
-					[
-						'handle' => 'nexora-ph-shared',
-						'src'    => 'assets/css/nexora-ph-shared.css',
-						'deps'   => [ 'nexora-ph-fonts' ],
-						'ver'    => true,
-					],
-					[
-						'handle' => 'nexora-ph-logos',
-						'src'    => 'assets/css/nexora-ph-logos.css',
 						'deps'   => [ 'nexora-ph-shared' ],
 						'ver'    => true,
 					],

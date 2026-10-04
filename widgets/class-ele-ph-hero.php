@@ -1,6 +1,6 @@
 <?php
 /**
- * PH Hero widget.
+ * PH Hero widget (hero + logo strip).
  *
  * Markup, CSS, and behavior are copied from the Prospects Hive design export.
  */
@@ -51,7 +51,7 @@ if ( ! class_exists( 'Nexora_PH_Hero_Widget', false ) ) {
 		 * Widget keywords.
 		 */
 		public function get_keywords(): array {
-			return [ 'nexora', 'prospects', 'hero' ];
+			return [ 'nexora', 'prospects', 'hero', 'logos', 'logo strip' ];
 		}
 
 		/**
