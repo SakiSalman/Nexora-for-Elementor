@@ -128,8 +128,8 @@ if ( ! function_exists( 'nexora_ph_stories_player_html' ) ) {
 			$surface .= '<div class="ph-story-poster ph-story-poster--empty" aria-hidden="true"></div>';
 		}
 
-		$icon = '<svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="#0B1620"></path></svg>';
-		$btn  = '<button type="button" class="pulse sheen ph-story-play" aria-label="' . esc_attr( $label ) . '" style="position: absolute; left: 50%; top: 50%; margin: -42px 0 0 -42px; width: 84px; height: 84px; border-radius: 50%; border: none; cursor: pointer; background: linear-gradient(145deg, #FF8A4C, #F15E22 60%, #D9480F); box-shadow: inset 0 2px 0 rgba(255,255,255,.5); display: flex; align-items: center; justify-content: center">' . $icon . '</button>';
+		$icon = '<svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="var(--ph-ink, #0B1620)"></path></svg>';
+		$btn  = '<button type="button" class="pulse sheen ph-play ph-story-play" aria-label="' . esc_attr( $label ) . '" style="position: absolute; left: 50%; top: 50%; margin: -42px 0 0 -42px; width: 84px; height: 84px; border-radius: 50%; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center">' . $icon . '</button>';
 
 		return '<div class="ph-story-player" data-ph-video data-source="' . esc_attr( $source ) . '" data-src="' . esc_attr( $src ) . '"'
 			. ( '' !== $poster ? ' data-poster="' . esc_attr( $poster ) . '"' : '' )

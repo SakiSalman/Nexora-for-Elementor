@@ -119,7 +119,7 @@ if ( ! function_exists( 'nexora_ph_nav_html' ) ) {
 			$panel   = 'nav-panel-' . $index;
 			$current = ! empty( $group['current'] );
 			$mark    = $current ? ' on' : '';
-			$style   = $current ? ' style="color: #0B1620; font-weight: 600"' : '';
+			$style   = $current ? ' style="color: var(--ph-ink, #0B1620); font-weight: 600"' : '';
 			if ( 'link' === $group['type'] ) {
 				$desktop .= '<a class="navlink' . $mark . '" data-nav-link' . nexora_ph_nav_attr_url( $group['url'] ) . $style . '>' . $label . '</a>';
 				$phone   .= '<a class="m-link' . $mark . '" data-nav-link' . nexora_ph_nav_attr_url( $group['url'] ) . $style . '>' . $label . ' <span aria-hidden="true">→</span></a>';
@@ -233,7 +233,7 @@ if ( ! function_exists( 'nexora_ph_nav_phone_sub' ) ) {
 				$html .= '<span class="mm-label">' . nexora_ph_nav_h( $group['others_label'] ) . '</span>';
 			}
 			foreach ( $group['others'] as $other ) {
-				$html .= '<a data-nav-link' . nexora_ph_nav_attr_url( $other['url'] ) . '><span class="mm-oic" style="background: linear-gradient(145deg, #F0F7FC, #D8EAF6)">' . $other['icon'] . '</span>' . nexora_ph_nav_h( $other['label'] ) . '</a>';
+				$html .= '<a data-nav-link' . nexora_ph_nav_attr_url( $other['url'] ) . '><span class="mm-oic">' . $other['icon'] . '</span>' . nexora_ph_nav_h( $other['label'] ) . '</a>';
 			}
 		}
 		return $html;

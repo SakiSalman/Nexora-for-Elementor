@@ -1,3 +1,4 @@
 /* Prospects Hive expertise styles. Selectors and declarations copied from the design export. */
 .span2{grid-column:span 2}
+.exp-list{background:linear-gradient(var(--ph-expertise-list-angle,160deg),var(--ph-expertise-list,#FFF6F0) var(--ph-expertise-list-start-stop,0%),var(--ph-expertise-list-end,#FFFFFF) var(--ph-expertise-list-end-stop,100%));border:1px solid var(--ph-expertise-list-border,#F6E1D5)}
 @media (max-width:760px){.span2{grid-column:auto}}

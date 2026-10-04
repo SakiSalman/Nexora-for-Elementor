@@ -1,11 +1,12 @@
 /* Prospects Hive cases styles. Selectors and declarations copied from the design export. */
-.arrowbtn{width:52px;height:52px;border-radius:50%;border:1.5px solid #E6DDD3;background:#FFFFFF;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;color:#0B1620;transition:all .2s}
-.arrowbtn:hover{background:#0B1620;color:#FFFFFF;border-color:#0B1620}
-.dot{width:10px;height:10px;border-radius:50%;border:none;padding:0;background:#E2D8CD;cursor:pointer;transition:all .2s}
-.dot.on{width:28px;border-radius:6px;background:linear-gradient(90deg,#F15E22,#FF9D72)}
-.btn-case{background:#FFF4EC;color:#C2410C;border:1.5px solid #F15E22;box-shadow:inset 0 1px 0 #FFFFFF,0 10px 22px -14px rgba(241,94,34,.55)}
-.btn-case:hover{background:linear-gradient(180deg,#FF8350 0%,#F15E22 55%,#DC5016 100%);color:#0B1620;border-color:#E2561B;transform:translateY(-2px);box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 16px 30px -12px rgba(241,94,34,.65)}
+.arrowbtn{width:52px;height:52px;border-radius:50%;border:1.5px solid var(--ph-cases-arrow-border,#E6DDD3);background:var(--ph-surface,#FFFFFF);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--ph-ink,#0B1620);transition:all .2s}
+.arrowbtn:hover{background:var(--ph-ink,#0B1620);color:var(--ph-on-dark,#FFFFFF);border-color:var(--ph-ink,#0B1620)}
+.dot{width:10px;height:10px;border-radius:50%;border:none;padding:0;background:var(--ph-cases-dot,#E2D8CD);cursor:pointer;transition:all .2s}
+.dot.on{width:28px;border-radius:6px;background:linear-gradient(var(--ph-cases-dot-on-angle,90deg),var(--ph-cases-dot-on,#F15E22) var(--ph-cases-dot-on-start-stop,0%),var(--ph-cases-dot-on-end,#FF9D72) var(--ph-cases-dot-on-end-stop,100%))}
+/* Background, text and border colors for .btn-case come from the shared !important rules. */
+.btn-case{box-shadow:inset 0 1px 0 var(--ph-surface,#FFFFFF),0 10px 22px -14px color-mix(in srgb,var(--ph-accent,#F15E22) 55%,transparent)}
+.btn-case:hover{transform:translateY(-2px);box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 16px 30px -12px color-mix(in srgb,var(--ph-accent,#F15E22) 65%,transparent)}
 .btn-case svg{transition:transform .25s ease}
 .btn-case:hover svg{transform:translate(3px,-3px)}
-.btn-case:hover{color:#FFFFFF !important}
-.btn-case:hover svg{color:#FFFFFF}
+.btn-case:hover{color:var(--ph-on-accent,#FFFFFF) !important}
+.btn-case:hover svg{color:var(--ph-on-accent,#FFFFFF)}

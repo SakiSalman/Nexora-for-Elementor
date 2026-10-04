@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Nexora for Elementor
  * Description:       Modern Elementor widgets for building high-converting websites.
- * Version:           1.2.7
+ * Version:           1.2.8
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            wpsaki
@@ -25,6 +25,7 @@ require_once NEXORA_ELE_PATH . 'includes/class-widget-registry.php';
 require_once NEXORA_ELE_PATH . 'includes/class-settings.php';
 require_once NEXORA_ELE_PATH . 'includes/class-admin-settings.php';
 require_once NEXORA_ELE_PATH . 'includes/class-nav-menu.php';
+require_once NEXORA_ELE_PATH . 'includes/ph-style-colors.php';
 
 /**
  * Main Nexora Plugin Class
@@ -34,7 +35,7 @@ final class Nexora_For_Elementor {
 	/**
 	 * Plugin version.
 	 */
-	const VERSION = '1.2.7';
+	const VERSION = '1.2.8';
 
 	/**
 	 * Constructor.

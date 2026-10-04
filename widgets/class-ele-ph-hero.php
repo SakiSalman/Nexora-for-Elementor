@@ -90,6 +90,10 @@ if ( ! class_exists( 'Nexora_PH_Hero_Widget', false ) ) {
 			if ( function_exists( 'nexora_ph_hero_register_content_controls' ) ) {
 				nexora_ph_hero_register_content_controls( $this );
 			}
+
+			if ( function_exists( 'nexora_ph_register_style_colors' ) ) {
+				nexora_ph_register_style_colors( $this, 'hero' );
+			}
 		}
 
 		/**

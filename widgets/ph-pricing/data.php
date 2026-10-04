@@ -287,8 +287,8 @@ if ( ! function_exists( 'nexora_ph_pricing_outcomes' ) ) {
 	 * @return array<int, array<string, string>>
 	 */
 	function nexora_ph_pricing_outcomes( $text ): array {
-		$warm = 'border-radius: 14px; padding: 13px 15px; border: 1px solid #F6D7C7; background: #FFFAF7';
-		$cool = 'border-radius: 14px; padding: 13px 15px; border: 1px solid #D6E7F4; background: #F7FBFE';
+		$warm = 'border-radius: 14px; padding: 13px 15px; border: 1px solid var(--ph-pricing-outcome-warm-border, #F6D7C7); background: var(--ph-pricing-outcome-warm-bg, #FFFAF7)';
+		$cool = 'border-radius: 14px; padding: 13px 15px; border: 1px solid var(--ph-pricing-outcome-cool-border, #D6E7F4); background: var(--ph-pricing-outcome-cool-bg, #F7FBFE)';
 		$rows = [];
 		foreach ( nexora_ph_pricing_lines( $text ) as $index => $line ) {
 			$parts = explode( '|', $line, 2 );
@@ -310,14 +310,24 @@ if ( ! function_exists( 'nexora_ph_pricing_months' ) ) {
 	 * @return array<int, array<string, mixed>>
 	 */
 	function nexora_ph_pricing_months( $item ): array {
-		$cards  = [
-			'border: 1px solid #EFE7DE; border-radius: 18px; padding: 22px; display: flex; flex-direction: column; gap: 10px; background: linear-gradient(180deg, #FFF4ED, #FFFFFF 45%)',
-			'border: 1px solid #EFE7DE; border-radius: 18px; padding: 22px; display: flex; flex-direction: column; gap: 10px; background: linear-gradient(180deg, #EEF5FB, #FFFFFF 45%)',
-			'border: 1px solid #EFE7DE; border-radius: 18px; padding: 22px; display: flex; flex-direction: column; gap: 10px; background: linear-gradient(180deg, #F2F4F6, #FFFFFF 45%)',
+		$card_style = 'border: 1px solid var(--ph-card-border, #EFE7DE); border-radius: 18px; padding: 22px; display: flex; flex-direction: column; gap: 10px';
+		$cards      = [
+			[
+				'class' => 'pr-month pr-month-1',
+				'style' => $card_style,
+			],
+			[
+				'class' => 'pr-month pr-month-2',
+				'style' => $card_style,
+			],
+			[
+				'class' => 'pr-month pr-month-3',
+				'style' => $card_style,
+			],
 		];
 		$labels = [
-			"font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; color: #C2410C",
-			"font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; color: #1A5A87",
+			"font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; color: var(--ph-link, #C2410C)",
+			"font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; color: var(--ph-link-blue, #1A5A87)",
 			"font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600",
 		];
 		$months = [];
@@ -328,7 +338,8 @@ if ( ! function_exists( 'nexora_ph_pricing_months' ) ) {
 				'title'      => nexora_ph_pricing_item_text( $item, 'plan_m' . $number . '_title' ),
 				'tasks'      => nexora_ph_pricing_lines( nexora_ph_pricing_item_text( $item, 'plan_m' . $number . '_tasks' ) ),
 				'output'     => nexora_ph_pricing_item_text( $item, 'plan_m' . $number . '_output' ),
-				'cardStyle'  => $cards[ $index ],
+				'cardClass'  => $cards[ $index ]['class'],
+				'cardStyle'  => $cards[ $index ]['style'],
 				'labelStyle' => $labels[ $index ],
 			];
 		}
@@ -368,7 +379,7 @@ if ( ! function_exists( 'nexora_ph_pricing_plan_payload' ) ) {
 		$upfront  = nexora_ph_pricing_item_text( $item, 'plan_upfront' );
 		$savings  = nexora_ph_pricing_item_text( $item, 'plan_savings' );
 		$style    = nexora_ph_pricing_item_text( $item, 'plan_badge_style' );
-		$highlight = 'background: linear-gradient(145deg, #FF8A4C, #F15E22); color: #FFFFFF; white-space: nowrap';
+		$is_highlight = 'highlight' === $style;
 
 		if ( 'custom' === $template ) {
 			$button = $custom;
@@ -380,7 +391,8 @@ if ( ! function_exists( 'nexora_ph_pricing_plan_payload' ) ) {
 			'isStandard'         => 'standard' === $template,
 			'isCustom'           => 'custom' === $template,
 			'badge'              => nexora_ph_pricing_item_text( $item, 'plan_badge' ),
-			'badgeStyle'         => 'highlight' === $style ? $highlight : false,
+			'badgeClass'         => $is_highlight ? 'chip o pr-badge-highlight' : 'chip o',
+			'badgeStyle'         => $is_highlight ? 'white-space: nowrap' : false,
 			'description'        => nexora_ph_pricing_item_text( $item, 'plan_description' ),
 			'price'              => nexora_ph_pricing_item_text( $item, 'plan_price' ),
 			'period'             => nexora_ph_pricing_item_text( $item, 'plan_period' ),

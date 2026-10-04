@@ -1,8 +1,8 @@
 /* Prospects Hive insights styles. Selectors and declarations copied from the design export. */
-.ins-img{aspect-ratio:5/3;overflow:hidden;background:#0B1620}
+.ins-img{aspect-ratio:5/3;overflow:hidden;background:var(--ph-ink,#0B1620)}
 .ins-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
 .ins-card:hover .ins-img img{transform:scale(1.05)}
 .ins-card h3{transition:color .3s ease}
-.ins-card:hover h3{color:#C2410C}
+.ins-card:hover h3{color:var(--ph-link,#C2410C)}
 .ins-cta{justify-content:flex-end}
 @media (max-width:760px){.ins-cta{justify-content:flex-start}}

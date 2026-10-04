@@ -1,4 +1,5 @@
 /* Prospects Hive partners styles. Selectors and declarations copied from the design export. */
+.partners-band{background:linear-gradient(var(--ph-partners-band-angle,120deg),var(--ph-partners-band,#FFF6F0) var(--ph-partners-band-start-stop,0%),var(--ph-partners-band-mid,#FFFBF8) 45%,var(--ph-partners-band-end,#F3F7FC) var(--ph-partners-band-end-stop,100%));border-top:1px solid var(--ph-partners-band-border-top,#F0E8DF);border-bottom:1px solid var(--ph-partners-band-border-bottom,#E6EEF5)}
 .g5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}
 @media (max-width:1024px){.g5{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:760px){.g5{grid-template-columns:1fr}

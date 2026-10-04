@@ -89,13 +89,13 @@ if ( ! function_exists( 'nexora_ph_video_player_html' ) ) {
 			$surface = '<div class="ph-video-cover ph-video-cover--empty" aria-hidden="true"></div>';
 		}
 
-		$icon = '<svg width="32" height="32" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="#FFFFFF"></path></svg>';
+		$icon = '<svg width="32" height="32" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="var(--ph-on-accent, #FFFFFF)"></path></svg>';
 
 		return '<div class="ph-video-player" data-ph-video data-source="' . esc_attr( $source ) . '" data-src="' . esc_attr( $src ) . '"'
 			. ( '' !== $poster ? ' data-poster="' . esc_attr( $poster ) . '"' : '' )
 			. '>'
 			. '<div class="ph-video-surface">' . $surface . '</div>'
-			. '<button type="button" class="pulse sheen ph-video-play" aria-label="' . esc_attr( $label ) . '">' . $icon . '</button>'
+			. '<button type="button" class="pulse sheen ph-play ph-video-play" aria-label="' . esc_attr( $label ) . '">' . $icon . '</button>'
 			. '</div>';
 	}
 }

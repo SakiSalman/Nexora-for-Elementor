@@ -1,1 +1,2 @@
 /* Prospects Hive cta styles. Selectors and declarations copied from the design export. */
+.cta-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(ellipse at 50% 20%,#000 15%,transparent 65%);mask-image:radial-gradient(ellipse at 50% 20%,#000 15%,transparent 65%);pointer-events:none}

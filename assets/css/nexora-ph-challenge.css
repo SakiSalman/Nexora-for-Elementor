@@ -8,14 +8,14 @@
 	display:block
 }
 .nexora-ph-challenge .icon-o i{
-	color:#C2410C
+	color:var(--ph-link,#C2410C)
 }
 .nexora-ph-challenge .hv-grid:not(:hover) .hv-card.hv-on .icon-o i,
 .nexora-ph-challenge .hv-grid .hv-card:hover .icon-o i{
-	color:#FFFFFF !important
+	color:var(--ph-on-accent,#FFFFFF) !important
 }
 .nexora-ph-challenge .hv-grid:not(:hover) .hv-card.hv-on .icon-o svg,
 .nexora-ph-challenge .hv-grid .hv-card:hover .icon-o svg{
-	color:#FFFFFF !important;
+	color:var(--ph-on-accent,#FFFFFF) !important;
 	fill:currentColor
 }

@@ -1,5 +1,5 @@
 /* Prospects Hive approach styles. Selectors and declarations copied from the design export. */
-.cross{flex-shrink:0;width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:#EEF1F4;color:#6B7680;font-size:12px;font-weight:700}
+.cross{flex-shrink:0;width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:var(--ph-approach-cross-bg,#EEF1F4);color:var(--ph-approach-cross-text,#6B7680);font-size:12px;font-weight:700}
 .nexora-ph-approach .check i,
 .nexora-ph-approach .check svg,
 .nexora-ph-approach .cross i,
@@ -12,7 +12,7 @@
 }
 .nexora-ph-approach .check i,
 .nexora-ph-approach .check svg{
-	color:#FFFFFF;
+	color:var(--ph-on-accent,#FFFFFF);
 	stroke:currentColor;
 	fill:currentColor
 }

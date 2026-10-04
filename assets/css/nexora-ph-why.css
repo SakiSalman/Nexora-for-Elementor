@@ -1,6 +1,6 @@
 /* Prospects Hive why styles. Selectors and declarations copied from the design export. */
-.icon-top{position:absolute;top:-26px;left:24px;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#FFFFFF,#FFF1E9);border:1.5px solid #F7C9B3;box-shadow:0 10px 24px -12px rgba(241,94,34,.6)}
-.hv-grid:not(:hover) .hv-card.hv-on .icon-top,.hv-grid .hv-card:hover .icon-top{box-shadow:0 0 0 6px rgba(255,255,255,.12),0 14px 28px -12px rgba(241,94,34,.8)}
+.icon-top{position:absolute;top:-26px;left:24px;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(var(--ph-why-icon-top-angle,145deg),var(--ph-why-icon-top,#FFFFFF) var(--ph-why-icon-top-start-stop,0%),var(--ph-why-icon-top-end,#FFF1E9) var(--ph-why-icon-top-end-stop,100%));border:1.5px solid var(--ph-why-icon-top-border,#F7C9B3);box-shadow:0 10px 24px -12px color-mix(in srgb,var(--ph-accent,#F15E22) 60%,transparent)}
+.hv-grid:not(:hover) .hv-card.hv-on .icon-top,.hv-grid .hv-card:hover .icon-top{box-shadow:0 0 0 6px rgba(255,255,255,.12),0 14px 28px -12px color-mix(in srgb,var(--ph-accent,#F15E22) 80%,transparent)}
 .nexora-ph-why .icon-top i,
 .nexora-ph-why .icon-top svg{
 	width:22px;
@@ -9,15 +9,15 @@
 	line-height:1;
 	display:block
 }
-.nexora-ph-why .icon-top i{color:#C2410C}
+.nexora-ph-why .icon-top i{color:var(--ph-link,#C2410C)}
 .nexora-ph-why .hv-grid:not(:hover) .hv-card.hv-on .icon-top i,
 .nexora-ph-why .hv-grid .hv-card:hover .icon-top i{
-	color:#FFFFFF !important
+	color:var(--ph-on-dark,#FFFFFF) !important
 }
 .nexora-ph-why .hv-grid:not(:hover) .hv-card.hv-on .icon-top svg,
 .nexora-ph-why .hv-grid .hv-card:hover .icon-top svg{
-	color:#FFFFFF !important;
-	stroke:#FFFFFF
+	color:var(--ph-on-dark,#FFFFFF) !important;
+	stroke:var(--ph-on-dark,#FFFFFF)
 }
 .nexora-ph-why .hv-grid:not(:hover) .hv-card.hv-on .icon-top svg:not([fill="none"]),
 .nexora-ph-why .hv-grid .hv-card:hover .icon-top svg:not([fill="none"]){
