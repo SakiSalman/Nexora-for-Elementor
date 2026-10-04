@@ -125,14 +125,15 @@
 		var ts = root.querySelector('.ts');
 		if (ts) {
 			var track = ts.querySelector('.ts-track');
+			var slides = Array.prototype.slice.call(ts.querySelectorAll('.ts-slide'));
 			var dots = Array.prototype.slice.call(ts.querySelectorAll('.ts-dot'));
-			var n = dots.length;
+			var n = Math.max(slides.length, dots.length);
 			var i = 0;
 			var timer = 0;
 			function go(k) {
 				if (!track || !n) return;
-				i = (k + n) % n;
-				track.style.transform = 'translateX(' + (-100 * i) + '%)';
+				i = ((k % n) + n) % n;
+				track.style.transform = 'translate3d(' + (-100 * i) + '%,0,0)';
 				dots.forEach(function (d, j) { d.classList.toggle('on', j === i); });
 			}
 			function reset() {
@@ -140,14 +141,30 @@
 				timer = setInterval(function () { go(i + 1); }, 6000);
 			}
 			if (n) {
+				go(0);
 				reset();
 				ts.addEventListener('click', function (e) {
-					var b = e.target.closest('button');
-					if (!b) return;
-					if (b.dataset.ts === 'prev') go(i - 1);
-					else if (b.dataset.ts === 'next') go(i + 1);
-					else if (b.dataset.tsI != null) go(+b.dataset.tsI);
-					reset();
+					var b = e.target && e.target.closest ? e.target.closest('button') : null;
+					if (!b || !ts.contains(b)) return;
+					var dir = b.getAttribute('data-ts');
+					var idx = b.getAttribute('data-ts-i');
+					if (dir === 'prev') {
+						e.preventDefault();
+						go(i - 1);
+						reset();
+						return;
+					}
+					if (dir === 'next') {
+						e.preventDefault();
+						go(i + 1);
+						reset();
+						return;
+					}
+					if (idx != null && idx !== '') {
+						e.preventDefault();
+						go(+idx);
+						reset();
+					}
 				}, signal ? { signal: signal } : false);
 				ts.addEventListener('mouseenter', function () { clearInterval(timer); }, signal ? { signal: signal } : false);
 				ts.addEventListener('mouseleave', reset, signal ? { signal: signal } : false);

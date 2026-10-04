@@ -124,7 +124,7 @@ if ( ! function_exists( 'nexora_ph_insights_cards_html' ) ) {
 				. '<div style="padding: 26px 26px 28px; display: flex; flex-direction: column; gap: 12px; flex-grow: 1">'
 				. $meta
 				. '<h3 class="ins-title">' . esc_html( $title ) . '</h3>'
-				. '<p class="muted" style="font-size: 15.5px; line-height: 1.65">' . esc_html( $excerpt ) . '</p>'
+				. '<p class="muted ins-excerpt">' . esc_html( $excerpt ) . '</p>'
 				. '<a class="more" href="' . esc_url( $url ) . '" style="margin-top: auto; color: var(--ph-link, #C2410C)">'
 				. esc_html__( 'Read article', 'nexora-elementor' )
 				. ' <span aria-hidden="true">→</span></a>'
