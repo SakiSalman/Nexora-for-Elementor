@@ -75,10 +75,10 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_stories' ) ) {
 			'gradients'      => array_merge(
 				$shared['gradients'],
 				[
-					nexora_ph_style_colors_linear_gradient( 'arrow_hover', 'Arrow button hover', 'button', '{{WRAPPER}} .nexora-ph .ts-arrow:hover', 'ph-stories-arrow-hover', '#FF8350', '#F15E22', 145 ),
-					nexora_ph_style_colors_linear_gradient( 'dot_on', 'Active slide dot', 'button', '{{WRAPPER}} .nexora-ph .ts-dot.on', 'ph-stories-dot-on', '#FF8A4C', '#F15E22', 90 ),
-					nexora_ph_style_colors_linear_gradient( 'tq_warm', 'Warm quote card', 'fill', '{{WRAPPER}} .nexora-ph .tq-o', 'ph-stories-tq-warm', '#FFE3D4', '#FFF6F0', 160, 0, 60 ),
-					nexora_ph_style_colors_linear_gradient( 'tq_cool', 'Cool quote card', 'fill', '{{WRAPPER}} .nexora-ph .tq-b', 'ph-stories-tq-cool', '#DCEBF6', '#F5F9FC', 160, 0, 60 ),
+					nexora_ph_style_colors_linear_gradient( 'arrow_hover', 'Arrow button hover', 'button', '{{WRAPPER}} .nexora-ph', 'ph-stories-arrow-hover', '#FF8350', '#F15E22', 145 ),
+					nexora_ph_style_colors_linear_gradient( 'dot_on', 'Active slide dot', 'button', '{{WRAPPER}} .nexora-ph', 'ph-stories-dot-on', '#FF8A4C', '#F15E22', 90 ),
+					nexora_ph_style_colors_linear_gradient( 'tq_warm', 'Warm quote card', 'fill', '{{WRAPPER}} .nexora-ph', 'ph-stories-tq-warm', '#FFE3D4', '#FFF6F0', 160, 0, 60 ),
+					nexora_ph_style_colors_linear_gradient( 'tq_cool', 'Cool quote card', 'fill', '{{WRAPPER}} .nexora-ph', 'ph-stories-tq-cool', '#DCEBF6', '#F5F9FC', 160, 0, 60 ),
 				]
 			),
 		];

@@ -286,8 +286,20 @@ if ( ! function_exists( 'nexora_ph_style_colors_radial_gradient' ) ) {
 		string $origin,
 		string $start,
 		string $end,
-		int $end_stop
+		int $end_stop,
+		bool $lock_origin = false
 	): array {
+		$vars    = nexora_ph_style_colors_vars( $prefix, 'radial' );
+		$options = [];
+		if ( $lock_origin ) {
+			unset( $vars['gradient_position'] );
+			$options['hidden'] = [ 'gradient_position' ];
+			$at                = $origin;
+		} else {
+			$options['position_options'] = nexora_ph_style_colors_position_options( $origin );
+			$at                          = sprintf( 'var(--%s-position,%s)', $prefix, $origin );
+		}
+
 		return [
 			'name'           => $name,
 			'label'          => $label,
@@ -303,20 +315,18 @@ if ( ! function_exists( 'nexora_ph_style_colors_radial_gradient' ) ) {
 				'gradient_position' => $origin,
 			],
 			'signature'      => sprintf(
-				'radial-gradient(%1$s at var(--%2$s-position,%3$s),var(--%2$s,%4$s) var(--%2$s-start-stop,0%%),var(--%2$s-end,%5$s) var(--%2$s-end-stop,%6$d%%))',
+				'radial-gradient(%1$s at %2$s,var(--%3$s,%4$s) var(--%3$s-start-stop,0%%),var(--%3$s-end,%5$s) var(--%3$s-end-stop,%6$d%%))',
 				$size,
+				$at,
 				$prefix,
-				$origin,
 				$start,
 				$end,
 				$end_stop
 			),
-			'fields_options' => nexora_ph_style_colors_bridge(
-				nexora_ph_style_colors_vars( $prefix, 'radial' ),
-				'radial',
-				[ 'position_options' => nexora_ph_style_colors_position_options( $origin ) ]
-			),
-		];
+			'fields_options' => nexora_ph_style_colors_bridge( $vars, 'radial', $options ),
+		] + ( $lock_origin
+			? [ 'notes' => 'Radial origin stays fixed in CSS so Elementor cannot replace the design position with center center.' ]
+			: [] );
 	}
 }
 
@@ -834,12 +844,12 @@ if ( ! function_exists( 'nexora_ph_style_colors_shared_catalog' ) ) {
 					),
 					'notes'    => 'Three-stop CSS-var bridge keeps --ph-btn-mid (#F15E22) at 60%; the gradient control owns the outer stops.',
 				],
-				nexora_ph_style_colors_linear_gradient( 'icon_o', 'Orange icon', 'fill', '{{WRAPPER}} .nexora-ph .icon-o', 'ph-icon-o', '#FFF3EC', '#FFE0CF', 145 ),
+				nexora_ph_style_colors_linear_gradient( 'icon_o', 'Orange icon', 'fill', '{{WRAPPER}} .nexora-ph', 'ph-icon-o', '#FFF3EC', '#FFE0CF', 145 ),
 				[
 					'name'     => 'icon_b',
 					'label'    => 'Blue icon',
 					'group'    => 'fill',
-					'selector' => '{{WRAPPER}} .nexora-ph .icon-b',
+					'selector' => '{{WRAPPER}} .nexora-ph',
 					'default'  => [
 						'background'     => 'gradient',
 						'color'          => '#F0F7FC',
@@ -862,7 +872,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_shared_catalog' ) ) {
 					'name'     => 'card',
 					'label'    => 'Card',
 					'group'    => 'fill',
-					'selector' => '{{WRAPPER}} .nexora-ph .card',
+					'selector' => '{{WRAPPER}} .nexora-ph',
 					'default'  => [
 						'background'     => 'gradient',
 						'color'          => '#FFFFFF',
@@ -872,13 +882,14 @@ if ( ! function_exists( 'nexora_ph_style_colors_shared_catalog' ) ) {
 					],
 					'signature'      => 'linear-gradient(var(--ph-card-angle,180deg),var(--ph-card,#FFFFFF) var(--ph-card-start-stop,0%),var(--ph-card-end,#FFFCFA) var(--ph-card-end-stop,100%))',
 					'fields_options' => nexora_ph_style_colors_bridge( nexora_ph_style_colors_vars( 'ph-card' ) ),
+					'notes'          => 'Vars are set on the widget root so Elementor cannot paint over .card / .hv-card fills.',
 				],
-				nexora_ph_style_colors_radial_gradient( 'soft_orange', 'Soft section wash — orange', 'fill', '{{WRAPPER}} .nexora-ph .soft', 'ph-soft-orange', '760px 420px', '100% 0%', 'rgba(241,94,34,.09)', 'rgba(241,94,34,0)', 62 ),
-				nexora_ph_style_colors_radial_gradient( 'soft_blue', 'Soft section wash — blue', 'fill', '{{WRAPPER}} .nexora-ph .soft', 'ph-soft-blue', '760px 420px', '0% 100%', 'rgba(35,116,172,.09)', 'rgba(35,116,172,0)', 62 ),
-				nexora_ph_style_colors_radial_gradient( 'cool_blue', 'Cool section wash — blue', 'fill', '{{WRAPPER}} .nexora-ph .cool', 'ph-cool-blue', '760px 420px', '0% 0%', 'rgba(35,116,172,.08)', 'rgba(35,116,172,0)', 62 ),
-				nexora_ph_style_colors_radial_gradient( 'cool_orange', 'Cool section wash — orange', 'fill', '{{WRAPPER}} .nexora-ph .cool', 'ph-cool-orange', '760px 420px', '100% 100%', 'rgba(241,94,34,.07)', 'rgba(241,94,34,0)', 62 ),
-				nexora_ph_style_colors_radial_gradient( 'ink_orange', 'Ink section wash — orange', 'fill', '{{WRAPPER}} .nexora-ph .ink', 'ph-ink-orange', '700px 420px', '90% 0%', 'rgba(241,94,34,.28)', 'rgba(241,94,34,0)', 62 ),
-				nexora_ph_style_colors_radial_gradient( 'ink_blue', 'Ink section wash — blue', 'fill', '{{WRAPPER}} .nexora-ph .ink', 'ph-ink-blue', '700px 420px', '0% 100%', 'rgba(35,116,172,.36)', 'rgba(35,116,172,0)', 62 ),
+				nexora_ph_style_colors_radial_gradient( 'soft_orange', 'Soft section wash — orange', 'fill', '{{WRAPPER}} .nexora-ph .soft', 'ph-soft-orange', '760px 420px', '100% 0%', 'rgba(241,94,34,.09)', 'rgba(241,94,34,0)', 62, true ),
+				nexora_ph_style_colors_radial_gradient( 'soft_blue', 'Soft section wash — blue', 'fill', '{{WRAPPER}} .nexora-ph .soft', 'ph-soft-blue', '760px 420px', '0% 100%', 'rgba(35,116,172,.09)', 'rgba(35,116,172,0)', 62, true ),
+				nexora_ph_style_colors_radial_gradient( 'cool_blue', 'Cool section wash — blue', 'fill', '{{WRAPPER}} .nexora-ph .cool', 'ph-cool-blue', '760px 420px', '0% 0%', 'rgba(35,116,172,.08)', 'rgba(35,116,172,0)', 62, true ),
+				nexora_ph_style_colors_radial_gradient( 'cool_orange', 'Cool section wash — orange', 'fill', '{{WRAPPER}} .nexora-ph .cool', 'ph-cool-orange', '760px 420px', '100% 100%', 'rgba(241,94,34,.07)', 'rgba(241,94,34,0)', 62, true ),
+				nexora_ph_style_colors_radial_gradient( 'ink_orange', 'Ink section wash — orange', 'fill', '{{WRAPPER}} .nexora-ph .ink', 'ph-ink-orange', '700px 420px', '90% 0%', 'rgba(241,94,34,.28)', 'rgba(241,94,34,0)', 62, true ),
+				nexora_ph_style_colors_radial_gradient( 'ink_blue', 'Ink section wash — blue', 'fill', '{{WRAPPER}} .nexora-ph .ink', 'ph-ink-blue', '700px 420px', '0% 100%', 'rgba(35,116,172,.36)', 'rgba(35,116,172,0)', 62, true ),
 				[
 					'name'     => 'grad_text',
 					'label'    => 'Gradient text',
@@ -905,15 +916,15 @@ if ( ! function_exists( 'nexora_ph_style_colors_shared_catalog' ) ) {
 					),
 					'notes'    => 'Restores the shipped effective look: 90deg, seven stops #F15E22 0%, #FF8A4C 20%, #E0617A 36%, #2B8AE0 52%, #E0617A 68%, #FF8A4C 84%, #F15E22 100%, 200% 100% repeating, shine2 9s. Elementor edits the two outer stops and angle; the fixed mid stops bridge through the shared grad-warm, grad-rose and grad-sky tokens at their original positions.',
 				],
-				nexora_ph_style_colors_radial_gradient( 'mid_orange', 'Mid section wash — orange', 'fill', '{{WRAPPER}} .nexora-ph .mid', 'ph-mid-orange', '700px 420px', '88% 0%', 'rgba(241,94,34,.32)', 'rgba(241,94,34,0)', 60 ),
-				nexora_ph_style_colors_radial_gradient( 'mid_blue', 'Mid section wash — blue', 'fill', '{{WRAPPER}} .nexora-ph .mid', 'ph-mid-blue', '760px 460px', '0% 100%', 'rgba(35,116,172,.42)', 'rgba(35,116,172,0)', 60 ),
+				nexora_ph_style_colors_radial_gradient( 'mid_orange', 'Mid section wash — orange', 'fill', '{{WRAPPER}} .nexora-ph .mid', 'ph-mid-orange', '700px 420px', '88% 0%', 'rgba(241,94,34,.32)', 'rgba(241,94,34,0)', 60, true ),
+				nexora_ph_style_colors_radial_gradient( 'mid_blue', 'Mid section wash — blue', 'fill', '{{WRAPPER}} .nexora-ph .mid', 'ph-mid-blue', '760px 460px', '0% 100%', 'rgba(35,116,172,.42)', 'rgba(35,116,172,0)', 60, true ),
 				nexora_ph_style_colors_linear_gradient( 'mid_base', 'Mid section base', 'fill', '{{WRAPPER}} .nexora-ph .mid', 'ph-mid-base', '#16283C', '#0B1620', 160, 0, 62 ),
-				nexora_ph_style_colors_radial_gradient( 'ivory_orange', 'Ivory section wash — orange', 'fill', '{{WRAPPER}} .nexora-ph .ivory', 'ph-ivory-orange', '820px 460px', '100% 0%', 'rgba(241,94,34,.10)', 'rgba(241,94,34,0)', 62 ),
-				nexora_ph_style_colors_radial_gradient( 'ivory_blue', 'Ivory section wash — blue', 'fill', '{{WRAPPER}} .nexora-ph .ivory', 'ph-ivory-blue', '820px 460px', '0% 100%', 'rgba(35,116,172,.10)', 'rgba(35,116,172,0)', 62 ),
+				nexora_ph_style_colors_radial_gradient( 'ivory_orange', 'Ivory section wash — orange', 'fill', '{{WRAPPER}} .nexora-ph .ivory', 'ph-ivory-orange', '820px 460px', '100% 0%', 'rgba(241,94,34,.10)', 'rgba(241,94,34,0)', 62, true ),
+				nexora_ph_style_colors_radial_gradient( 'ivory_blue', 'Ivory section wash — blue', 'fill', '{{WRAPPER}} .nexora-ph .ivory', 'ph-ivory-blue', '820px 460px', '0% 100%', 'rgba(35,116,172,.10)', 'rgba(35,116,172,0)', 62, true ),
 				nexora_ph_style_colors_linear_gradient( 'ivory_base', 'Ivory section base', 'fill', '{{WRAPPER}} .nexora-ph .ivory', 'ph-ivory-base', '#FFFCF9', '#FFF6F0', 180 ),
 				nexora_ph_style_colors_linear_gradient( 'check', 'Check badge', 'fill', '{{WRAPPER}} .nexora-ph .check', 'ph-check', '#FF8350', '#F15E22', 145 ),
-				nexora_ph_style_colors_radial_gradient( 'hv_orange', 'Hover card dark — orange glow', 'fill', '{{WRAPPER}} .nexora-ph', 'ph-hv-orange', '320px 200px', '100% 0%', 'rgba(241,94,34,.38)', 'rgba(241,94,34,0)', 70 ),
-				nexora_ph_style_colors_radial_gradient( 'hv_blue', 'Hover card dark — blue glow', 'fill', '{{WRAPPER}} .nexora-ph', 'ph-hv-blue', '320px 220px', '0% 100%', 'rgba(35,116,172,.45)', 'rgba(35,116,172,0)', 70 ),
+				nexora_ph_style_colors_radial_gradient( 'hv_orange', 'Hover card dark — orange glow', 'fill', '{{WRAPPER}} .nexora-ph', 'ph-hv-orange', '320px 200px', '100% 0%', 'rgba(241,94,34,.38)', 'rgba(241,94,34,0)', 70, true ),
+				nexora_ph_style_colors_radial_gradient( 'hv_blue', 'Hover card dark — blue glow', 'fill', '{{WRAPPER}} .nexora-ph', 'ph-hv-blue', '320px 220px', '0% 100%', 'rgba(35,116,172,.45)', 'rgba(35,116,172,0)', 70, true ),
 				nexora_ph_style_colors_linear_gradient( 'hv_dark', 'Hover card dark — base', 'fill', '{{WRAPPER}} .nexora-ph', 'ph-hv-dark', '#16283C', '#0B1620', 160, 0, 70 ),
 				[
 					'name'           => 'hv_icon',
@@ -937,7 +948,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_shared_catalog' ) ) {
 					'name'           => 'play_btn',
 					'label'          => 'Play button',
 					'group'          => 'button',
-					'selector'       => '{{WRAPPER}} .nexora-ph .ph-play',
+					'selector'       => '{{WRAPPER}} .nexora-ph',
 					'default'        => [
 						'background'     => 'gradient',
 						'color'          => '#FF8A4C',

@@ -87,7 +87,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_growth' ) ) {
 						'name'     => 'gs_steps_line',
 						'label'    => 'Steps connector line',
 						'group'    => 'fill',
-						'selector' => '{{WRAPPER}} .nexora-ph .gs-steps::before',
+						'selector' => '{{WRAPPER}} .nexora-ph',
 						'prefix'   => 'ph-growth-steps-line',
 						'type'     => 'linear',
 						'stops'    => [
@@ -101,7 +101,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_growth' ) ) {
 						'name'     => 'gs_step_card',
 						'label'    => 'Step card',
 						'group'    => 'fill',
-						'selector' => '{{WRAPPER}} .nexora-ph .gs-step',
+						'selector' => '{{WRAPPER}} .nexora-ph',
 						'prefix'   => 'ph-growth-step-card',
 						'type'     => 'linear',
 						'stops'    => [
@@ -114,7 +114,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_growth' ) ) {
 						'name'     => 'gs_step_no',
 						'label'    => 'Step number badge',
 						'group'    => 'fill',
-						'selector' => '{{WRAPPER}} .nexora-ph .gs-no',
+						'selector' => '{{WRAPPER}} .nexora-ph',
 						'prefix'   => 'ph-growth-step-no',
 						'type'     => 'linear',
 						'stops'    => [
@@ -127,7 +127,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_growth' ) ) {
 						'name'     => 'gs_you_card',
 						'label'    => 'Your-role card',
 						'group'    => 'fill',
-						'selector' => '{{WRAPPER}} .nexora-ph .gs-you',
+						'selector' => '{{WRAPPER}} .nexora-ph',
 						'prefix'   => 'ph-growth-you-card',
 						'type'     => 'linear',
 						'stops'    => [
@@ -140,7 +140,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_growth' ) ) {
 						'name'     => 'gs_no_active',
 						'label'    => 'Active step number badge',
 						'group'    => 'fill',
-						'selector' => '{{WRAPPER}} .nexora-ph .gs-you .gs-no, {{WRAPPER}} .nexora-ph .gs-step.on .gs-no',
+						'selector' => '{{WRAPPER}} .nexora-ph',
 						'prefix'   => 'ph-growth-no-active',
 						'type'     => 'linear',
 						'stops'    => [
@@ -150,39 +150,37 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_growth' ) ) {
 						],
 						'angle'    => 145,
 					] ),
-					nexora_ph_style_colors_stops_gradient( [
-						'name'     => 'gs_panel_blue',
-						'label'    => 'Results panel — blue glow',
-						'group'    => 'fill',
-						'selector' => '{{WRAPPER}} .nexora-ph .gs-right',
-						'prefix'   => 'ph-growth-panel-blue',
-						'type'     => 'radial',
-						'stops'    => [
-							[ 'rgba(95,176,232,.16)', 0 ],
-							[ 'rgba(95,176,232,0)', 70 ],
-						],
-						'size'     => '420px 260px',
-						'origin'   => '50% 0%',
-					] ),
-					nexora_ph_style_colors_stops_gradient( [
-						'name'     => 'gs_panel_orange',
-						'label'    => 'Results panel — orange glow',
-						'group'    => 'fill',
-						'selector' => '{{WRAPPER}} .nexora-ph .gs-right',
-						'prefix'   => 'ph-growth-panel-orange',
-						'type'     => 'radial',
-						'stops'    => [
-							[ 'rgba(241,94,34,.12)', 0 ],
-							[ 'rgba(241,94,34,0)', 70 ],
-						],
-						'size'     => '380px 240px',
-						'origin'   => '50% 100%',
-					] ),
+					nexora_ph_style_colors_radial_gradient(
+						'gs_panel_blue',
+						'Results panel — blue glow',
+						'fill',
+						'{{WRAPPER}} .nexora-ph',
+						'ph-growth-panel-blue',
+						'420px 260px',
+						'50% 0%',
+						'rgba(95,176,232,.16)',
+						'rgba(95,176,232,0)',
+						70,
+						true
+					),
+					nexora_ph_style_colors_radial_gradient(
+						'gs_panel_orange',
+						'Results panel — orange glow',
+						'fill',
+						'{{WRAPPER}} .nexora-ph',
+						'ph-growth-panel-orange',
+						'380px 240px',
+						'50% 100%',
+						'rgba(241,94,34,.12)',
+						'rgba(241,94,34,0)',
+						70,
+						true
+					),
 					nexora_ph_style_colors_stops_gradient( [
 						'name'     => 'gs_panel_base',
 						'label'    => 'Results panel — base',
 						'group'    => 'fill',
-						'selector' => '{{WRAPPER}} .nexora-ph .gs-right',
+						'selector' => '{{WRAPPER}} .nexora-ph',
 						'prefix'   => 'ph-growth-panel-base',
 						'type'     => 'linear',
 						'stops'    => [
@@ -195,7 +193,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_growth' ) ) {
 						'name'     => 'gs_bar_1',
 						'label'    => 'Funnel tier 1',
 						'group'    => 'fill',
-						'selector' => '{{WRAPPER}} .nexora-ph .gs-b1',
+						'selector' => '{{WRAPPER}} .nexora-ph',
 						'prefix'   => 'ph-growth-bar-1',
 						'type'     => 'linear',
 						'stops'    => [
@@ -208,7 +206,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_growth' ) ) {
 						'name'     => 'gs_bar_1_text',
 						'label'    => 'Funnel tier 1 value text',
 						'group'    => 'fill',
-						'selector' => '{{WRAPPER}} .nexora-ph .gs-b1 .gs-v',
+						'selector' => '{{WRAPPER}} .nexora-ph',
 						'prefix'   => 'ph-growth-bar-1-text',
 						'type'     => 'linear',
 						'stops'    => [
@@ -221,7 +219,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_growth' ) ) {
 						'name'     => 'gs_bar_2',
 						'label'    => 'Funnel tier 2',
 						'group'    => 'fill',
-						'selector' => '{{WRAPPER}} .nexora-ph .gs-b2',
+						'selector' => '{{WRAPPER}} .nexora-ph',
 						'prefix'   => 'ph-growth-bar-2',
 						'type'     => 'linear',
 						'stops'    => [
@@ -235,7 +233,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_growth' ) ) {
 						'name'     => 'gs_bar_3',
 						'label'    => 'Funnel tier 3',
 						'group'    => 'fill',
-						'selector' => '{{WRAPPER}} .nexora-ph .gs-b3',
+						'selector' => '{{WRAPPER}} .nexora-ph',
 						'prefix'   => 'ph-growth-bar-3',
 						'type'     => 'linear',
 						'stops'    => [
@@ -249,7 +247,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_growth' ) ) {
 						'name'     => 'gs_bar_4',
 						'label'    => 'Funnel tier 4',
 						'group'    => 'fill',
-						'selector' => '{{WRAPPER}} .nexora-ph .gs-b4',
+						'selector' => '{{WRAPPER}} .nexora-ph',
 						'prefix'   => 'ph-growth-bar-4',
 						'type'     => 'linear',
 						'stops'    => [
@@ -263,7 +261,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_growth' ) ) {
 						'name'     => 'gs_step_active',
 						'label'    => 'Active step card',
 						'group'    => 'fill',
-						'selector' => '{{WRAPPER}} .nexora-ph .gs-step.on',
+						'selector' => '{{WRAPPER}} .nexora-ph',
 						'prefix'   => 'ph-growth-step-active',
 						'type'     => 'linear',
 						'stops'    => [

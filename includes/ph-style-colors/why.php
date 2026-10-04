@@ -56,7 +56,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_why' ) ) {
 			'gradients'      => array_merge(
 				$shared['gradients'],
 				[
-					nexora_ph_style_colors_linear_gradient( 'icon_top', 'Floating icon', 'fill', '{{WRAPPER}} .nexora-ph .icon-top', 'ph-why-icon-top', '#FFFFFF', '#FFF1E9', 145 ),
+					nexora_ph_style_colors_linear_gradient( 'icon_top', 'Floating icon', 'fill', '{{WRAPPER}} .nexora-ph', 'ph-why-icon-top', '#FFFFFF', '#FFF1E9', 145 ),
 				]
 			),
 		];

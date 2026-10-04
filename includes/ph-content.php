@@ -394,6 +394,13 @@ if ( ! function_exists( 'nexora_ph_apply_content' ) ) {
 			if ( $start < 0 || $end < $start || $end > strlen( $html ) ) {
 				continue;
 			}
+			// Skip drifted tag maps — wrong bytes would corrupt the markup.
+			if ( ! empty( $range['tag_replace'] ) && isset( $range['expect'] ) ) {
+				$current = substr( $html, $start, $end - $start );
+				if ( $current !== (string) $range['expect'] ) {
+					continue;
+				}
+			}
 			$html = substr_replace( $html, (string) $range['value'], $start, $end - $start );
 		}
 
@@ -441,16 +448,27 @@ if ( ! function_exists( 'nexora_ph_tag_ranges' ) ) {
 		if ( $value === $default ) {
 			return [];
 		}
+		$open_start  = isset( $field['openStart'] ) ? (int) $field['openStart'] : -1;
+		$open_end    = isset( $field['openEnd'] ) ? (int) $field['openEnd'] : -1;
+		$close_start = isset( $field['closeStart'] ) ? (int) $field['closeStart'] : -1;
+		$close_end   = isset( $field['closeEnd'] ) ? (int) $field['closeEnd'] : -1;
+		if ( $open_start < 0 || $open_end <= $open_start || $close_start < 0 || $close_end <= $close_start ) {
+			return [];
+		}
 		return [
 			[
-				'start' => isset( $field['openStart'] ) ? (int) $field['openStart'] : 0,
-				'end'   => isset( $field['openEnd'] ) ? (int) $field['openEnd'] : 0,
-				'value' => $value,
+				'start'         => $open_start,
+				'end'           => $open_end,
+				'value'         => $value,
+				'expect'        => $default,
+				'tag_replace'   => true,
 			],
 			[
-				'start' => isset( $field['closeStart'] ) ? (int) $field['closeStart'] : 0,
-				'end'   => isset( $field['closeEnd'] ) ? (int) $field['closeEnd'] : 0,
-				'value' => $value,
+				'start'         => $close_start,
+				'end'           => $close_end,
+				'value'         => $value,
+				'expect'        => $default,
+				'tag_replace'   => true,
 			],
 		];
 	}

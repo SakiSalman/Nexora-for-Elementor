@@ -16,6 +16,7 @@
 }
 .nexora-ph-challenge .hv-grid:not(:hover) .hv-card.hv-on .icon-o svg,
 .nexora-ph-challenge .hv-grid .hv-card:hover .icon-o svg{
-	color:var(--ph-on-accent,#FFFFFF) !important;
-	fill:currentColor
+	stroke:var(--ph-on-accent,#FFFFFF) !important;
+	fill:none !important;
+	color:var(--ph-on-accent,#FFFFFF) !important
 }
