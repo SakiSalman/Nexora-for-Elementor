@@ -63,6 +63,8 @@
 				button.setAttribute('aria-expanded', 'true');
 			}
 			open = index;
+			// Demo keeps the bar visible while mega/dropdown is open.
+			header.classList.remove('nav-hide');
 		}
 
 		function setPhone(next) {
@@ -73,6 +75,7 @@
 			if (toggle) toggle.setAttribute('aria-expanded', menu ? 'true' : 'false');
 			header.classList.toggle('m-open', menu);
 			if (!menu) setPhoneSub(null);
+			if (menu) header.classList.remove('nav-hide');
 		}
 
 		function setPhoneSub(index) {
@@ -147,24 +150,30 @@
 		}
 		document.addEventListener('keydown', onKey, { signal: signal });
 
+		/* Scroll hide/show — same rules as Home page Redesign.dc.html bindNav(). */
 		var last = 0;
-		function syncScrollSolid(y) {
-			header.classList.toggle('nav-solid', y > 24);
+		function pageScrollEl() {
+			return document.scrollingElement || document.documentElement;
 		}
 		function onScroll(event) {
 			var t = event && event.target;
-			var el = !t || t === document || t === document.documentElement || t === document.body ? document.scrollingElement || document.documentElement : t;
-			if (!el || typeof el.scrollTop !== 'number') return;
+			var page = pageScrollEl();
+			// Only the page scroller (nested Elementor overflow panes desync last/y).
+			if (t && t !== document && t !== document.documentElement && t !== document.body && t !== page) {
+				return;
+			}
+			var el = page;
+			if (!el || typeof el.scrollTop !== 'number' || el.scrollHeight - el.clientHeight < 200) return;
 			var y = el.scrollTop;
 			var dy = y - last;
-			syncScrollSolid(y);
-			if (el.scrollHeight - el.clientHeight < 200) return;
+			header.classList.toggle('nav-solid', y > 24);
 			if (Math.abs(dy) < 6) return;
 			last = y;
 			var heroEl = document.querySelector('.hero-sec');
 			var heroH = heroEl ? heroEl.offsetHeight : 700;
 			var hide = dy > 0 && y > heroH - 90 && open === null && !menu;
 			header.classList.toggle('nav-hide', hide);
+			header.classList.toggle('nav-solid', y > 24);
 		}
 		window.addEventListener('scroll', onScroll, true);
 		if (signal) {
@@ -173,12 +182,14 @@
 			});
 		}
 		try {
-			var startEl = document.scrollingElement || document.documentElement;
+			var startEl = pageScrollEl();
 			var startY = startEl && typeof startEl.scrollTop === 'number' ? startEl.scrollTop : 0;
 			last = startY;
-			syncScrollSolid(startY);
+			header.classList.toggle('nav-solid', startY > 24);
+			header.classList.remove('nav-hide');
 		} catch (e) {
-			syncScrollSolid(0);
+			header.classList.remove('nav-solid');
+			header.classList.remove('nav-hide');
 		}
 
 		root.addEventListener(

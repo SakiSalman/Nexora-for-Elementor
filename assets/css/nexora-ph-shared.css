@@ -26,7 +26,12 @@
 .nexora-ph a.navlink:hover,
 .nexora-ph button.navlink:hover{color:var(--ph-link,#C2410C)}
 .nexora-ph a.navlink.on,
-.nexora-ph button.navlink.on{color:var(--ph-ink,#0B1620)}
+.nexora-ph button.navlink.on{
+	background:var(--ph-surface,#FFFFFF);
+	box-shadow:0 4px 12px -6px color-mix(in srgb,var(--ph-ink,#0B1620) 25%,transparent);
+	color:var(--ph-ink,#0B1620);
+	font-weight:600
+}
 .nexora-ph a.m-link{color:var(--ph-ink,#0B1620)}
 .nexora-ph a.mm-all{color:var(--ph-link-blue,#1A5A87)}
 .nexora-ph a.mm-all:hover{color:var(--ph-link,#C2410C)}
@@ -397,7 +402,12 @@
 .nexora-ph a.navlink:hover,
 .nexora-ph button.navlink:hover{color:var(--ph-link,#C2410C) !important}
 .nexora-ph a.navlink.on,
-.nexora-ph button.navlink.on{color:var(--ph-ink,#0B1620) !important}
+.nexora-ph button.navlink.on{
+	background:var(--ph-surface,#FFFFFF) !important;
+	box-shadow:0 4px 12px -6px color-mix(in srgb,var(--ph-ink,#0B1620) 25%,transparent) !important;
+	color:var(--ph-ink,#0B1620) !important;
+	font-weight:600 !important
+}
 .nexora-ph a.m-link{color:var(--ph-ink,#0B1620) !important}
 .nexora-ph a.mm-all{color:var(--ph-link-blue,#1A5A87) !important}
 .nexora-ph a.mm-all:hover{color:var(--ph-link,#C2410C) !important}
