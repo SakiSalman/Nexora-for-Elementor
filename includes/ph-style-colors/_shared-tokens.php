@@ -912,14 +912,14 @@ if ( ! function_exists( 'nexora_ph_style_colors_shared_catalog' ) ) {
 				nexora_ph_style_colors_radial_gradient( 'ivory_blue', 'Ivory section wash — blue', 'fill', '{{WRAPPER}} .nexora-ph .ivory', 'ph-ivory-blue', '820px 460px', '0% 100%', 'rgba(35,116,172,.10)', 'rgba(35,116,172,0)', 62 ),
 				nexora_ph_style_colors_linear_gradient( 'ivory_base', 'Ivory section base', 'fill', '{{WRAPPER}} .nexora-ph .ivory', 'ph-ivory-base', '#FFFCF9', '#FFF6F0', 180 ),
 				nexora_ph_style_colors_linear_gradient( 'check', 'Check badge', 'fill', '{{WRAPPER}} .nexora-ph .check', 'ph-check', '#FF8350', '#F15E22', 145 ),
-				nexora_ph_style_colors_radial_gradient( 'hv_orange', 'Hover card dark — orange glow', 'fill', '{{WRAPPER}} .nexora-ph .hv-card', 'ph-hv-orange', '320px 200px', '100% 0%', 'rgba(241,94,34,.38)', 'rgba(241,94,34,0)', 70 ),
-				nexora_ph_style_colors_radial_gradient( 'hv_blue', 'Hover card dark — blue glow', 'fill', '{{WRAPPER}} .nexora-ph .hv-card', 'ph-hv-blue', '320px 220px', '0% 100%', 'rgba(35,116,172,.45)', 'rgba(35,116,172,0)', 70 ),
-				nexora_ph_style_colors_linear_gradient( 'hv_dark', 'Hover card dark — base', 'fill', '{{WRAPPER}} .nexora-ph .hv-card', 'ph-hv-dark', '#16283C', '#0B1620', 160, 0, 70 ),
+				nexora_ph_style_colors_radial_gradient( 'hv_orange', 'Hover card dark — orange glow', 'fill', '{{WRAPPER}} .nexora-ph', 'ph-hv-orange', '320px 200px', '100% 0%', 'rgba(241,94,34,.38)', 'rgba(241,94,34,0)', 70 ),
+				nexora_ph_style_colors_radial_gradient( 'hv_blue', 'Hover card dark — blue glow', 'fill', '{{WRAPPER}} .nexora-ph', 'ph-hv-blue', '320px 220px', '0% 100%', 'rgba(35,116,172,.45)', 'rgba(35,116,172,0)', 70 ),
+				nexora_ph_style_colors_linear_gradient( 'hv_dark', 'Hover card dark — base', 'fill', '{{WRAPPER}} .nexora-ph', 'ph-hv-dark', '#16283C', '#0B1620', 160, 0, 70 ),
 				[
 					'name'           => 'hv_icon',
 					'label'          => 'Hover card icon',
 					'group'          => 'fill',
-					'selector'       => '{{WRAPPER}} .nexora-ph .hv-card',
+					'selector'       => '{{WRAPPER}} .nexora-ph',
 					'default'        => [
 						'background'     => 'gradient',
 						'color'          => '#FF8350',
@@ -931,7 +931,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_shared_catalog' ) ) {
 					],
 					'signature'      => 'linear-gradient(var(--ph-hv-icon-angle,145deg),var(--ph-hv-icon,#FF8350) var(--ph-hv-icon-start-stop,0%),var(--ph-btn-mid,#F15E22) 60%,var(--ph-hv-icon-end,#D94E14) var(--ph-hv-icon-end-stop,100%))',
 					'fields_options' => nexora_ph_style_colors_bridge( nexora_ph_style_colors_vars( 'ph-hv-icon' ) ),
-					'notes'          => 'Three-stop CSS-var bridge keeps --ph-btn-mid (#F15E22) at 60%; the gradient control owns the outer stops.',
+					'notes'          => 'Three-stop CSS-var bridge keeps --ph-btn-mid (#F15E22) at 60%; the gradient control owns the outer stops. Vars are set on the widget root so Elementor cannot paint over .hv-card.',
 				],
 				[
 					'name'           => 'play_btn',

@@ -308,6 +308,15 @@
 .nexora-ph .ink .tag,.nexora-ph .mid .tag{color:var(--ph-tag-on-dark,#FFC2A6) !important}
 .nexora-ph .chip{color:var(--ph-link-blue,#1A5A87) !important}
 .nexora-ph .chip.o{color:var(--ph-chip-orange-text,#B03E0B) !important}
+.nexora-ph .hv-grid:not(:hover) .hv-card.hv-on .chip,
+.nexora-ph .hv-grid .hv-card:hover .chip{
+	color:var(--ph-chip-on-dark,#DCE4EA) !important;
+	background:rgba(255,255,255,.1) !important
+}
+.nexora-ph .hv-grid:not(:hover) .hv-card.hv-on .muted,
+.nexora-ph .hv-grid .hv-card:hover .muted{color:var(--ph-lead-on-dark,#C9D3DC) !important}
+.nexora-ph .hv-grid:not(:hover) .hv-card.hv-on h3,
+.nexora-ph .hv-grid .hv-card:hover h3{color:var(--ph-on-dark,#FFFFFF) !important}
 .nexora-ph .check{color:var(--ph-on-accent,#FFFFFF) !important}
 .nexora-ph a:not([class]){color:var(--ph-link-blue,#1A5A87) !important}
 .nexora-ph a:not([class]):hover{color:var(--ph-link,#C2410C) !important}
