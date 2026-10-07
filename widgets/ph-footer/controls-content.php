@@ -44,5 +44,28 @@ if ( ! function_exists( 'nexora_ph_footer_register_content_controls' ) ) {
 			require_once NEXORA_ELE_PATH . 'includes/ph-content.php';
 		}
 		nexora_ph_register_mapped_controls( $widget, 'footer' );
+
+		$widget->start_controls_section(
+			'section_newsletter_form',
+			[
+				'label' => esc_html__( 'Newsletter form', 'nexora-elementor' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+		$widget->add_control(
+			'footer_newsletter_shortcode',
+			[
+				'label'       => esc_html__( 'Form shortcode', 'nexora-elementor' ),
+				'type'        => Controls_Manager::TEXTAREA,
+				'default'     => '[contact-form-7 id="151" title="Untitled"]',
+				'rows'        => 3,
+				'label_block' => true,
+				'description' => esc_html__( 'Paste a Contact Form 7 shortcode. It replaces the email field and Subscribe button only.', 'nexora-elementor' ),
+				'placeholder' => '[contact-form-7 id="151" title="Untitled"]',
+			]
+		);
+
+		$widget->end_controls_section();
 	}
 }

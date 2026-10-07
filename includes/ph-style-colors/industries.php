@@ -26,13 +26,13 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_industries' ) ) {
 			[
 			'solids'    => [
 				'ink' => 'Heading / body text',
-				'muted' => 'Tile description / captions',
+				'muted' => 'Explore link (default)',
 				'surface' => 'Section background',
 				'on-dark' => 'Tile title (hover)',
-				'more-on-dark' => 'Learn more link (hover)',
+				'more-on-dark' => 'Explore link (hover)',
 				'accent' => 'Accent / highlight',
-				'link' => 'Link / icon stroke',
-				'link-blue' => 'Blue link / chip text',
+				'link' => 'Link / accent',
+				'link-blue' => 'Industry icon',
 				'grad-warm' => 'Heading gradient — warm stop',
 				'grad-rose' => 'Heading gradient — rose stop',
 				'grad-sky' => 'Heading gradient — sky stop',
@@ -48,6 +48,17 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_industries' ) ) {
 			],
 			]
 		);
+
+		// Hover text paints belong under Colors — Text (not Accent).
+		foreach ( $shared['solids'] as $i => $solid ) {
+			if ( ! is_array( $solid ) ) {
+				continue;
+			}
+			$token = isset( $solid['token'] ) ? (string) $solid['token'] : '';
+			if ( in_array( $token, [ 'on-dark', 'more-on-dark' ], true ) ) {
+				$shared['solids'][ $i ]['group'] = 'text';
+			}
+		}
 
 		return [
 			'include_shared' => false,

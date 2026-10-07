@@ -157,8 +157,7 @@ Labels are the Elementor sidebar names. HTML Tag is the default tag for that hea
 | footer | Description (A B2B outbound and GTM agency. We...) | `footer_f11` | Content | No | A B2B outbound and GTM agency. We build the systems that turn prospects into ... | — |
 | footer | Label | `footer_f12` | Content | No | Subscribe to our Friday newsletter | — |
 | footer | Description (One practical GTM and outbound id...) | `footer_f13` | Content | No | One practical GTM and outbound idea every week. No spam. | — |
-| footer | Placeholder | `footer_f14` | Content | No | you@company.com | — |
-| footer | Button text (Subscribe) | `footer_f15` | Call to action | No | Subscribe | — |
+| footer | Newsletter form shortcode | `footer_newsletter_shortcode` | Newsletter form | No | (empty — paste CF7 shortcode) | — |
 | footer | Column title (Services) | `footer_f16` | Content | No | Services | — |
 | footer | Column title (Company) | `footer_f17` | Content | No | Company | — |
 | footer | Column title (Resources) | `footer_f18` | Content | No | Resources | — |

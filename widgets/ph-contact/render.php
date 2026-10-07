@@ -46,7 +46,11 @@ if ( '' !== $shortcode ) {
 	$form_html = do_shortcode( $shortcode );
 	$form_html = is_string( $form_html ) ? $form_html : '';
 }
-if ( '' === trim( wp_strip_all_tags( $form_html ) ) ) {
+$has_form = '' !== $form_html && (
+	false !== strpos( $form_html, 'wpcf7' )
+	|| (bool) preg_match( '/<(?:input|textarea|button|select)\b/i', $form_html )
+);
+if ( ! $has_form ) {
 	$form_html = '<p class="ct-form-placeholder">' . esc_html__( 'Add a Contact Form 7 shortcode in the Contact form section.', 'nexora-elementor' ) . '</p>';
 }
 

@@ -6,16 +6,20 @@
 /* Default colors for interactive elements (beat theme / Elementor link styles). */
 .nexora-ph a.btn-primary,
 .nexora-ph a.btn-primary:hover,
+.nexora-ph button.btn-primary,
+.nexora-ph button.btn-primary:hover,
 .nexora-ph a.btn-dark,
 .nexora-ph a.btn-dark:hover,
 .nexora-ph a.btn-primary .btn-arr,
+.nexora-ph button.btn-primary .btn-arr,
 .nexora-ph a.btn-dark .btn-arr{color:var(--ph-on-accent,#FFFFFF)}
 .nexora-ph a.btn-white,
 .nexora-ph a.btn-white:hover{color:var(--ph-ink,#0B1620)}
 .nexora-ph a.btn-case{color:var(--ph-link,#C2410C)}
 .nexora-ph a.btn-case:hover,
 .nexora-ph a.btn-case:hover .btn-arr{color:var(--ph-on-accent,#FFFFFF)}
-.nexora-ph a.btn-primary{background:linear-gradient(var(--ph-btn-angle,180deg),var(--ph-btn-soft,#FF8350) var(--ph-btn-start-stop,0%),var(--ph-btn-mid,#F15E22) 55%,var(--ph-btn-deep,#DC5016) var(--ph-btn-end-stop,100%))}
+.nexora-ph a.btn-primary,
+.nexora-ph button.btn-primary{background:linear-gradient(var(--ph-btn-angle,180deg),var(--ph-btn-soft,#FF8350) var(--ph-btn-start-stop,0%),var(--ph-btn-mid,#F15E22) 55%,var(--ph-btn-deep,#DC5016) var(--ph-btn-end-stop,100%))}
 .nexora-ph a.btn-dark{background:linear-gradient(var(--ph-btn-dark-angle,180deg),var(--ph-btn-dark,#223647) var(--ph-btn-dark-start-stop,0%),var(--ph-btn-dark-end,#0B1620) var(--ph-btn-dark-end-stop,100%))}
 .nexora-ph a.btn-white{background:linear-gradient(180deg,#FFFFFF,#F6F2EE)}
 .nexora-ph a.btn-case{background:var(--ph-btn-case-surface,#FFF4EC)}
@@ -43,7 +47,8 @@
 .nexora-ph .dd a{color:var(--ph-ink,#0B1620)}
 .nexora-ph .dd a span{color:var(--ph-muted,#56626D)}
 .nexora-ph .m-sub a{color:var(--ph-nav-text,#2B3843)}
-.nexora-ph a.ind-tile{color:#0B1620}
+.nexora-ph a.ind-tile{color:var(--ph-ink,#0B1620)}
+.nexora-ph a.ind-tile .ind-ex{color:var(--ph-muted,#56626D)}
 .nexora-ph a.fc-book,
 .nexora-ph a.fc-book:hover{color:var(--ph-link,#C2410C)}
 .nexora-ph a.fc-phone{color:var(--ph-ink,#0B1620)}
@@ -364,7 +369,10 @@
 .nexora-ph a:not([class]):hover{color:var(--ph-link,#C2410C) !important}
 .nexora-ph a.btn.btn-primary,
 .nexora-ph a.btn.btn-primary:hover,
-.nexora-ph a.btn.btn-primary:focus-visible{
+.nexora-ph a.btn.btn-primary:focus-visible,
+.nexora-ph button.btn.btn-primary,
+.nexora-ph button.btn.btn-primary:hover,
+.nexora-ph button.btn.btn-primary:focus-visible{
 	background:linear-gradient(var(--ph-btn-angle,180deg),var(--ph-btn-soft,#FF8350) var(--ph-btn-start-stop,0%),var(--ph-btn-mid,#F15E22) 55%,var(--ph-btn-deep,#DC5016) var(--ph-btn-end-stop,100%)) !important;
 	color:var(--ph-on-accent,#FFFFFF) !important;
 	border:none !important
@@ -419,8 +427,19 @@
 .nexora-ph .dd a{color:var(--ph-ink,#0B1620) !important}
 .nexora-ph .dd a span{color:var(--ph-muted,#56626D) !important}
 .nexora-ph .m-sub a{color:var(--ph-nav-text,#2B3843) !important}
-.nexora-ph a.ind-tile{color:#0B1620 !important}
-.nexora-ph a.ind-tile .ind-ex{color:#56626D !important}
+/* Industries tiles — Explore default + hover. */
+.nexora-ph a.ind-tile{color:var(--ph-ink,#0B1620) !important}
+.nexora-ph a.ind-tile .ind-ex{color:var(--ph-muted,#56626D) !important}
+.nexora-ph a.ind-tile:hover .ind-ex,
+.nexora-ph a.ind-tile.on .ind-ex,
+.nexora-ph .ind-grid:hover a.ind-tile:hover .ind-ex{color:var(--ph-more-on-dark,#FFB08C) !important}
+.nexora-ph .ind-grid:hover a.ind-tile.on:not(:hover) .ind-ex{color:var(--ph-muted,#56626D) !important}
+.nexora-ph a.ind-tile.on,
+.nexora-ph .ind-grid:hover a.ind-tile:hover{color:var(--ph-on-dark,#FFFFFF) !important}
+.nexora-ph .ind-grid:hover a.ind-tile.on:not(:hover){color:var(--ph-ink,#0B1620) !important}
+.nexora-ph a.ind-tile.on .ind-nm,
+.nexora-ph .ind-grid:hover a.ind-tile:hover .ind-nm{color:var(--ph-on-dark,#FFFFFF) !important}
+.nexora-ph .ind-grid:hover a.ind-tile.on:not(:hover) .ind-nm{color:var(--ph-ink,#0B1620) !important}
 .nexora-ph a.fc-book,
 .nexora-ph a.fc-book:hover{color:var(--ph-link,#C2410C) !important}
 .nexora-ph a.fc-phone{color:var(--ph-ink,#0B1620) !important}

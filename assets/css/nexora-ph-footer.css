@@ -19,7 +19,99 @@
 .fb .ft-col{display:flex;flex-direction:column;gap:11px;font-size:15px;color:var(--ph-footer-text-soft,#A9B6C2)}
 .fb .ft-col a:not(.btn){color:var(--ph-footer-text-soft,#A9B6C2);text-decoration:none;transition:color .2s}
 .fb .ft-col a:not(.btn):hover{color:var(--ph-footer-hover,#FFB08C)}
-.fb .ft-col a.btn-primary{color:var(--ph-on-dark,#FFFFFF)}
+.fb .btn.btn-primary,
+.fb button.btn.btn-primary,
+.fb a.btn.btn-primary{
+	height:44px;
+	padding:0 20px;
+	font-size:14px;
+	gap:10px;
+	line-height:1;
+	border:none;
+	color:var(--ph-on-accent,#FFFFFF);
+	background:linear-gradient(var(--ph-btn-angle,180deg),var(--ph-btn-soft,#FF8350) var(--ph-btn-start-stop,0%),var(--ph-btn-mid,#F15E22) 55%,var(--ph-btn-deep,#DC5016) var(--ph-btn-end-stop,100%));
+	box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 12px 30px -10px color-mix(in srgb,var(--ph-accent,#F15E22) 60%,transparent)
+}
+.fb .btn.btn-primary:hover,
+.fb button.btn.btn-primary:hover,
+.fb a.btn.btn-primary:hover{
+	color:var(--ph-on-accent,#FFFFFF);
+	transform:translateY(-2px);
+	box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 18px 40px -10px color-mix(in srgb,var(--ph-accent,#F15E22) 75%,transparent)
+}
+.fb .btn.btn-primary .btn-arr,
+.fb button.btn.btn-primary .btn-arr,
+.fb a.btn.btn-primary .btn-arr{color:var(--ph-on-accent,#FFFFFF);flex-shrink:0}
+.ft-news-placeholder{margin:0;padding:12px 16px;font-size:13px;line-height:1.45;color:var(--ph-footer-text-muted,#8FA0AF);border-radius:999px;border:1px dashed rgba(255,255,255,.2);background:rgba(255,255,255,.04)}
+.ft-news-form .wpcf7{margin:0;width:100%}
+.ft-news-form .wpcf7-form{margin:0}
+.ft-news-form .wpcf7-form>.ft-news-pill,
+.ft-news-form .wpcf7-form>p{
+	display:flex;
+	align-items:center;
+	gap:0;
+	margin:0;
+	padding:5px;
+	border-radius:999px;
+	background:rgba(255,255,255,.08);
+	border:1px solid rgba(255,255,255,.14)
+}
+/* wpcf7_autop() wraps the pill's form tags in a <p> and turns the newline between
+   them into <br>. Keep that wrapper in the flex row so input + button stay inline. */
+.ft-news-form .ft-news-pill>p{display:flex;align-items:center;gap:0;flex:1;min-width:0;margin:0;padding:0}
+.ft-news-form .wpcf7-form br{display:none}
+.ft-news-form .wpcf7-form-control-wrap{flex:1;min-width:0;display:block}
+.ft-news-form input.wpcf7-email,
+.ft-news-form input[type="email"],
+.ft-news-form .ft-news-input{
+	width:100%;
+	height:44px;
+	padding:0 16px;
+	border:none;
+	background:transparent;
+	color:var(--ph-on-dark,#FFFFFF);
+	font-family:inherit;
+	font-size:15px;
+	outline:none;
+	box-shadow:none
+}
+.ft-news-form input.wpcf7-email::placeholder,
+.ft-news-form input[type="email"]::placeholder,
+.ft-news-form .ft-news-input::placeholder{color:var(--ph-footer-text-muted,#8FA0AF)}
+.ft-news-form input.wpcf7-submit,
+.ft-news-form .ft-news-submit{
+	display:inline-flex;
+	align-items:center;
+	justify-content:center;
+	flex-shrink:0;
+	height:44px;
+	padding:0 20px;
+	border:none;
+	border-radius:999px;
+	font-family:inherit;
+	font-size:14px;
+	font-weight:600;
+	line-height:1;
+	cursor:pointer;
+	white-space:nowrap;
+	color:var(--ph-on-accent,#FFFFFF);
+	background:linear-gradient(var(--ph-btn-angle,180deg),var(--ph-btn-soft,#FF8350) var(--ph-btn-start-stop,0%),var(--ph-btn-mid,#F15E22) 55%,var(--ph-btn-deep,#DC5016) var(--ph-btn-end-stop,100%));
+	box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 12px 30px -10px color-mix(in srgb,var(--ph-accent,#F15E22) 60%,transparent);
+	transition:transform .2s ease,box-shadow .2s ease
+}
+.ft-news-form input.wpcf7-submit:hover,
+.ft-news-form .ft-news-submit:hover{
+	transform:translateY(-2px);
+	color:var(--ph-on-accent,#FFFFFF);
+	box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 18px 40px -10px color-mix(in srgb,var(--ph-accent,#F15E22) 75%,transparent)
+}
+/* CF7 JS injects .wpcf7-spinner after the button. It is visibility:hidden but still
+   reserves 24px + margins, which stops the button reaching the pill edge — collapse
+   it until the form is actually submitting. */
+.ft-news-form .wpcf7-spinner{width:0;height:24px;margin:0;padding:0;overflow:hidden;transition:width .2s ease,margin .2s ease}
+.ft-news-form form.submitting .wpcf7-spinner{width:24px;margin:0 0 0 8px}
+.ft-news-form .wpcf7-not-valid-tip{font-size:12px;color:#FF8A8A;margin-top:6px}
+.ft-news-form .wpcf7-response-output{margin:10px 0 0;padding:8px 12px;border-radius:12px;font-size:13px;border-color:rgba(255,255,255,.18)}
 .fb .ft-h{font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ph-on-dark,#FFFFFF);padding-bottom:12px;margin-bottom:4px;border-bottom:1px solid var(--ph-footer-head-border,#1F3141)}
 .fb .ft-soc{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--ph-footer-soc-text,#DCE4EA);background:rgba(255,255,255,.05);border:1px solid var(--ph-footer-soc-border,#2A3D4D);transition:all .2s}
 .fb .ft-soc:hover{color:var(--ph-ink,#0B1620);background:linear-gradient(var(--ph-footer-hover-fill-angle,145deg),var(--ph-footer-hover-fill,#FF8A4C) var(--ph-footer-hover-fill-start-stop,0%),var(--ph-footer-hover-fill-end,#F15E22) var(--ph-footer-hover-fill-end-stop,100%));border-color:transparent;transform:translateY(-2px)}
