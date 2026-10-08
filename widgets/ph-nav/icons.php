@@ -15,7 +15,7 @@ if ( ! function_exists( 'nexora_ph_nav_seed_icons' ) ) {
 	 */
 	function nexora_ph_nav_seed_icons(): array {
 		return [
-		'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--ph-ink, #0B1620)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13"></path><path d="M22 2l-7 20-4-9-9-4z"></path></svg>',
+		'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--ph-link, #C2410C)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13"></path><path d="M22 2l-7 20-4-9-9-4z"></path></svg>',
 		'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--ph-link, #C2410C)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"></rect><path d="M8 11v5M8 8v.01M12 16v-5M16 16v-3a2 2 0 0 0-4 0"></path></svg>',
 		'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--ph-link, #C2410C)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg>',
 		'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--ph-link, #C2410C)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="5"></circle><circle cx="12" cy="12" r="1.5"></circle></svg>',

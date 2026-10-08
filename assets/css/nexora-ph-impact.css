@@ -1,8 +1,15 @@
 /* Prospects Hive impact styles. Selectors and declarations copied from the design export. */
-.tab{height:48px;padding:0 20px;border-radius:999px;border:1.5px solid var(--ph-impact-tab-border,#E6DDD3);background:var(--ph-surface,#FFFFFF);color:var(--ph-ink,#0B1620);font-family:inherit;font-size:15px;font-weight:500;cursor:pointer;transition:all .2s}
+.tab{height:48px;padding:0 20px;border-radius:999px;border:1.5px solid var(--ph-impact-tab-border,#E6DDD3);background:var(--ph-impact-tab-bg,#FFFFFF);color:var(--ph-impact-tab-text,#0B1620);font-family:inherit;font-size:15px;font-weight:500;cursor:pointer;transition:all .2s}
 .tab:hover{border-color:var(--ph-ink,#0B1620)}
-.tab.on{background:linear-gradient(var(--ph-impact-tab-on-angle,180deg),var(--ph-impact-tab-on,#FF8350) var(--ph-impact-tab-on-start-stop,0%),var(--ph-btn-mid,#F15E22) 60%,var(--ph-impact-tab-on-end,#DC5016) var(--ph-impact-tab-on-end-stop,100%));border-color:transparent;color:var(--ph-ink,#0B1620);font-weight:600;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 10px 24px -10px color-mix(in srgb,var(--ph-accent,#F15E22) 70%,transparent)}
+.tab.on{background:linear-gradient(var(--ph-impact-tab-on-angle,180deg),var(--ph-impact-tab-on,#FF8350) var(--ph-impact-tab-on-start-stop,0%),var(--ph-impact-tab-on-mid,#F15E22) 60%,var(--ph-impact-tab-on-end,#DC5016) var(--ph-impact-tab-on-end-stop,100%));border-color:transparent;color:var(--ph-impact-tab-on-text,#FFFFFF);font-weight:600;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 10px 24px -10px color-mix(in srgb,var(--ph-accent,#F15E22) 70%,transparent)}
 .tab,.tab.on{font-weight:600}
 .imp-frame{background:linear-gradient(var(--ph-impact-frame-angle,145deg),var(--ph-impact-frame,#F15E22) var(--ph-impact-frame-start-stop,0%),var(--ph-impact-frame-mid,#FF9D72) 45%,var(--ph-impact-frame-end,#5FB0E8) var(--ph-impact-frame-end-stop,100%))}
 .imp-panel{background:linear-gradient(var(--ph-impact-panel-angle,165deg),var(--ph-impact-panel,#FFF4ED) var(--ph-impact-panel-start-stop,0%),var(--ph-impact-panel-end,#FFFFFF) var(--ph-impact-panel-end-stop,55%))}
-@media (max-width:760px){.tabs-scroll>.tab{flex-shrink:0;height:42px;padding:0 16px;font-size:14px;white-space:nowrap}}
+.tabs-row{display:flex;align-items:center;gap:8px;align-self:flex-start;max-width:100%}
+.tabs-row>.tabs-scroll{flex:1 1 auto;min-width:0}
+.tabs-arrow{display:none;flex:0 0 auto;align-items:center;justify-content:center;width:40px;height:40px;padding:0;border-radius:999px;border:1.5px solid var(--ph-impact-tab-border,#E6DDD3);background:var(--ph-surface,#FFFFFF);color:var(--ph-ink,#0B1620);cursor:pointer;transition:all .2s}
+.tabs-arrow:hover:not(:disabled){border-color:var(--ph-accent,#F15E22);color:var(--ph-accent,#F15E22)}
+.tabs-arrow:disabled{opacity:.4;cursor:default}
+.tabs-arrow[hidden]{display:none}
+@media (max-width:760px){.tabs-scroll>.tab{flex-shrink:0;height:42px;padding:0 16px;font-size:14px;white-space:nowrap}
+.tabs-arrow{display:inline-flex;width:36px;height:36px}}

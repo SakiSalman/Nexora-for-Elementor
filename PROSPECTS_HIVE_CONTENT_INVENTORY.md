@@ -315,6 +315,8 @@ Labels are the Elementor sidebar names. HTML Tag is the default tag for that hea
 | impact | Highlight | `impact_f3` | Header | No | connected GTM system | — |
 | impact | HTML Tag | `impact_tag1` | Header | No | H2 | H2 |
 | impact | Accessible label | `impact_f4` | Content | No | Impact areas | — |
+| impact | Left arrow label | `impact_f7` | Content | No | Scroll tabs left | — |
+| impact | Right arrow label | `impact_f8` | Content | No | Scroll tabs right | — |
 | impact | Image | `impact_f5` | Content | No | impact.webp | — |
 | impact | Image alt | `impact_f6` | Content | No | Connected GTM targeting map | — |
 

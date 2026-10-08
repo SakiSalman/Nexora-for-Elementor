@@ -4,6 +4,7 @@
 .wf-node.rev small{color:var(--ph-muted-on-dark, #A9B6C2)}
 .tool-tile{border-radius:20px;overflow:hidden;background:var(--ph-surface, #FFFFFF);border:1px solid var(--ph-card-border, #EFE7DE);box-shadow:inset 0 1px 0 var(--ph-surface, #FFFFFF),0 18px 36px -24px color-mix(in srgb, var(--ph-ink, #0B1620) 30%, transparent);transition:transform .3s}
 .tool-tile:hover{transform:translateY(-4px) rotate(-1deg)}
+.tech-grid .tool-tile{animation:none !important}
 .tool-tile img{display:block;width:100%;height:auto;mix-blend-mode:multiply}
 .wf.grad .wf-node.rev{background:linear-gradient(var(--ph-tech-node-light-angle,145deg),var(--ph-tech-node-light,#FFFFFF) var(--ph-tech-node-light-start-stop,0%),var(--ph-tech-node-light-end,#E9EEF3) var(--ph-tech-node-light-end-stop,100%));color:var(--ph-ink, #0B1620)}
 .wf.grad .wf-node.rev small{color:var(--ph-muted, #56626D)}

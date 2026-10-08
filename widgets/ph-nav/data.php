@@ -476,6 +476,24 @@ if ( ! function_exists( 'nexora_ph_nav_menu_items' ) ) {
 			return [];
 		}
 		$items = wp_get_nav_menu_items( $menu_id );
-		return is_array( $items ) ? $items : [];
+		if ( ! is_array( $items ) ) {
+			return [];
+		}
+
+		/*
+		 * wp_get_nav_menu_items() only decorates the raw items. WordPress attaches
+		 * current-menu-item (and the ancestor/parent variants) inside wp_nav_menu(),
+		 * so a menu read straight from that call never reports an active item and the
+		 * nav's `.on` state never renders. Run the same core pass wp_nav_menu() uses.
+		 */
+		if (
+			function_exists( '_wp_menu_item_classes_by_context' )
+			&& isset( $GLOBALS['wp_query'] )
+			&& $GLOBALS['wp_query'] instanceof WP_Query
+		) {
+			_wp_menu_item_classes_by_context( $items );
+		}
+
+		return $items;
 	}
 }

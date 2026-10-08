@@ -39,7 +39,7 @@ if ( ! function_exists( 'nexora_ph_impact_register_content_controls' ) ) {
 			'_schema_version',
 			[
 				'type'    => Controls_Manager::HIDDEN,
-				'default' => '1',
+				'default' => '2',
 			]
 		);
 

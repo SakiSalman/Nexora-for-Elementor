@@ -3,10 +3,14 @@
 <script type="application/json" class="ph-impact-data">__PH_IMPACT_JSON__</script>
 <div class="wrap" style="display: flex; flex-direction: column; gap: 40px">
 <div class="head reveal" style="max-width: 820px"><span class="tag blue">GTM impact</span><h2 class="h2">More than lead generation: the impact of a <span class="grad-text">connected GTM system</span></h2></div>
+<div class="tabs-row">
+<button type="button" class="tabs-arrow" data-ph-tabs-step="-1" aria-label="Scroll tabs left"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></button>
 <div role="tablist" aria-label="Impact areas" class="glass tabs-scroll" style="display: flex; flex-wrap: wrap; gap: 6px; padding: 6px; border-radius: 999px; align-self: flex-start">
 <sc-for list="{{ impactTabs }}" as="t" hint-placeholder-count="5">
 <button role="tab" class="{{ t.cls }}" aria-selected="{{ t.sel }}" onClick="{{ t.pick }}" style="border: none">{{ t.label }}</button>
 </sc-for>
+</div>
+<button type="button" class="tabs-arrow" data-ph-tabs-step="1" aria-label="Scroll tabs right"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button>
 </div>
 <div role="tabpanel" class="stack-sm" style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: stretch">
 <div class="reveal" style="position: relative; border-radius: 28px; overflow: hidden; background: var(--ph-ink, #0B1620); box-shadow: 0 40px 80px -40px color-mix(in srgb, var(--ph-ink, #0B1620) 60%, transparent)">

@@ -23,5 +23,6 @@
 .benefit-item+.benefit-item::before{display:none}
 .vid-box{aspect-ratio:4/5 !important;gap:10px !important;padding:0 20px}
 .vid-box>img{height:30px !important}
-.vid-box .pulse,.ph-video-play{width:72px !important;height:72px !important;margin:-36px 0 0 -36px}}
+.vid-box .pulse,.ph-video-play{width:72px !important;height:72px !important}
+.ph-video-play{margin:-36px 0 0 -36px}}
 @keyframes vprog{from{width:0}to{width:100%}}

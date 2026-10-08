@@ -104,14 +104,59 @@ if ( ! function_exists( 'nexora_ph_pricing_register_content_controls' ) ) {
 			]
 		);
 
-		$widget->add_control(
+		$spots = new Repeater();
+
+		$spots->add_control(
 			'spots_note',
 			[
 				'label'       => esc_html__( 'Note', 'nexora-elementor' ),
 				'type'        => Controls_Manager::TEXTAREA,
-				'default'     => $defaults['spots_note'],
+				'default'     => '',
 				'rows'        => 2,
 				'description' => esc_html__( 'First line, then a new line for the second line.', 'nexora-elementor' ),
+			]
+		);
+
+		$widget->add_control(
+			'spots_notes',
+			[
+				'label'       => esc_html__( 'Notes', 'nexora-elementor' ),
+				'type'        => Controls_Manager::REPEATER,
+				'fields'      => $spots->get_controls(),
+				'default'     => [
+					[
+						'spots_note' => $defaults['spots_note'],
+					],
+				],
+				'title_field' => '{{{ spots_note }}}',
+				'description' => esc_html__( 'Shown one at a time on the sticky note.', 'nexora-elementor' ),
+			]
+		);
+
+		$widget->add_control(
+			'spots_rotate',
+			[
+				'label'        => esc_html__( 'Auto rotate', 'nexora-elementor' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'default'      => 'yes',
+				'label_on'     => esc_html__( 'On', 'nexora-elementor' ),
+				'label_off'    => esc_html__( 'Off', 'nexora-elementor' ),
+				'return_value' => 'yes',
+				'description'  => esc_html__( 'Rotate through the notes, one at a time.', 'nexora-elementor' ),
+			]
+		);
+
+		$widget->add_control(
+			'spots_interval',
+			[
+				'label'     => esc_html__( 'Seconds per note', 'nexora-elementor' ),
+				'type'      => Controls_Manager::NUMBER,
+				'default'   => 4,
+				'min'       => 1,
+				'step'      => 1,
+				'condition' => [
+					'spots_rotate' => 'yes',
+				],
 			]
 		);
 

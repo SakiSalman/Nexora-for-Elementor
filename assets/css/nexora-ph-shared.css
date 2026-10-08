@@ -68,7 +68,7 @@
 .nexora-ph summary::-webkit-details-marker{display:none}
 .nexora-ph *{box-sizing:border-box}
 .wrap{width:100%;max-width:1328px;margin:0 auto;padding:0 40px}
-.sec{position:relative;padding:128px 0;overflow:hidden}
+.sec{position:relative;padding:80px 0;overflow:hidden}
 .soft{background:radial-gradient(760px 420px at 100% 0%,var(--ph-soft-orange,rgba(241,94,34,.09)) var(--ph-soft-orange-start-stop,0%),var(--ph-soft-orange-end,rgba(241,94,34,0)) var(--ph-soft-orange-end-stop,62%)),radial-gradient(760px 420px at 0% 100%,var(--ph-soft-blue,rgba(35,116,172,.09)) var(--ph-soft-blue-start-stop,0%),var(--ph-soft-blue-end,rgba(35,116,172,0)) var(--ph-soft-blue-end-stop,62%)),var(--ph-soft-surface,#FFF9F5)}
 .cool{background:radial-gradient(760px 420px at 0% 0%,var(--ph-cool-blue,rgba(35,116,172,.08)) var(--ph-cool-blue-start-stop,0%),var(--ph-cool-blue-end,rgba(35,116,172,0)) var(--ph-cool-blue-end-stop,62%)),radial-gradient(760px 420px at 100% 100%,var(--ph-cool-orange,rgba(241,94,34,.07)) var(--ph-cool-orange-start-stop,0%),var(--ph-cool-orange-end,rgba(241,94,34,0)) var(--ph-cool-orange-end-stop,62%)),var(--ph-cool-surface,#F7FAFD)}
 .ink{background:radial-gradient(700px 420px at 90% 0%,var(--ph-ink-orange,rgba(241,94,34,.28)) var(--ph-ink-orange-start-stop,0%),var(--ph-ink-orange-end,rgba(241,94,34,0)) var(--ph-ink-orange-end-stop,62%)),radial-gradient(700px 420px at 0% 100%,var(--ph-ink-blue,rgba(35,116,172,.36)) var(--ph-ink-blue-start-stop,0%),var(--ph-ink-blue-end,rgba(35,116,172,0)) var(--ph-ink-blue-end-stop,62%)),var(--ph-ink-surface,#0B1620);color:var(--ph-on-dark,#FFFFFF)}
@@ -266,13 +266,13 @@
 .nexora-ph-contact .ct-form-panel{max-width:640px}}
 @media (max-width:760px){.g2,.g3,.g4{grid-template-columns:1fr}
 .wrap{padding:0 20px}
-.sec{padding:88px 0}
+.sec{padding:40px 0}
 .stack-sm{grid-template-columns:1fr !important}
 .fb-cta{margin-top:56px;padding:26px 20px;border-radius:26px}
 .fb-badges{grid-template-columns:repeat(2,minmax(0,1fr))}
 .fb-ai-l{margin-right:0;width:100%}
 .fb-bottom{flex-direction:column;align-items:flex-start}
-.sec{padding:72px 0}
+.sec{padding:40px 0}
 .nexora-ph .h2,.h2{font-size:clamp(30px,8.6vw,40px)}
 .wrap{padding:0 18px}
 .stack-sm{grid-template-columns:minmax(0,1fr) !important}

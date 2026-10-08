@@ -426,6 +426,57 @@ if ( ! function_exists( 'nexora_ph_pricing_plan_payload' ) ) {
 	}
 }
 
+if ( ! function_exists( 'nexora_ph_pricing_spots' ) ) {
+	/**
+	 * Sticky-note availability notes. One at a time, rotating.
+	 *
+	 * @param mixed $settings Elementor settings.
+	 * @return array<string, mixed>
+	 */
+	function nexora_ph_pricing_spots( $settings ): array {
+		$rows = ( is_array( $settings ) && array_key_exists( 'spots_notes', $settings ) && is_array( $settings['spots_notes'] ) )
+			? $settings['spots_notes']
+			: null;
+
+		if ( null === $rows ) {
+			// Widget was saved before the availability repeater existed.
+			// Carry the old sticky note over so no content is lost.
+			$migrated = nexora_ph_pricing_setting( $settings, 'spots_note', '' );
+			$rows     = [ [ 'spots_note' => $migrated ] ];
+		}
+
+		$spots = [];
+		foreach ( $rows as $row ) {
+			if ( ! is_array( $row ) ) {
+				continue;
+			}
+			$lines = nexora_ph_pricing_lines( nexora_ph_pricing_item_text( $row, 'spots_note' ) );
+			$line1 = $lines[0] ?? '';
+			$line2 = count( $lines ) > 1 ? implode( ' ', array_slice( $lines, 1 ) ) : '';
+			if ( '' === trim( $line1 . ' ' . $line2 ) ) {
+				continue;
+			}
+			$spots[] = [
+				'line1' => $line1,
+				'line2' => $line2,
+			];
+		}
+
+		$rotate   = 'yes' === nexora_ph_pricing_setting( $settings, 'spots_rotate', 'yes' );
+		$interval = max( 1, (int) nexora_ph_pricing_setting( $settings, 'spots_interval', 4 ) );
+
+		if ( count( $spots ) < 2 ) {
+			$rotate = false;
+		}
+
+		return [
+			'spots'         => $spots,
+			'spotsRotate'   => $rotate,
+			'spotsInterval' => $interval,
+		];
+	}
+}
+
 if ( ! function_exists( 'nexora_ph_pricing_payload' ) ) {
 	/**
 	 * Header, plans, and the after-90 block for the pricing template.
@@ -435,9 +486,7 @@ if ( ! function_exists( 'nexora_ph_pricing_payload' ) ) {
 	 */
 	function nexora_ph_pricing_payload( $settings ): array {
 		$defaults = nexora_ph_pricing_defaults();
-		$note     = nexora_ph_pricing_lines( nexora_ph_pricing_setting( $settings, 'spots_note', $defaults['spots_note'] ) );
-		$line1    = $note[0] ?? '';
-		$line2    = count( $note ) > 1 ? implode( ' ', array_slice( $note, 1 ) ) : '';
+		$spots    = nexora_ph_pricing_spots( $settings );
 		$plans    = ( is_array( $settings ) && array_key_exists( 'plans', $settings ) && is_array( $settings['plans'] ) )
 			? $settings['plans']
 			: nexora_ph_pricing_default_plans();
@@ -448,8 +497,9 @@ if ( ! function_exists( 'nexora_ph_pricing_payload' ) ) {
 			'headingBefore'    => nexora_ph_pricing_setting( $settings, 'heading', $defaults['heading'] ),
 			'headingTag'       => nexora_ph_pricing_tag( nexora_ph_pricing_setting( $settings, 'heading_tag', $defaults['heading_tag'] ), 'h2' ),
 			'highlight'        => nexora_ph_pricing_setting( $settings, 'highlight', $defaults['highlight'] ),
-			'spotsLine1'       => $line1,
-			'spotsLine2'       => $line2,
+			'spots'            => $spots['spots'],
+			'spotsRotate'      => $spots['spotsRotate'],
+			'spotsInterval'    => $spots['spotsInterval'],
 			'spotsLabel'       => nexora_ph_pricing_setting( $settings, 'spots_label', $defaults['spots_label'] ),
 			'plans'            => array_map( 'nexora_ph_pricing_plan_payload', array_values( $plans ) ),
 			'afterHeading'     => nexora_ph_pricing_setting( $settings, 'after_heading', $defaults['after_heading'] ),

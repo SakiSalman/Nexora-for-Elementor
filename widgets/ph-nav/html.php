@@ -105,7 +105,18 @@ if ( ! function_exists( 'nexora_ph_nav_html' ) ) {
 
 		$logo_img = '';
 		if ( '' !== $logo_src ) {
-			$src      = function_exists( 'esc_url' ) ? esc_url( $logo_src ) : htmlspecialchars( $logo_src, ENT_QUOTES, 'UTF-8' );
+			/*
+			 * The short assets/ form is expanded by the shared PH rewrite in
+			 * nexora_ph_render_section(). esc_url() prefixes a schemeless path with
+			 * http://, and the rewrite then prepends the site URL a second time
+			 * (http://http://…), so leave that form untouched.
+			 */
+			$is_relative = 0 === strpos( $logo_src, 'assets/' );
+			if ( $is_relative || ! function_exists( 'esc_url' ) ) {
+				$src = function_exists( 'esc_attr' ) ? esc_attr( $logo_src ) : htmlspecialchars( $logo_src, ENT_QUOTES, 'UTF-8' );
+			} else {
+				$src = esc_url( $logo_src );
+			}
 			$logo_img = '<img src="' . $src . '" alt="' . nexora_ph_nav_h( $logo_alt ) . '" style="height: 26px; width: auto; display: block">';
 		}
 
@@ -171,9 +182,10 @@ if ( ! function_exists( 'nexora_ph_nav_mega' ) ) {
 			$view = '<div class="mm-top" style="justify-content: flex-end"><a class="mm-all" data-nav-link' . nexora_ph_nav_attr_url( $group['view_url'] ) . '>' . nexora_ph_nav_h( $group['view_text'] ) . ' <span aria-hidden="true">→</span></a></div>';
 		}
 		$cards = '';
-		foreach ( $group['cards'] as $index => $card ) {
-			$class  = 0 === $index ? 'mm-item mm-feat' : 'mm-item';
-			$cards .= '<a class="' . $class . '" role="menuitem" data-nav-link' . nexora_ph_nav_attr_url( $card['url'] ) . '><span class="mm-ic">' . $card['icon'] . '</span><span class="mm-tx"><strong>' . nexora_ph_nav_h( $card['label'] ) . '</strong><span>' . nexora_ph_nav_h( $card['description'] ) . '</span></span></a>';
+		foreach ( $group['cards'] as $card ) {
+			// No featured card: every box renders identically and only :hover applies
+			// the white fill / hairline / shadow (design's .mm-item treatment).
+			$cards .= '<a class="mm-item" role="menuitem" data-nav-link' . nexora_ph_nav_attr_url( $card['url'] ) . '><span class="mm-ic">' . $card['icon'] . '</span><span class="mm-tx"><strong>' . nexora_ph_nav_h( $card['label'] ) . '</strong><span>' . nexora_ph_nav_h( $card['description'] ) . '</span></span></a>';
 		}
 		$grid = '' !== $cards ? '<div class="mm-grid">' . $cards . '</div>' : '';
 		$main = ( '' !== $view || '' !== $grid ) ? '<div class="mm-main">' . $view . $grid . '</div>' : '';

@@ -94,6 +94,9 @@ body.admin-bar .nav{top:32px}
 .mm-item:hover{background:var(--ph-surface,#FFFFFF);border-color:var(--ph-nav-item-border,#FBD3BF);box-shadow:0 16px 30px -22px color-mix(in srgb,var(--ph-accent,#F15E22) 55%,transparent);transform:translateY(-1px)}
 .mm-ic{flex-shrink:0;width:42px;height:42px;border-radius:13px;display:flex;align-items:center;justify-content:center;background:linear-gradient(var(--ph-nav-ic-angle,145deg),var(--ph-nav-ic,#FFF3EC) var(--ph-nav-ic-start-stop,0%),var(--ph-nav-ic-end,#FFE0CF) var(--ph-nav-ic-end-stop,100%));box-shadow:inset 0 1px 0 var(--ph-surface,#FFFFFF);transition:transform .2s}
 .mm-item:hover .mm-ic{transform:scale(1.06)}
+/* Every tile icon is the same orange stroke (design's non-featured card), so no
+   box can inherit a "featured" tint from a seed SVG already saved in page data. */
+.mm-ic svg{stroke:var(--ph-link,#C2410C) !important;color:var(--ph-link,#C2410C) !important}
 .mm-tx{display:flex;flex-direction:column;gap:3px}
 .mm-tx strong{font-size:15px;font-weight:600;letter-spacing:-.01em}
 .mm-tx span{font-size:13px;line-height:1.5;color:var(--ph-muted,#56626D)}
@@ -179,10 +182,12 @@ body.admin-bar .nav{top:32px}
 .mm-others .mm-label{color:var(--ph-link-blue,#1A5A87)}
 .mm-other{border-color:var(--ph-nav-other-border,#CFE2F1) !important;box-shadow:0 6px 14px -10px color-mix(in srgb,var(--ph-blue-accent,#2374AC) 50%,transparent)}
 .mm-oic{background:linear-gradient(var(--ph-nav-oic-angle,145deg),var(--ph-nav-oic,#E4F1FA) var(--ph-nav-oic-start-stop,0%),var(--ph-nav-oic-end,#C7DFF1) var(--ph-nav-oic-end-stop,100%)) !important}
-.dd{pointer-events:auto;position:absolute;top:76px;z-index:5;min-width:280px;max-width:360px;padding:8px;border-radius:22px;display:flex;flex-direction:column;background:linear-gradient(var(--ph-nav-menu-angle,160deg),var(--ph-nav-menu,rgba(255,255,255,.96)) var(--ph-nav-menu-start-stop,0%),color-mix(in srgb,var(--ph-nav-menu-mid,#FFF4EC) 94%,transparent) 55%,var(--ph-nav-menu-end,rgba(234,243,251,.96)) var(--ph-nav-menu-end-stop,100%));border:1px solid rgba(255,255,255,.95);box-shadow:0 30px 60px -24px color-mix(in srgb,var(--ph-ink,#0B1620) 45%,transparent);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px)}
+/* Panel + row shadows are the design's .mm panel / .mm-item:hover treatment —
+   the redesign has no .dd, so its dropdown surface is the reference. */
+.dd{pointer-events:auto;position:absolute;top:76px;z-index:5;min-width:280px;max-width:360px;padding:8px;border-radius:22px;display:flex;flex-direction:column;background:linear-gradient(var(--ph-nav-menu-angle,160deg),var(--ph-nav-menu,rgba(255,255,255,.96)) var(--ph-nav-menu-start-stop,0%),color-mix(in srgb,var(--ph-nav-menu-mid,#FFF4EC) 94%,transparent) 55%,var(--ph-nav-menu-end,rgba(234,243,251,.96)) var(--ph-nav-menu-end-stop,100%));border:1px solid rgba(255,255,255,.95);box-shadow:inset 0 1px 0 var(--ph-surface,#FFFFFF),0 0 0 1px color-mix(in srgb,var(--ph-accent,#F15E22) 6%,transparent),0 50px 100px -40px color-mix(in srgb,var(--ph-ink,#0B1620) 50%,transparent),0 10px 30px -16px color-mix(in srgb,var(--ph-blue-accent,#2374AC) 30%,transparent);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px)}
 .dd::before{content:"";position:absolute;left:0;right:0;top:-20px;height:20px}
-.dd a{display:flex;flex-direction:column;gap:3px;padding:12px 14px;border-radius:14px;text-decoration:none;color:var(--ph-ink,#0B1620)}
-.dd a:hover{background:rgba(255,255,255,.8)}
+.dd a{display:flex;flex-direction:column;gap:3px;padding:12px 14px;border:1px solid transparent;border-radius:14px;text-decoration:none;color:var(--ph-ink,#0B1620);transition:background .2s,border-color .2s,box-shadow .2s,transform .2s}
+.dd a:hover{background:var(--ph-surface,#FFFFFF);border-color:var(--ph-nav-item-border,#FBD3BF);box-shadow:0 16px 30px -22px color-mix(in srgb,var(--ph-accent,#F15E22) 55%,transparent);transform:translateY(-1px)}
 .dd strong{font-size:15px;font-weight:600}
 .dd span{font-size:13px;line-height:1.45;color:var(--ph-muted,#56626D)}
 .nav [hidden]{display:none !important}

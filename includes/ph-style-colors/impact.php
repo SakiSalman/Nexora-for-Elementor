@@ -30,7 +30,6 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_impact' ) ) {
 				'link',
 				'link-blue',
 				'blue-accent',
-				'btn-mid',
 				'grad-warm',
 				'grad-rose',
 				'grad-sky',
@@ -49,7 +48,6 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_impact' ) ) {
 				'link' => 'Link / icon stroke',
 				'link-blue' => 'Blue link / chip text',
 				'blue-accent' => 'Blue accent / tag dot',
-				'btn-mid' => 'Primary button middle stop',
 				'grad-warm' => 'Heading gradient — warm stop',
 				'grad-rose' => 'Heading gradient — rose stop',
 				'grad-sky' => 'Heading gradient — sky stop',
@@ -77,6 +75,30 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_impact' ) ) {
 						'group'   => 'surface',
 					],
 					[
+						'token'   => 'tab-bg',
+						'label'   => 'Inactive tab background',
+						'default' => '#FFFFFF',
+						'group'   => 'surface',
+					],
+					[
+						'token'   => 'tab-text',
+						'label'   => 'Inactive tab text',
+						'default' => '#0B1620',
+						'group'   => 'surface',
+					],
+					[
+						'token'   => 'tab-on-mid',
+						'label'   => 'Active tab — middle stop',
+						'default' => '#F15E22',
+						'group'   => 'button',
+					],
+					[
+						'token'   => 'tab-on-text',
+						'label'   => 'Active tab text',
+						'default' => '#FFFFFF',
+						'group'   => 'button',
+					],
+					[
 						'token'   => 'frame-mid',
 						'label'   => 'Panel frame middle stop (45%)',
 						'default' => '#FF9D72',
@@ -87,24 +109,7 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_impact' ) ) {
 			'gradients'      => array_merge(
 				$shared['gradients'],
 				[
-					[
-						'name'           => 'tab_on',
-						'label'          => 'Active tab background',
-						'group'          => 'button',
-						'selector'       => '{{WRAPPER}} .nexora-ph .tab.on',
-						'default'        => [
-							'background'     => 'gradient',
-							'color'          => '#FF8350',
-							'color_b'        => '#DC5016',
-							'color_stop'     => [ 'unit' => '%', 'size' => 0 ],
-							'color_b_stop'   => [ 'unit' => '%', 'size' => 100 ],
-							'gradient_type'  => 'linear',
-							'gradient_angle' => [ 'unit' => 'deg', 'size' => 180 ],
-						],
-						'signature'      => 'linear-gradient(var(--ph-impact-tab-on-angle,180deg),var(--ph-impact-tab-on,#FF8350) var(--ph-impact-tab-on-start-stop,0%),var(--ph-btn-mid,#F15E22) 60%,var(--ph-impact-tab-on-end,#DC5016) var(--ph-impact-tab-on-end-stop,100%))',
-						'fields_options' => nexora_ph_style_colors_bridge( nexora_ph_style_colors_vars( 'ph-impact-tab-on' ) ),
-						'notes'          => 'Three-stop CSS-var bridge keeps --ph-btn-mid (#F15E22) at 60%; the gradient control owns the outer stops.',
-					],
+					nexora_ph_style_colors_solid_mid_gradient( 'tab_on', 'Active tab background', 'button', '{{WRAPPER}} .nexora-ph .tab.on', 'ph-impact-tab-on', '#FF8350', '#DC5016', 180, '#F15E22', 60 ),
 					[
 						'name'           => 'frame',
 						'label'          => 'Panel frame border',
