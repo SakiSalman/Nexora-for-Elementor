@@ -124,6 +124,18 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_framework' ) ) {
 						'default' => '#F15E22',
 						'group'   => 'fill',
 					],
+					[
+						'token'   => 'bubble-bg',
+						'label'   => 'Bubble / mover background',
+						'default' => '#FFFFFF',
+						'group'   => 'surface',
+					],
+					[
+						'token'   => 'bubble-text',
+						'label'   => 'Bubble / mover text',
+						'default' => '#0B1620',
+						'group'   => 'text',
+					],
 				]
 			),
 			'gradients'      => array_merge(
@@ -240,19 +252,6 @@ if ( ! function_exists( 'nexora_ph_style_colors_inventory_framework' ) ) {
 							[ '#0A131B', 100 ],
 						],
 						'angle'    => 160,
-					] ),
-					nexora_ph_style_colors_stops_gradient( [
-						'name'     => 'fw_card_light',
-						'label'    => 'Light bubble / mover card',
-						'group'    => 'fill',
-						'selector' => '{{WRAPPER}} .nexora-ph .fw-bubble, {{WRAPPER}} .nexora-ph .fw-mover',
-						'prefix'   => 'ph-framework-card-light',
-						'type'     => 'linear',
-						'stops'    => [
-							[ '#FFFFFF', 0 ],
-							[ '#F4F7FA', 100 ],
-						],
-						'angle'    => 180,
 					] ),
 					nexora_ph_style_colors_stops_gradient( [
 						'name'     => 'fw_bars',
