@@ -32,7 +32,7 @@
 		var o = {};
 		for (var i = 0; i < 8; i++) {
 			(function (i) {
-				o['c' + i] = i === cur ? 'ind-tile reveal on' : 'ind-tile reveal';
+				o['c' + i] = i === cur ? 'ind-tile reveal' : 'ind-tile reveal';
 				o['a' + i] = i === cur ? 'true' : 'false';
 				o['p' + i] = function (e) {
 					if (e && e.preventDefault) e.preventDefault();

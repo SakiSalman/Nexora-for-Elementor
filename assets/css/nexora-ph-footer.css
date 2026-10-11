@@ -129,3 +129,10 @@
 .ft-logo text{stroke-width:2.6px}
 .ft-logo{margin-bottom:-18px}}
 @media (min-width:1441px){.ft-logo{margin-bottom:-60px}}
+/* Bottom legal bar (Privacy / Terms / Cookie): keep the design's 12px uppercase look even when a theme or another plugin styles `a` directly.
+   The links carry an inline color, so the hover rule needs !important to win over it. */
+.nexora-ph .footer-sec .ft-legal,
+.nexora-ph .footer-sec .ft-legal a,
+.nexora-ph .footer-sec .ft-legal a:visited{font-size:12px !important;font-weight:400 !important;letter-spacing:.1em !important;text-transform:uppercase !important;text-decoration:none !important;color:var(--ph-footer-text-muted,#8FA0AF) !important;transition:color .2s}
+.nexora-ph .footer-sec .ft-legal a:hover,
+.nexora-ph .footer-sec .ft-legal a:focus-visible{color:var(--ph-footer-hover,#FFB08C) !important}
