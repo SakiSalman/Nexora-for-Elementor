@@ -2271,10 +2271,84 @@ Every heading an editor can change has two controls: the heading text, and HTML 
 
 ---
 
+## 39. Cold Email widgets
+
+The nine Cold Email widgets (`ele-ph-ce-*`) are a second widget family built from the "Cold Email" landing design. They reuse the Prospects Hive design system: `assets/css/nexora-ph-shared.css`, the `nexora-ph-fonts` handle, the Nexora panel category, the admin Nexora → Widgets screen, and the PH color catalog. GTM Funnel, Timeline, and the PH widgets were not modified to build them. Five widgets from the original thirteen (CE Tech, CE Reviews, CE FAQ, CE CTA, CE Footer) were removed after QA; their files, delta CSS, color inventories, behavior scripts, and registry entries were deleted with them. A ninth widget, CE Problem (design section CE2), was added after QA and reproduces its design section as-is.
+
+### Registry ids
+
+All nine live in `includes/class-widget-registry.php`, each with the same asset shape as a PH widget: `nexora-ph-fonts` + `nexora-ph-shared` + its own delta CSS `assets/css/nexora-ph-ce-{name}.css` (handle `nexora-ph-ce-{name}`).
+
+| Registry id | Class | Behavior script |
+| --- | --- | --- |
+| `ele-ph-ce-hero` | `Nexora_PH_CE_Hero_Widget` | `nexora-ph-ce-anchors.js` |
+| `ele-ph-ce-problem` | `Nexora_PH_CE_Problem_Widget` | `nexora-ph-ce-problem.js` (scroll timeline) |
+| `ele-ph-ce-solution` | `Nexora_PH_CE_Solution_Widget` | `nexora-ph-ce-solution.js` (sticky stack) |
+| `ele-ph-ce-services` | `Nexora_PH_CE_Services_Widget` | `nexora-ph-ce-hover.js` |
+| `ele-ph-ce-pipeline` | `Nexora_PH_CE_Pipeline_Widget` | `nexora-ph-ce-pipeline.js` |
+| `ele-ph-ce-process` | `Nexora_PH_CE_Process_Widget` | none (CSS sticky stack) |
+| `ele-ph-ce-outlook` | `Nexora_PH_CE_Outlook_Widget` | none (CSS bar animation) |
+| `ele-ph-ce-why` | `Nexora_PH_CE_Why_Widget` | `nexora-ph-ce-hover.js` |
+| `ele-ph-ce-signal` | `Nexora_PH_CE_Signal_Widget` | none (CSS animations) |
+
+`nexora-ph-ce-anchors.js` rewrites the design's cross-widget links (`#contact`) to the id-suffixed anchors the renderer emits.
+
+### File map
+
+Per widget:
+
+| File | Role |
+| --- | --- |
+| `widgets/class-ele-ph-ce-{name}.php` | Elementor widget class. `register_controls()` calls the per-widget content registrar, then `nexora_ph_register_style_colors( $this, 'ce-{name}' )`. |
+| `widgets/ph-ce-{name}/markup.html` | Golden copy of the design slice. The byte source for the parity gate; never edited after extraction. |
+| `widgets/ph-ce-{name}/defaults.php` | Default settings: one key per control, reproducing the design copy, including one default row per repeater item. |
+| `widgets/ph-ce-{name}/template.php` | Markup with editable holes. Prints the defaults byte for byte. |
+| `widgets/ph-ce-{name}/controls-content.php` | Content-tab controls: hidden `_schema_version`, then the header/repeater sections. |
+| `widgets/ph-ce-{name}/render.php` | Loads settings and includes the template. |
+| `assets/css/nexora-ph-ce-{name}.css` | Widget-owned delta CSS: design block 1 + block 2, scoped with `.nexora-ph-ce-{name}`, source order preserved, shared-conflicting selectors renamed or scoped. |
+| `includes/ph-style-colors/ce-{name}.php` | Color inventory (`nexora_ph_style_colors_inventory_ce_{name}`), 4–8 curated entries. |
+
+Shared CE files:
+
+| File | Role |
+| --- | --- |
+| `widgets/ph-ce-lib/fields.php` | Settings helpers: `setting`, `text`, `attr`, `mark`, `lines`, `rows`, `media`, `link`, `heading_tag`, `svg`. |
+| `widgets/ph-ce-lib/icons.php` | Harvested SVG glyphs keyed by md5 prefix. |
+| `widgets/ph-ce-pipeline/data.php` | Stage data for the pipeline visuals. |
+| `assets/js/nexora-ph-ce-anchors.js` | Cross-widget anchor rewriting. |
+| `assets/js/nexora-ph-ce-hover.js` | Card hover state (services, why). |
+| `assets/js/nexora-ph-ce-solution.js` | Sticky-stack scroll state. |
+| `assets/js/nexora-ph-ce-problem.js` | Timeline scroll state: fill progress and active step. |
+| `assets/js/nexora-ph-ce-pipeline.js` | Stage auto-advance and panel switch. |
+| `bin/ce-extract.mjs`, `bin/ce-css-diff.mjs` | Section extraction and classified delta CSS. |
+| `bin/ce-parity.mjs`, `bin/ce-style-colors-verify.php` | Byte-parity gate and color-inventory gate. |
+
+### Text conventions
+
+**`[[highlight]]` markers.** `nexora_ph_ce_mark()` escapes the text first, then turns `[[word]]` into `<mark>word</mark>`. Use it for rich copy where the design highlights a word (email subjects, signal lines). Only the marker-generated `<mark>` renders as HTML; user-supplied HTML never does. The `cemark` family in the widget delta styles the marks.
+
+**Lines convention.** `nexora_ph_ce_lines()` turns one TEXTAREA into an array of trimmed non-empty lines: one line is one item (mailbox rows, chips, board cards, tool lists). Some line shapes split further on ` | ` — a mailbox row is `address | status`, and a missing trailing part falls back to the design default for that slot. Bar heights are plain numbers, one per line. A line beyond the design count renders with the design's last-row styling.
+
+**Repeater rows.** `nexora_ph_ce_rows()` fills a row's missing keys from the default row with the same `_id`, else the same index, else the first default row, so an added row clones the design look. The template iterates rows; the design rows are the defaults, same count and order.
+
+### Delta CSS conventions
+
+**Section padding.** Every CE delta re-declares the CE design's section base scoped to its widget — `.nexora-ph-ce-{name} .sec{position:relative;padding:40px 0;overflow:hidden}` — because `nexora-ph-shared.css` keeps the PH value (80px). The responsive chain follows in the media queries: `88px`, then `72px` at ≤760px (the later rule wins, matching the design cascade). Sticky sections add only `overflow:visible !important` on their own section class and inherit this padding; CE Problem's design `padding:40px 0` was aligned with the family after QA. (`ss-sec` and `stk-sec` still carry their original design overrides.)
+
+### Style colors
+
+Every CE widget registers its curated inventory through the shared registrar `includes/ph-style-colors.php`, exactly like PH widgets. Entries come from `nexora_ph_style_colors_shared_subset()` with label overrides, or from own solid/gradient entries; `include_shared` stays `false`. Each picker writes one `--ph-*` variable on `{{WRAPPER}} .nexora-ph`; templates and delta CSS read `var(--ph-*, #original)`, so an untouched page is byte-identical to the design. `php bin/ce-style-colors-verify.php --widget ce-{name}` gates labels, the eight-picker cap, defaults, and variable consumption.
+
+### Parity gate
+
+`node bin/ce-parity.mjs <rendered-file>` compares every rendered instance against its `markup.html` slice after reverting `var(--ph-*, fallback)` to the fallback and excluding the pipeline JSON script and the `<template>` wrapper. Defaults must stay byte-identical, which is why `markup.html` is never edited and template holes print the design copy.
+
+---
+
 ## Document history
 
 | Item | Value |
 | --- | --- |
 | Derived from | Plugin source at version 1.1.1 |
 | Primary files read | `nexora-for-elementor.php`, `includes/*`, `widgets/class-ele-*.php`, `widgets/gtm-funnel/*`, `widgets/timeline/*`, `widgets/lib/class-funnel-geometry.php`, `assets/js/*`, `assets/css/*` (timeline and admin in full, GTM CSS by structure) |
-| Not modified | Plugin behavior at the time section 36 was written. Section 37 documents Prospects Hive content controls. Section 38 documents sidebar organization, repeaters, and heading tags. |
+| Not modified | Plugin behavior at the time section 36 was written. Section 37 documents Prospects Hive content controls. Section 38 documents sidebar organization, repeaters, and heading tags. Section 39 documents the Cold Email widgets. |

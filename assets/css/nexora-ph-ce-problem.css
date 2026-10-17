@@ -1,0 +1,51 @@
+/* Cold Email problem section (design CE2 PROBLEM), scoped delta.
+   Source order follows ColdEmail.dc.html (funnel chart block 1, then block 2 rules).
+   Shared (.sec/.wrap/.head/.tag/.h2/.lead/.grad-text/.mid/.gridlines/.reveal) is not repeated;
+   animations use ce- keyframes per the family rule (shared's float/pulse are not referenced).
+   Colors read var(--ph-*, fallback); the fallbacks are the design values (phase 3). */
+.nexora-ph-ce-problem .ce-lab{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ph-muted,#56626D)}
+.nexora-ph-ce-problem .ce-funnel-top{position:relative;display:flex;justify-content:space-between;align-items:center}
+.nexora-ph-ce-problem .ce-warn{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(241,94,34,.16);border:1px solid rgba(241,94,34,.35);color:#FFB08C;font-size:12.5px;font-weight:600}
+.nexora-ph-ce-problem .ce-warn i{width:8px;height:8px;border-radius:50%;background:var(--ph-accent,#F15E22);animation:ce-pulse 2s ease-out infinite}
+.nexora-ph-ce-problem .ce-frows{position:relative;display:flex;flex-direction:column;gap:14px}
+.nexora-ph-ce-problem .ce-frow{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:14px;align-items:center}
+.nexora-ph-ce-problem .ce-ftrack{height:48px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);overflow:hidden}
+.nexora-ph-ce-problem .ce-fbar{display:flex;align-items:center;height:100%;padding:0 14px;border-radius:13px;background:linear-gradient(90deg,#2374AC,#5FB0E8 45%,#FF8A4C 85%,var(--ph-accent,#F15E22));white-space:nowrap;transform-origin:left;animation:ce-grow 1.3s cubic-bezier(.2,.8,.2,1) both}
+.nexora-ph-ce-problem .ce-fbar b{font-size:13.5px;font-weight:600;color:#FFFFFF;text-shadow:0 1px 8px rgba(0,0,0,.35)}
+.nexora-ph-ce-problem .ce-leak{display:inline-flex;align-items:center;gap:6px;justify-self:start;padding:7px 11px;border-radius:10px;font-size:12.5px;font-weight:600;color:#FFC2A6;background:rgba(241,94,34,.14);border:1px dashed rgba(241,94,34,.55);animation:ce-float 5s ease-in-out infinite}
+.nexora-ph-ce-problem .ce-frow:nth-child(3) .ce-leak{animation-delay:.8s}.nexora-ph-ce-problem .ce-frow:nth-child(4) .ce-leak{animation-delay:1.6s}.nexora-ph-ce-problem .ce-frow:nth-child(5) .ce-leak{animation-delay:2.4s}
+@media (max-width:760px){.nexora-ph-ce-problem .ce-frow{grid-template-columns:1fr}.nexora-ph-ce-problem .ce-leak{justify-self:end;margin-top:-6px}}
+.nexora-ph-ce-problem .pt-sec{overflow:visible !important;padding:110px 0}
+.nexora-ph-ce-problem .pt-head{max-width:900px;padding:0 20px;margin:0 auto 56px}
+.nexora-ph-ce-problem .pt-wrap{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,1fr);gap:72px;align-items:start}
+.nexora-ph-ce-problem .pt-left{position:sticky;top:110px}
+.nexora-ph-ce-problem .pt-card{position:relative;overflow:hidden;border-radius:30px;padding:36px 38px;display:flex;flex-direction:column;gap:16px;box-shadow:0 50px 90px -46px rgba(11,22,32,.7)}
+.nexora-ph-ce-problem .pt-chart{position:relative;display:flex;flex-direction:column;gap:18px}
+.nexora-ph-ce-problem .pt-chart .ce-frows{gap:12px !important}
+.nexora-ph-ce-problem .pt-chart .ce-ftrack{height:46px !important}
+.nexora-ph-ce-problem .pt-chart .ce-fbar b{font-size:13.5px !important}
+.nexora-ph-ce-problem .pt-fnote{position:relative;font-size:13.5px;color:#A9B6C2}
+.nexora-ph-ce-problem .pt-chart .ce-frows{gap:9px}
+.nexora-ph-ce-problem .pt-chart .ce-ftrack{height:36px;border-radius:11px}
+.nexora-ph-ce-problem .pt-chart .ce-fbar{border-radius:10px}
+.nexora-ph-ce-problem .pt-chart .ce-fbar b{font-size:12.5px}
+.nexora-ph-ce-problem .pt-chart .ce-frow{grid-template-columns:minmax(0,1fr) 138px;gap:12px}
+.nexora-ph-ce-problem .pt-chart .ce-leak{font-size:12px;padding:6px 10px}
+.nexora-ph-ce-problem .pt-tl{position:relative;display:flex;flex-direction:column;gap:84px;padding:34px 0 60px 64px}
+.nexora-ph-ce-problem .pt-line{position:absolute;left:10px;top:0;bottom:0;width:3px;border-radius:3px;background:rgba(11,22,32,.08);overflow:hidden}
+.nexora-ph-ce-problem .pt-fill{position:absolute;inset:0;border-radius:3px;background:linear-gradient(var(--ph-ce-problem-timeline-angle,180deg),var(--ph-ce-problem-timeline,#F15E22) var(--ph-ce-problem-timeline-start-stop,0%),var(--ph-ce-problem-timeline-mid,#FF9D72) 45%,var(--ph-ce-problem-timeline-mid-2,#5FB0E8) 80%,var(--ph-ce-problem-timeline-end,#2374AC) var(--ph-ce-problem-timeline-end-stop,100%));transform-origin:top;transform:scaleY(0);transition:transform .2s linear}
+.nexora-ph-ce-problem .pt-item{position:relative;display:flex;flex-direction:column;gap:12px}
+.nexora-ph-ce-problem .pt-dot{position:absolute;left:-63px;top:22px;width:20px;height:20px;border-radius:50%;background:#FFFFFF;border:3px solid #E2D8CD;box-shadow:0 0 0 6px #FFFFFF;transition:all .4s ease}
+.nexora-ph-ce-problem .pt-item.on .pt-dot{border-color:var(--ph-accent,#F15E22);background:var(--ph-accent,#F15E22);box-shadow:0 0 0 6px #FFFFFF,0 0 0 10px rgba(241,94,34,.18)}
+.nexora-ph-ce-problem .pt-num{font-size:60px;font-weight:700;letter-spacing:-.04em;line-height:1;color:#D8DEE3;transition:color .4s ease}
+.nexora-ph-ce-problem .pt-item.on .pt-num{background:linear-gradient(var(--ph-ce-problem-num-angle,160deg),var(--ph-ce-problem-num,#FF9D72) var(--ph-ce-problem-num-start-stop,0%),var(--ph-ce-problem-num-mid,#F15E22) 50%,var(--ph-ce-problem-num-end,#2374AC) var(--ph-ce-problem-num-end-stop,100%));-webkit-background-clip:text;background-clip:text;color:transparent}
+.nexora-ph-ce-problem .pt-item h3{font-size:clamp(24px,2.3vw,32px);font-weight:700;letter-spacing:-.025em;line-height:1.2;margin-top:10px}
+.nexora-ph-ce-problem .pt-item p{font-size:17.5px;line-height:1.75;color:var(--ph-muted,#56626D);max-width:560px}
+@media (max-width:1024px){.nexora-ph-ce-problem .pt-wrap{grid-template-columns:1fr;gap:48px}.nexora-ph-ce-problem .pt-left{position:static}}
+@media (max-width:760px){.nexora-ph-ce-problem .pt-card{padding:26px}.nexora-ph-ce-problem .pt-tl{padding-left:48px;gap:56px}.nexora-ph-ce-problem .pt-dot{left:-47px}.nexora-ph-ce-problem .pt-num{font-size:46px}.nexora-ph-ce-problem .pt-chart .ce-frow{grid-template-columns:1fr}.nexora-ph-ce-problem .pt-chart .ce-leak{justify-self:end;margin-top:-4px}}
+.nexora-ph-ce-problem .pt-head .h2{line-height:1.16}
+.nexora-ph-ce-problem .ce-fbar{background:linear-gradient(90deg,#B83A0A 0%,var(--ph-accent,#F15E22) 55%,#FF9D72 100%) !important;box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 8px 20px -10px rgba(241,94,34,.8)}
+.nexora-ph-ce-problem .ce-ftrack{background:rgba(255,255,255,.06)}
+@keyframes ce-grow{from{transform:scaleX(.2);opacity:0}to{transform:scaleX(1);opacity:1}}
+@keyframes ce-pulse{0%{box-shadow:0 0 0 0 rgba(241,94,34,.5)}100%{box-shadow:0 0 0 18px rgba(241,94,34,0)}}
+@keyframes ce-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}

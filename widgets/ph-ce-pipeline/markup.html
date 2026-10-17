@@ -1,0 +1,26 @@
+<!-- CE5 B2B PIPELINE (Option A: interactive stages) -->
+<section class="sec ivory" style="padding: 110px 0">
+<div class="wrap" style="display: flex; flex-direction: column; gap: 48px">
+<div class="head center" style="max-width: 860px">
+<span class="tag blue">B2B Pipeline</span>
+<h2 class="h2">Cold email system that creates <span class="grad-text">opportunities for B2B business</span></h2>
+<p class="lead">Five parts work together. When one is weak, the whole pipeline leaks. We build all five.</p>
+</div>
+<div class="{{ plTrack }}" role="tablist" aria-label="Pipeline stages">
+<div class="pl-line" aria-hidden="true"><span></span></div>
+<button type="button" class="{{ pl0.cls }}" aria-selected="{{ pl0.sel }}" onClick="{{ pl0.pick }}"><span class="pl-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="5"></circle><circle cx="12" cy="12" r="1.5"></circle></svg></span><span class="pl-lab">Targeting</span><span class="pl-sub">Right buyers</span></button><button type="button" class="{{ pl1.cls }}" aria-selected="{{ pl1.sel }}" onClick="{{ pl1.pick }}"><span class="pl-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M9 12l2 2 4-4"></path></svg></span><span class="pl-lab">Deliverability</span><span class="pl-sub">Inbox, not spam</span></button><button type="button" class="{{ pl2.cls }}" aria-selected="{{ pl2.sel }}" onClick="{{ pl2.pick }}"><span class="pl-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><path d="M8 9h8M8 13h4"></path></svg></span><span class="pl-lab">Relevance</span><span class="pl-sub">A reason to reply</span></button><button type="button" class="{{ pl3.cls }}" aria-selected="{{ pl3.sel }}" onClick="{{ pl3.pick }}"><span class="pl-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="2.5"></circle><circle cx="18" cy="18" r="2.5"></circle><path d="M8.5 6H15a3 3 0 0 1 0 6H9a3 3 0 0 0 0 6h6.5"></path></svg></span><span class="pl-lab">Qualification</span><span class="pl-sub">Replies to meetings</span></button><button type="button" class="{{ pl4.cls }}" aria-selected="{{ pl4.sel }}" onClick="{{ pl4.pick }}"><span class="pl-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L3 14h8l-1 8 10-12h-8z"></path></svg></span><span class="pl-lab">Scale</span><span class="pl-sub">Grow what works</span></button>
+</div>
+<div class="pl-card glass" role="tabpanel">
+<div class="pl-left">
+<div class="pl-step"><span class="pl-num">{{ plCur.no }}</span><span class="pl-of">/ 05</span></div>
+<h3>{{ plCur.title }}</h3>
+<p class="muted">{{ plCur.body }}</p>
+</div>
+<ul class="pl-points">
+<sc-for list="{{ plCur.points }}" as="pt" hint-placeholder-count="4">
+<li><span class="pl-ck"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg></span>{{ pt }}</li>
+</sc-for>
+</ul>
+</div>
+</div>
+</section>
