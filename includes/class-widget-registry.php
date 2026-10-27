@@ -1251,6 +1251,44 @@ if ( ! class_exists( 'Nexora_Ele_Widget_Registry', false ) ) {
 					],
 					'scripts'         => [],
 				],
+				'ele-ph-li-signal' => [
+					'id'              => 'ele-ph-li-signal',
+					'title'           => __( 'LI Signal', 'nexora-elementor' ),
+					'description'     => __( 'LinkedIn signal-based outreach radar.', 'nexora-elementor' ),
+					'file'            => 'widgets/class-ele-ph-li-signal.php',
+					'class'           => 'Nexora_PH_LI_Signal_Widget',
+					'default_enabled' => true,
+					'styles'          => [
+						[
+							'handle'   => 'nexora-ph-fonts',
+							'src'      => 'https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap',
+							'deps'     => [],
+							'ver'      => null,
+							'external' => true,
+						],
+						[
+							'handle' => 'nexora-ph-shared',
+							'src'    => 'assets/css/nexora-ph-shared.css',
+							'deps'   => [ 'nexora-ph-fonts' ],
+							'ver'    => true,
+						],
+						[
+							'handle' => 'nexora-ph-li-signal',
+							'src'    => 'assets/css/nexora-ph-li-signal.css',
+							'deps'   => [ 'nexora-ph-shared' ],
+							'ver'    => true,
+						],
+					],
+					'scripts'         => [
+						[
+							'handle'    => 'nexora-ph-li-signal',
+							'src'       => 'assets/js/nexora-ph-li-signal.js',
+							'deps'      => [],
+							'ver'       => true,
+							'in_footer' => true,
+						],
+					],
+				],
 			];
 
 			/**
