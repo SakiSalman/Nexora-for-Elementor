@@ -3,9 +3,9 @@
  * Default content for CE Problem — the design copy from the Cold Email export.
  *
  * The golden markup.html is the design slice byte for byte (design section CE2 PROBLEM).
- * The funnel chart's bar labels and leak badges are a fixed visualization dataset
- * (their widths and animation delays are design bytes) and stay static in the template;
- * the chart's standalone copy lines are editable controls below.
+ * The funnel chart bars (label, width %, leak badge) are an editable repeater;
+ * animation delay is derived from the row position (0.15s steps) so defaults
+ * still print the design bytes.
  *
  * Defaults live in a function (not file-scope variables) so require_once stays
  * safe: every render and the controls get the same array without scope traps.
@@ -31,6 +31,38 @@ if ( ! function_exists( 'nexora_ph_ce_problem_defaults' ) ) {
 			'chart_label'   => 'Where cold email leaks',
 			'leaks_label'   => '4 leaks found',
 			'footnote'      => 'Every leak shrinks the pipeline before sales ever sees it.',
+			'chart_rows'    => array(
+				array(
+					'_id'        => 'ch_bar_0',
+					'bar_label'  => 'Emails sent',
+					'bar_width'  => '100',
+					'leak_label' => '',
+				),
+				array(
+					'_id'        => 'ch_bar_1',
+					'bar_label'  => 'Reach the right buyer',
+					'bar_width'  => '74',
+					'leak_label' => 'Poor lead lists',
+				),
+				array(
+					'_id'        => 'ch_bar_2',
+					'bar_label'  => 'Land in the inbox',
+					'bar_width'  => '50',
+					'leak_label' => 'Spam folder',
+				),
+				array(
+					'_id'        => 'ch_bar_3',
+					'bar_label'  => 'Get a reply',
+					'bar_width'  => '30',
+					'leak_label' => 'Generic copy',
+				),
+				array(
+					'_id'        => 'ch_bar_4',
+					'bar_label'  => 'Become a meeting',
+					'bar_width'  => '14',
+					'leak_label' => 'No follow-up',
+				),
+			),
 			'rows'          => array(
 				array(
 					'_id'           => 'e2f4a7c1',

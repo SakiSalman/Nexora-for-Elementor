@@ -156,6 +156,53 @@ if ( ! function_exists( 'nexora_ph_ce_problem_register_content_controls' ) ) {
 			]
 		);
 
+		$chart_repeater = new Repeater();
+
+		$chart_repeater->add_control(
+			'bar_label',
+			[
+				'label'   => esc_html__( 'Bar label', 'nexora-elementor' ),
+				'type'    => Controls_Manager::TEXT,
+				'dynamic' => array( 'active' => true ),
+			]
+		);
+
+		$chart_repeater->add_control(
+			'bar_width',
+			[
+				'label'       => esc_html__( 'Bar width (%)', 'nexora-elementor' ),
+				'type'        => Controls_Manager::NUMBER,
+				'min'         => 0,
+				'max'         => 100,
+				'step'        => 1,
+				'default'     => '50',
+				'description' => esc_html__( 'Width of the bar, 0 to 100.', 'nexora-elementor' ),
+			]
+		);
+
+		$chart_repeater->add_control(
+			'leak_label',
+			[
+				'label'       => esc_html__( 'Leak badge text', 'nexora-elementor' ),
+				'type'        => Controls_Manager::TEXT,
+				'dynamic'     => array( 'active' => true ),
+				'description' => esc_html__( 'Leave empty to hide the badge for this bar.', 'nexora-elementor' ),
+			]
+		);
+
+		$widget->add_control(
+			'problem_chart_rows',
+			[
+				'label'         => esc_html__( 'Chart bars', 'nexora-elementor' ),
+				'type'          => Controls_Manager::REPEATER,
+				'fields'        => $chart_repeater->get_controls(),
+				'default'       => $ce_d['chart_rows'],
+				'title_field'   => '{{{ bar_label }}}',
+				'prevent_empty' => false,
+				'render_type'   => 'template',
+			]
+		);
+
 		$widget->end_controls_section();
 
 		$widget->start_controls_section(

@@ -131,6 +131,8 @@ if ( ! function_exists( 'nexora_ph_register_mapped_controls' ) ) {
 		}
 
 		$manager   = \Elementor\Controls_Manager::class;
+		// Optional content-map key `sectionCondition` hides every mapped section (e.g. when another template style is selected).
+		$section_extra = isset( $map['sectionCondition'] ) && is_array( $map['sectionCondition'] ) ? [ 'condition' => $map['sectionCondition'] ] : [];
 		$singles   = isset( $map['singletons'] ) && is_array( $map['singletons'] ) ? $map['singletons'] : [];
 		$repeaters = isset( $map['repeaters'] ) && is_array( $map['repeaters'] ) ? $map['repeaters'] : [];
 
@@ -181,10 +183,13 @@ if ( ! function_exists( 'nexora_ph_register_mapped_controls' ) ) {
 			$group_index++;
 			$widget->start_controls_section(
 				'section_ph_' . $slug . '_' . $group_index,
-				[
-					'label' => $section_label,
-					'tab'   => $manager::TAB_CONTENT,
-				]
+				array_merge(
+					[
+						'label' => $section_label,
+						'tab'   => $manager::TAB_CONTENT,
+					],
+					$section_extra
+				)
 			);
 
 			foreach ( $fields as $field ) {
@@ -216,10 +221,13 @@ if ( ! function_exists( 'nexora_ph_register_mapped_controls' ) ) {
 			$group_index++;
 			$widget->start_controls_section(
 				'section_ph_' . $slug . '_' . $group_index,
-				[
-					'label' => (string) $section_label,
-					'tab'   => $manager::TAB_CONTENT,
-				]
+				array_merge(
+					[
+						'label' => (string) $section_label,
+						'tab'   => $manager::TAB_CONTENT,
+					],
+					$section_extra
+				)
 			);
 			foreach ( $fields as $field ) {
 				nexora_ph_add_mapped_control( $widget, $field );
@@ -234,10 +242,13 @@ if ( ! function_exists( 'nexora_ph_register_mapped_controls' ) ) {
 			$group_index++;
 			$widget->start_controls_section(
 				'section_ph_' . $slug . '_' . $group_index,
-				[
-					'label' => (string) $section_label,
-					'tab'   => $manager::TAB_CONTENT,
-				]
+				array_merge(
+					[
+						'label' => (string) $section_label,
+						'tab'   => $manager::TAB_CONTENT,
+					],
+					$section_extra
+				)
 			);
 			foreach ( $reps as $repeater_map ) {
 				nexora_ph_register_mapped_repeater_control( $widget, $repeater_map );

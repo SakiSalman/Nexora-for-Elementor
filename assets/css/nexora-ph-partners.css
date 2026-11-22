@@ -8,3 +8,15 @@
 .partner-grid>li:last-child:nth-child(odd){grid-column:1/-1;justify-self:center;width:calc(50% - 6px)}}
 @media (min-width:1025px){.partner-grid{grid-template-columns:repeat(5,minmax(0,1fr)) !important}}
 @media (min-width:761px) and (max-width:1024px){.partner-grid{grid-template-columns:repeat(3,minmax(0,1fr)) !important}}
+
+/* "B2B badge cards" template style (B2B12). Scoped to the widget; the default style above is untouched. */
+.nexora-ph-partners .pr-sec{background:radial-gradient(760px 420px at 0% 0%,rgba(35,116,172,.08),transparent 62%),radial-gradient(760px 420px at 100% 100%,rgba(241,94,34,.08),transparent 62%),#F7FAFD}
+.nexora-ph-partners .pr-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}
+.nexora-ph-partners .pr-card{padding:26px 20px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;position:relative;overflow:hidden}
+.nexora-ph-partners .pr-card img{position:relative;width:96px;height:96px;object-fit:contain}
+.nexora-ph-partners .pr-card h3{position:relative;font-size:18px;font-weight:600}
+.nexora-ph-partners .pr-card .chip{position:relative}
+.nexora-ph-partners .pr-card p{position:relative;font-size:13.5px;line-height:1.5}
+@media (min-width:1025px){.nexora-ph-partners .pr-sec .h2{font-size:clamp(34px,3.4vw,48px) !important;line-height:1.1 !important}}
+@media (max-width:1024px){.nexora-ph-partners .pr-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.nexora-ph-partners .pr-sec .h2br{display:none}}
+@media (max-width:760px){.nexora-ph-partners .pr-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}

@@ -28,6 +28,8 @@ $ce_chart_label = nexora_ph_ce_text( $settings, 'problem_chart_label', $ce_d['ch
 $ce_leaks_label = nexora_ph_ce_text( $settings, 'problem_leaks_label', $ce_d['leaks_label'] );
 $ce_footnote    = nexora_ph_ce_text( $settings, 'problem_footnote', $ce_d['footnote'] );
 $ce_items       = nexora_ph_ce_rows( $settings, 'problem_rows', $ce_d['rows'] );
+$ce_bars        = nexora_ph_ce_rows( $settings, 'problem_chart_rows', $ce_d['chart_rows'] );
+$ce_x_icon      = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>';
 ?>
 <!-- CE2 PROBLEM (sticky title card + scrolling timeline) -->
 <section class="sec pt-sec" style="background: #FFFFFF">
@@ -43,12 +45,22 @@ $ce_items       = nexora_ph_ce_rows( $settings, 'problem_rows', $ce_d['rows'] );
 <div class="pt-chart">
 <div class="ce-funnel-top"><span class="ce-lab" style="color: #A9B6C2"><?php echo $ce_chart_label; ?></span><span class="ce-warn"><i></i><?php echo $ce_leaks_label; ?></span></div>
 <div class="ce-frows">
-<div class="ce-frow"><div class="ce-ftrack"><span class="ce-fbar" style="width: 100%; animation-delay: 0.00s"><b>Emails sent</b></span></div><span></span></div>
-<div class="ce-frow"><div class="ce-ftrack"><span class="ce-fbar" style="width: 74%; animation-delay: 0.15s"><b>Reach the right buyer</b></span></div><span class="ce-leak"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>Poor lead lists</span></div>
-<div class="ce-frow"><div class="ce-ftrack"><span class="ce-fbar" style="width: 50%; animation-delay: 0.30s"><b>Land in the inbox</b></span></div><span class="ce-leak"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>Spam folder</span></div>
-<div class="ce-frow"><div class="ce-ftrack"><span class="ce-fbar" style="width: 30%; animation-delay: 0.45s"><b>Get a reply</b></span></div><span class="ce-leak"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>Generic copy</span></div>
-<div class="ce-frow"><div class="ce-ftrack"><span class="ce-fbar" style="width: 14%; animation-delay: 0.60s"><b>Become a meeting</b></span></div><span class="ce-leak"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>No follow-up</span></div>
-</div>
+<?php
+foreach ( $ce_bars as $ce_i => $ce_bar ) {
+	$ce_w     = (float) nexora_ph_ce_setting( $ce_bar, 'bar_width', 50 );
+	$ce_w     = max( 0, min( 100, $ce_w ) );
+	$ce_w_txt = rtrim( rtrim( number_format( $ce_w, 2, '.', '' ), '0' ), '.' );
+	$ce_delay = number_format( $ce_i * 0.15, 2, '.', '' );
+	$ce_leak  = (string) nexora_ph_ce_setting( $ce_bar, 'leak_label', '' );
+	echo '<div class="ce-frow"><div class="ce-ftrack"><span class="ce-fbar" style="width: ' . esc_attr( $ce_w_txt ) . '%; animation-delay: ' . esc_attr( $ce_delay ) . 's"><b>' . nexora_ph_ce_text( $ce_bar, 'bar_label', '' ) . '</b></span></div>';
+	if ( '' !== trim( $ce_leak ) ) {
+		echo '<span class="ce-leak">' . $ce_x_icon . esc_html( $ce_leak ) . '</span>';
+	} else {
+		echo '<span></span>';
+	}
+	echo '</div>' . "\n";
+}
+?></div>
 <p class="pt-fnote"><?php echo $ce_footnote; ?></p>
 </div>
 </div>
